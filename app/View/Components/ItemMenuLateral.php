@@ -23,6 +23,6 @@ class ItemMenuLateral extends Component
     public
     function render(): View|Closure|string
     {
-        return view('components.item-menu-lateral');
+        return view('components.menuLateral.item-menu-lateral');
     }
 }

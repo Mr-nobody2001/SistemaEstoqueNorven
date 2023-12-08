@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('css/components/menu-lateral/item-menu-lateral.css') }}">
 </head>
 <body>
-<x-menu-lateral/>
+<x-menulateral.menu-lateral/>
 {{ $slot }}
 <script src="{{ asset('js/menuLateral.js') }}"></script>
 </body>

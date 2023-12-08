@@ -13,7 +13,7 @@ class MarcaProdutoController extends Controller
     public function index()
     {
         $listaMarcaProduto = MarcaProduto::all();
-        return view('index-marca-produto');
+        return view('marcaProduto.index-marca-produto');
     }
 
     /**
@@ -21,7 +21,7 @@ class MarcaProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('marcaProduto.criacao-marca-produto');
     }
 
     /**
