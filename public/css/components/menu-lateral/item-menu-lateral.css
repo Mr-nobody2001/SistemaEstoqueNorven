@@ -1,0 +1,35 @@
+.item-menu-lateral {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    width: 100%;
+    padding: 15px;
+    color: var(--cor-texto-item-menu-lateral);
+}
+
+.item-menu-lateral:hover {
+    cursor: pointer;
+    background-color: var(--background-rosa);
+    transition: 0.5s;
+}
+
+.item-menu-lateral li {
+    list-style: none;
+}
+
+.item-menu-lateral a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    color: var(--cor-texto-item-menu-lateral);
+}
+
+.item-menu-lateral span {
+    font-size: 1.5rem;
+}
+
+.item-menu-lateral p {
+    text-align: center;
+    font-size: 0.8rem;
+}

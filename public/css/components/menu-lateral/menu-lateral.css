@@ -1,0 +1,34 @@
+#menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100vh;
+    width: 80px;
+    padding-top: 30px;
+    padding-left: 10px;
+    background-color: var(--background-menu-lateral);
+    box-shadow: 5px 0 0 var(--background-rosa);
+    overflow: hidden;
+}
+
+.expandir-menu-lateral {
+    width: 200px !important;
+    transition: 0.5s !important;
+}
+
+.retrair-menu-lateral {
+    width: 80px;
+    transition: 0.5s !important;
+}
+
+#menu-lateral > span {
+    color: var(--cor-texto-item-menu-lateral);
+    margin: 15px;
+}
+
+#menu-lateral > span:hover {
+    cursor: pointer;
+}
