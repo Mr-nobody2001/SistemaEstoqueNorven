@@ -14,8 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('marca-produto', MarcaProdutoController::class);
+Route::resource('marca', MarcaProdutoController::class);

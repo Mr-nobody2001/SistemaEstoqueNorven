@@ -3,18 +3,14 @@
     align-items: center;
     height: 65px;
     width: 100%;
-    padding: 15px;
     color: var(--cor-texto-item-menu-lateral);
+    list-style: none;
 }
 
 .item-menu-lateral:hover {
     cursor: pointer;
     background-color: var(--background-rosa);
-    transition: 0.5s;
-}
-
-.item-menu-lateral li {
-    list-style: none;
+    transition: 1s;
 }
 
 .item-menu-lateral a {
@@ -32,4 +28,9 @@
 .item-menu-lateral p {
     text-align: center;
     font-size: 0.8rem;
+}
+
+.aba-atual {
+    background-color: var(--background-rosa);
+    transition: 1s;
 }

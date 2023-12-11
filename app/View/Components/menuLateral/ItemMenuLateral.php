@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\menuLateral;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,7 +12,7 @@ class ItemMenuLateral extends Component
      * Create a new component instance.
      */
     public
-    function __construct(public string $textoIcone, public string $categoria)
+    function __construct(public string $textoIcone, public string $link, public string $categoria)
     {
         //
     }

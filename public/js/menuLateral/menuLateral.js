@@ -1,6 +1,8 @@
 const menuLateral = document.querySelector("#menu-lateral");
+const listaMenuLateral = document.querySelector("#lista-menu-lateral");
 const listaItemMenu = document.querySelectorAll(".item-menu-lateral");
-const iconeHamburguer = document.querySelector("#icone-hamburguer")
+const iconeHamburguer = document.querySelector("#icone-hamburguer");
+let abaAtual;
 
 // Animação do menu lateral
 const animarMenu = () => {
@@ -36,6 +38,25 @@ const retirarAnimacao = (e) => {
     e.target.classList.remove("animate__pulse");
 }
 
+const estilizarAbaAtual = () => {
+    abaAtual.classList.add("aba-atual");
+}
+
+const retirarAbaAtual = () => {
+    if (!abaAtual) {
+        for (let itemMenu of listaItemMenu) {
+            if (itemMenu.classList.contains("aba-atual")) {
+                itemMenu.classList.remove("aba-atual");
+                abaAtual = itemMenu;
+            }
+        }
+    } else {
+        abaAtual.classList.remove("aba-atual")
+    }
+}
+
+listaMenuLateral.addEventListener("mouseleave", estilizarAbaAtual);
+listaMenuLateral.addEventListener('mouseover', retirarAbaAtual);
 iconeHamburguer.addEventListener("click", animarMenu);
 
 window.onload = () => {

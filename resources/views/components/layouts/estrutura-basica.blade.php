@@ -22,13 +22,13 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 
     {{-- Links de estilo interno --}}
-    <link rel="stylesheet" href="{{ asset('css/estilo-geral.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/menu-lateral/menu-lateral.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/menu-lateral/item-menu-lateral.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/layouts/estilo-geral.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/menuLateral/menu-lateral.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/menuLateral/item-menu-lateral.css') }}">
 </head>
 <body>
-<x-menulateral.menu-lateral/>
+<x-menuLateral.menu-lateral/>
 {{ $slot }}
-<script src="{{ asset('js/menuLateral.js') }}"></script>
+<script src="{{ asset('js/menuLateral/menuLateral.js') }}"></script>
 </body>
 </html>

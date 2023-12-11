@@ -10,13 +10,12 @@
     padding-top: 30px;
     padding-left: 10px;
     background-color: var(--background-menu-lateral);
-    box-shadow: 5px 0 0 var(--background-rosa);
     overflow: hidden;
 }
 
 .expandir-menu-lateral {
-    width: 200px !important;
-    transition: 0.5s !important;
+    width: 250px !important;
+    transition: 1s !important;
 }
 
 .retrair-menu-lateral {
@@ -24,11 +23,11 @@
     transition: 0.5s !important;
 }
 
-#menu-lateral > span {
+#menu-lateral span {
     color: var(--cor-texto-item-menu-lateral);
     margin: 15px;
 }
 
-#menu-lateral > span:hover {
+#menu-lateral span:hover {
     cursor: pointer;
 }
