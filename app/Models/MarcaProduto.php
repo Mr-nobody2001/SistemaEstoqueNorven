@@ -13,6 +13,6 @@ class MarcaProduto extends Model
 
     protected $fillable = [
         'nome_marca',
-        'descricao_marca'
+        'descricao'
     ];
 }

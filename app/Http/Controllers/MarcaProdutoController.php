@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MarcaProduto;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class MarcaProdutoController extends Controller
@@ -10,10 +11,13 @@ class MarcaProdutoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listaMarcaProduto = MarcaProduto::all();
-        return view('marcaProduto.index-marca-produto');
+        $paginaMarcaProduto = MarcaProduto::query()->when($request->nome, function (Builder $builder) use ($request) {
+            $builder->where('nome_marca', 'ilike', "%$request->nome%");
+        })->paginate(5);
+
+        return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
     }
 
     /**

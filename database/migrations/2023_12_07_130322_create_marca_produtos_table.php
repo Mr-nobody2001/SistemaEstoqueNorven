@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('marca_produtos', static function (Blueprint $table) {
             $table->id();
             $table->string('nome_marca', 50);
-            $table->text('descricao');
             $table->timestamps();
         });
     }
