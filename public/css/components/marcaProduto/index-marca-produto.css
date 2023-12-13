@@ -1,44 +1,13 @@
 :root {
-    --cor-botao-pesquisa: #000000;
-    --cor-texto-botao: #000000;
-
     --background-celula-tabela-hover: #F1F1F1;
     --borda-tabela: #F2F2F2;
 
-    --borda-scrollbar-slide:#F2F2F2;
-
-    --cor-texto-botao-pesquisa-hover: #FFFFFF;
-}
-
-#secao-principal {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-}
-
-#container-informacoes-pagina {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-}
-
-#container-informacoes-pagina span {
-    font-size: 2.5rem;
-}
-
-#container-informacoes-pagina h1 {
-    font-size: 2rem;
-}
-
-#container-informacoes-pagina i {
-    margin-top: 12px;
-    color: var(--cor-contraste);
+    --borda-scrollbar-slide: #F2F2F2;
 }
 
 #container-formulario {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 20px;
 }
 
@@ -53,19 +22,18 @@
     width: 100%;
 }
 
-#container-formulario button[type="submit"] {
-    margin-bottom: 0 !important;
-    border: 1px solid var(--cor-botao-pesquisa);
-    background-color: transparent;
-    color: #000000;
+#container-formulario i,
+#container-formulario i {
+    font-size: 1rem;
 }
 
-#container-formulario button[type="submit"]:hover {
-    background-color: var(--cor-botao-pesquisa);
-    color: var(--cor-texto-botao-pesquisa-hover);
+#container-formulario a {
+    text-decoration: none;
+    color: var(--cor-texto-botao-pesquisa);
 }
 
-#container-formulario i:hover {
+#container-formulario i:hover,
+#container-formulario a:hover {
     cursor: pointer;
 }
 
@@ -74,8 +42,8 @@
     font-size: 1.5rem;
 }
 
-.tabela, th, td{
-    border-collapse:collapse;
+.tabela, th, td {
+    border-collapse: collapse;
     padding: 10px;
     text-align: center;
     border-bottom: 1px solid var(--borda-tabela);

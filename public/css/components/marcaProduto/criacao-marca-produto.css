@@ -1,0 +1,10 @@
+#container-formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+#container-formulario > div div:first-child {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 40px;
+}

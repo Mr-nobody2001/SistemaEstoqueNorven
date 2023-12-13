@@ -1,0 +1,13 @@
+#container-informacoes-pagina {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+#container-informacoes-pagina span {
+    font-size: 2.5rem;
+}
+
+#container-informacoes-pagina h1 {
+    font-size: 2rem;
+}

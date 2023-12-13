@@ -33,5 +33,9 @@ body {
 }
 
 #secao-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
     padding: 40px;
 }

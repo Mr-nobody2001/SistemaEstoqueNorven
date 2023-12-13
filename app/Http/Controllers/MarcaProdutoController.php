@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SalvarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MarcaProdutoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request) : View
     {
         $paginaMarcaProduto = MarcaProduto::query()->when($request->marca, function (Builder $builder) use ($request) {
             $builder->where('nome_marca', 'ilike', "%$request->marca%");
@@ -23,7 +25,7 @@ class MarcaProdutoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() : View
     {
         return view('marcaProduto.criacao-marca-produto');
     }
@@ -31,9 +33,9 @@ class MarcaProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SalvarMarcaProdutoRequest $request) : View
     {
-        //
+
     }
 
     /**
