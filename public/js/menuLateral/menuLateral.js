@@ -1,3 +1,4 @@
+const body = document.querySelector("body");
 const menuLateral = document.querySelector("#menu-lateral");
 const listaMenuLateral = document.querySelector("#lista-menu-lateral");
 const listaItemMenu = document.querySelectorAll(".item-menu-lateral");
@@ -14,13 +15,17 @@ const animarMenu = () => {
 }
 
 const retrairMenu = () => {
+    body.classList.remove("body-menu-expandido");
     menuLateral.classList.remove("expandir-menu-lateral");
+    body.classList.add("body-menu-retraido");
     menuLateral.classList.add("retrair-menu-lateral");
     menuLateral.dataset.expandido = "false";
 }
 
 const expandirMenu = () => {
+    body.classList.remove("body-menu-retraido");
     menuLateral.classList.remove("retrair-menu-lateral");
+    body.classList.add("body-menu-expandido");
     menuLateral.classList.add("expandir-menu-lateral");
     menuLateral.dataset.expandido = "true";
 }

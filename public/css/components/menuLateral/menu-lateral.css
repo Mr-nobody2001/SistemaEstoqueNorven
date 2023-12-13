@@ -1,3 +1,7 @@
+:root {
+    --background-menu-lateral: #1D1C1D;
+}
+
 #menu-lateral {
     position: fixed;
     top: 0;
@@ -13,14 +17,8 @@
     overflow: hidden;
 }
 
-.expandir-menu-lateral {
-    width: 250px !important;
-    transition: 1s !important;
-}
-
-.retrair-menu-lateral {
-    width: 80px;
-    transition: 0.5s !important;
+#lista-menu-lateral {
+    padding: 0px;
 }
 
 #menu-lateral span {
@@ -30,4 +28,24 @@
 
 #menu-lateral span:hover {
     cursor: pointer;
+}
+
+.expandir-menu-lateral {
+    width: 250px !important;
+    transition: 0.5s !important;
+}
+
+.retrair-menu-lateral {
+    width: 80px;
+    transition: 0.5s !important;
+}
+
+.body-menu-expandido {
+    padding-left: 250px !important;
+    transition: 0.5s;
+}
+
+.body-menu-retraido {
+    padding-left: 80px !important;
+    transition: 0.5s;
 }

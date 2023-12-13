@@ -13,9 +13,9 @@ class MarcaProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $paginaMarcaProduto = MarcaProduto::query()->when($request->nome, function (Builder $builder) use ($request) {
-            $builder->where('nome_marca', 'ilike', "%$request->nome%");
-        })->paginate(5);
+        $paginaMarcaProduto = MarcaProduto::query()->when($request->marca, function (Builder $builder) use ($request) {
+            $builder->where('nome_marca', 'ilike', "%$request->marca%");
+        })->paginate(20);
 
         return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
     }

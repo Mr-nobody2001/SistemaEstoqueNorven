@@ -1,0 +1,68 @@
+:root {
+    --cor-botao-pesquisa: #000000;
+    --cor-texto-botao: #000000;
+}
+
+#secao-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+#secao-principal div:first-child {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+#secao-principal div:first-child span:first-child {
+    font-size: 2.5rem;
+}
+
+#secao-principal div:first-child h1 {
+    font-size: 2rem;
+}
+
+#secao-principal div:first-child i:last-child {
+    margin-top: 12px;
+    color: var(--cor-contraste);
+}
+
+form input[type="text"] {
+    width: 100%;
+}
+
+form button[type="submit"] {
+    border: 1px solid var(--cor-botao-pesquisa);
+    background-color: transparent;
+    color: #000000;
+}
+
+form button[type="submit"]:hover {
+    background-color: var(--cor-botao-pesquisa);
+}
+
+#container-lista-marca {
+    display: flex;
+    flex-direction: column;
+}
+
+#lista-marca {
+    padding: 0px;
+}
+
+#container-lista-marca div p {
+    margin-right: 475px;
+}
+
+
+#container-lista-marca li {
+    display: flex;
+    gap: 500px;
+}
+
+.destaque {
+    font-weight: bolder;
+    font-size: 1.5rem;
+}

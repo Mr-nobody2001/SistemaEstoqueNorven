@@ -31,5 +31,9 @@ class MarcaProdutoSeeder extends Seeder
         DB::table('marca_produtos')->insert([
             'nome_marca' => 'Unilever',
         ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Pepsi',
+        ]);
     }
 }

@@ -1,3 +1,7 @@
+:root {
+    --cor-texto-item-menu-lateral: #F4F4F6;
+}
+
 .item-menu-lateral {
     display: flex;
     align-items: center;
@@ -7,30 +11,31 @@
     list-style: none;
 }
 
-.item-menu-lateral:hover {
-    cursor: pointer;
-    background-color: var(--background-rosa);
-    transition: 1s;
-}
-
 .item-menu-lateral a {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 40px;
+    text-decoration: none;
     color: var(--cor-texto-item-menu-lateral);
 }
 
+.item-menu-lateral:hover a,
+.item-menu-lateral:hover a span {
+    cursor: pointer;
+    color: var(--cor-contraste) !important;
+    transition: 0.5s;
+}
+
 .item-menu-lateral span {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 
 .item-menu-lateral p {
     text-align: center;
-    font-size: 0.8rem;
 }
 
 .aba-atual {
-    background-color: var(--background-rosa);
-    transition: 1s;
+    background-color: var(--cor-contraste);
+    transition: 0.5s;
 }
