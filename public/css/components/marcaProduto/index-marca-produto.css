@@ -1,6 +1,13 @@
 :root {
     --cor-botao-pesquisa: #000000;
     --cor-texto-botao: #000000;
+
+    --background-celula-tabela-hover: #F1F1F1;
+    --borda-tabela: #F2F2F2;
+
+    --borda-scrollbar-slide:#F2F2F2;
+
+    --cor-texto-botao-pesquisa-hover: #FFFFFF;
 }
 
 #secao-principal {
@@ -10,59 +17,71 @@
     width: 100%;
 }
 
-#secao-principal div:first-child {
+#container-informacoes-pagina {
     display: flex;
     align-items: flex-start;
     gap: 15px;
 }
 
-#secao-principal div:first-child span:first-child {
+#container-informacoes-pagina span {
     font-size: 2.5rem;
 }
 
-#secao-principal div:first-child h1 {
+#container-informacoes-pagina h1 {
     font-size: 2rem;
 }
 
-#secao-principal div:first-child i:last-child {
+#container-informacoes-pagina i {
     margin-top: 12px;
     color: var(--cor-contraste);
 }
 
-form input[type="text"] {
+#container-formulario {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#container-formulario form {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#container-formulario input[type="text"] {
+    min-width: 200px;
     width: 100%;
 }
 
-form button[type="submit"] {
+#container-formulario button[type="submit"] {
+    margin-bottom: 0 !important;
     border: 1px solid var(--cor-botao-pesquisa);
     background-color: transparent;
     color: #000000;
 }
 
-form button[type="submit"]:hover {
+#container-formulario button[type="submit"]:hover {
     background-color: var(--cor-botao-pesquisa);
+    color: var(--cor-texto-botao-pesquisa-hover);
 }
 
-#container-lista-marca {
-    display: flex;
-    flex-direction: column;
-}
-
-#lista-marca {
-    padding: 0px;
-}
-
-#container-lista-marca div p {
-    margin-right: 475px;
-}
-
-
-#container-lista-marca li {
-    display: flex;
-    gap: 500px;
+#container-formulario i:hover {
+    cursor: pointer;
 }
 
 .destaque {
     font-weight: bolder;
     font-size: 1.5rem;
+}
+
+.tabela, th, td{
+    border-collapse:collapse;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--borda-tabela);
+}
+
+tbody tr:hover {
+    background-color: var(--background-celula-tabela-hover);
+    cursor: pointer;
 }

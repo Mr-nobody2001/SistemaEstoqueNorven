@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -34,6 +33,47 @@ class MarcaProdutoSeeder extends Seeder
 
         DB::table('marca_produtos')->insert([
             'nome_marca' => 'Pepsi',
+        ]);
+
+        // Adicione mais 10 marcas aqui
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Ferrero',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'General Mills',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Kraft Heinz',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Procter & Gamble',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Danone',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Mondelez International',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Nestea',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Quaker Oats',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Heinz',
+        ]);
+
+        DB::table('marca_produtos')->insert([
+            'nome_marca' => 'Knorr',
         ]);
     }
 }

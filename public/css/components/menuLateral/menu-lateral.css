@@ -18,7 +18,7 @@
 }
 
 #lista-menu-lateral {
-    padding: 0px;
+    padding: 0;
 }
 
 #menu-lateral span {
@@ -28,6 +28,10 @@
 
 #menu-lateral span:hover {
     cursor: pointer;
+}
+
+#lista-menu-lateral p {
+    margin-bottom: 0;
 }
 
 .expandir-menu-lateral {
@@ -41,11 +45,19 @@
 }
 
 .body-menu-expandido {
-    padding-left: 250px !important;
+    padding-left: 0 !important;
     transition: 0.5s;
+}
+
+@media (min-width: 768px) {
+    .body-menu-expandido {
+        padding-left: 250px !important;
+        transition: 0.5s;
+    }
 }
 
 .body-menu-retraido {
     padding-left: 80px !important;
     transition: 0.5s;
 }
+
