@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SalvarMarcaProdutoRequest;
-use App\Models\MarcaProduto;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Requests\CriarMarcaProdutoRequest;
+use App\services\MarcaProdutoService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MarcaProdutoController extends Controller
 {
+    public function __construct(private readonly MarcaProdutoService $marcaProdutoService)
+    {}
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
-        $paginaMarcaProduto = MarcaProduto::query()->when($request->marca, function (Builder $builder) use ($request) {
-            $builder->where('nome_marca', 'ilike', "%$request->marca%");
-        })->paginate(20);
+        $paginaMarcaProduto = $this->marcaProdutoService->listarTodasMarcas($request);
 
         return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
     }
@@ -25,7 +25,7 @@ class MarcaProdutoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('marcaProduto.criacao-marca-produto');
     }
@@ -33,9 +33,13 @@ class MarcaProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SalvarMarcaProdutoRequest $request) : View
+    public function store(CriarMarcaProdutoRequest $request): View
     {
+        if ($this->marcaProdutoService->criarMarcaProduto($request)) {
+            return view('marcaProduto.criacao-marca-produto');
+        }
 
+        return view('marcaProduto.criacao-marca-produto');
     }
 
     /**

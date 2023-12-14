@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SalvarMarcaProdutoRequest extends FormRequest
+class criarMarcaProdutoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class SalvarMarcaProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:50'
+            'nome_marca' => 'required|string|max:50'
         ];
     }
 }
