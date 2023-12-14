@@ -3,37 +3,40 @@
     --borda-tabela: #F2F2F2;
 
     --borda-scrollbar-slide: #F2F2F2;
+
+    --cor-texto-botao-pesquisa: #FFFFFF;
+
+    --cor-icones-barra-pesquisa: #000000FF;
 }
 
-#container-formulario {
+#container-pesquisa {
     display: flex;
     align-items: flex-end;
     gap: 20px;
 }
 
-#container-formulario form {
+#container-pesquisa form {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-#container-formulario input[type="text"] {
+#container-pesquisa input[type="text"] {
     min-width: 200px;
     width: 100%;
 }
 
-#container-formulario i,
-#container-formulario i {
+#container-pesquisa i {
     font-size: 1rem;
 }
 
-#container-formulario a {
+#container-pesquisa a {
     text-decoration: none;
-    color: var(--cor-texto-botao-pesquisa);
+    color: var(--cor-icones-barra-pesquisa);
 }
 
-#container-formulario i:hover,
-#container-formulario a:hover {
+#container-pesquisa i:hover,
+#container-pesquisa a:hover {
     cursor: pointer;
 }
 
@@ -44,8 +47,8 @@
 
 .tabela, th, td {
     border-collapse: collapse;
-    padding: 10px;
-    text-align: center;
+    padding: 20px 0 20px 150px;
+    text-align: left;
     border-bottom: 1px solid var(--borda-tabela);
 }
 

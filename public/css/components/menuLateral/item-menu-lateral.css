@@ -1,5 +1,6 @@
 :root {
     --cor-texto-item-menu-lateral: #F4F4F6;
+    --background-item-menu-lateral-hover: #323232;
 }
 
 .item-menu-lateral {
@@ -20,11 +21,15 @@
     color: var(--cor-texto-item-menu-lateral);
 }
 
+.item-menu-lateral:hover {
+    background-color: var(--background-item-menu-lateral-hover);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
 .item-menu-lateral:hover a,
 .item-menu-lateral:hover a span {
-    cursor: pointer;
     color: var(--cor-contraste) !important;
-    transition: 0.5s;
 }
 
 .item-menu-lateral span {

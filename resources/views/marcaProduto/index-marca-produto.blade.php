@@ -1,8 +1,8 @@
 @section('titulo', 'Marca')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/components/marcaProduto/estilo-geral-marca-produto.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/marcaProduto/index-marca-produto.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/estiloGeral/index-geral.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/estiloGeral/index-estiloGeral.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/informacoes-pagina.css') }}">
 @endsection
 
@@ -13,7 +13,7 @@
 <x-layouts.estrutura-basica>
     <x-informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Marcas'"/>
 
-    <div id="container-formulario">
+    <div id="container-pesquisa">
         <form action="{{ route('marca.index') }}" method="GET">
             <div>
                 <label for="text" class="visually-hidden">Marca</label>
