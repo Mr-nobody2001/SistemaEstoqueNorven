@@ -24,9 +24,9 @@ class MarcaProdutoController extends Controller
             $paginaMarcaProduto = $this->marcaProdutoService->listarTodasMarcas();
         }
 
-        if (!$paginaMarcaProduto) {
+        /*if (!$paginaMarcaProduto) {
 
-        }
+        }*/
 
         return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
     }
@@ -61,31 +61,30 @@ class MarcaProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         $marcaProduto = $this->marcaProdutoService->encontrarMarcaId($id);
 
-        if (is_null($marcaProduto)) {
+        /*if (is_null($marcaProduto)) {
 
-        }
+        }*/
 
-        return $marcaProduto;
-        //return view('marcaProduto.atualizacao-delecao-marca-produto', compact('marcaProduto'));
+        return view('marcaProduto.atualizacao-marca-produto', compact('marcaProduto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): View
     {
-        //
+        return view();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): View
     {
-        //
+        return view();
     }
 }

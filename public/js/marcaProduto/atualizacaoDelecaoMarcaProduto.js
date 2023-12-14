@@ -1,15 +1,21 @@
+import {exibirAviso, ocultarAviso} from "../avisos/aviso.js";
+
 const listaItensMarca = document.querySelectorAll("tbody tr");
-const exibirFormularioAtualizacao = async (evento) => {
-    console.log(evento.target.parentNode.dataset.id)
-    const apiUrl = `http://localhost:8000/marca/${evento.target.parentNode.dataset.id.toString()}/edit`;
+const avisoConfirmacaoAtualizacaoDelecao = document.querySelector("#confirmacao-atualizacao-delecao");
+const botaoFecharAviso = document.querySelector("#botao-fechar-aviso");
 
-    const paginaHtml = await fetch(apiUrl);
+const exibirAvisoConfirmacaoAtualizacaoDelecao = () => {
+    exibirAviso(avisoConfirmacaoAtualizacaoDelecao)
+}
 
-    document.body.innerHTML = await paginaHtml.text();
+const ocultarAvisoConfirmacaoAtualizacaoDelecao = () => {
+    ocultarAviso(avisoConfirmacaoAtualizacaoDelecao)
 }
 
 window.onload = () => {
     for (let marca of listaItensMarca) {
-        marca.addEventListener("click", exibirFormularioAtualizacao)
+        marca.addEventListener("click", exibirAvisoConfirmacaoAtualizacaoDelecao);
     }
+
+    botaoFecharAviso.addEventListener("click", ocultarAvisoConfirmacaoAtualizacaoDelecao);
 }

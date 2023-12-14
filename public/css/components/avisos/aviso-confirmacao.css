@@ -1,0 +1,31 @@
+:root {
+    --cor-texto-botao-atualizar-deletar: #FFFFFF;
+
+    --background-botao-atualizar: #3ABFAE;
+    --background-botao-deletar: #000000FF;
+}
+
+#opcoes-confirmacao {
+    display: flex;
+    justify-content: space-around;
+}
+
+.aviso > button {
+    background-color: var(--background-botao-fechar-aviso);
+}
+
+.aviso button {
+    color: var(--cor-texto-botao-atualizar-deletar);
+}
+
+.aviso button:hover {
+    color: var(--cor-texto-botao-atualizar-deletar);
+}
+
+#opcoes-confirmacao button:first-child {
+    background-color: var(--background-botao-atualizar);
+}
+
+#opcoes-confirmacao button:last-child {
+    background-color: var(--background-botao-deletar);
+}

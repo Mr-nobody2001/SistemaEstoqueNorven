@@ -1,7 +1,7 @@
 const forms = document.querySelectorAll('.needs-validation');
 export const validarPesquisa = (evento, valorPesquisa) => {
     // alfanumérica, permitindo espaços e exigindo que tenha pelo menos três caracteres
-    const regex = /^(?=.*[a-zA-Z0-9])[\w\s]{3,}$/;
+    const regex = /^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ\-]*$/;
 
     if (!regex.test(valorPesquisa)) {
         evento.preventDefault();

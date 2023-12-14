@@ -1,0 +1,28 @@
+:root {
+    --background-botao-salvar-atualizar: #000000FF;
+    --cor-texto-botao-salvar-atualizar: #FFFFFF;
+}
+
+#container-formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+#container-formulario > div div:first-child {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 40px;
+}
+
+#botao-salvar,
+#botao-atualizar {
+    color: var(--cor-texto-botao-salvar-atualizar) !important;
+    background-color: var(--background-botao-salvar-atualizar);
+    border: none;
+}
+
+#botao-salvar:hover,
+#botao-atualizar:hover {
+    background-color: var(--cor-contraste);
+    transition: 0.5s;
+}

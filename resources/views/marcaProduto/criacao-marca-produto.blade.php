@@ -1,13 +1,12 @@
 @section('titulo', 'Cadastrar Marca')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/components/marcaProduto/estilo-estilosGerais-marca-produto.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/marcaProduto/criacao-atualizacao-delecao-marca-produto.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/criacao-atualizacao-delecao-geral.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/componentesGerais/informacoes-pagina.css') }}">
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/marcaProduto/criacaoMarcaProduto.js') }}"></script>
+    <script type="module" src="{{ asset('js/scriptGeral/criacao.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
@@ -17,12 +16,12 @@
         @csrf
         <div>
             <div>
-                <button class="btn btn-primary" type="submit" id="botao-pesquisa">Salvar</button>
+                <button class="btn" type="submit" id="botao-salvar">Salvar</button>
             </div>
 
-            <label for="validationCustom01" class="form-label">Nome da marca</label>
-            <input type="text" class="form-control" name="nome_marca" maxlength="50" id="validationCustom01" required
-                   pattern="^(?=.*[a-zA-Z0-9])[\w\s]{3,}$">
+            <label for="nome_marca" class="form-label">Nome da marca</label>
+            <input type="text" class="form-control" name="nome_marca" maxlength="50" id="nome_marca" required
+                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ\-]*$">
             <div class="valid-feedback">
                 Parece bom!
             </div>

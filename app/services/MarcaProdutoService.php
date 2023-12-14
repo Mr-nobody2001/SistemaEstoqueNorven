@@ -6,7 +6,6 @@ use App\Http\Requests\CriarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class MarcaProdutoService
@@ -22,7 +21,7 @@ class MarcaProdutoService
 
     public function encontrarMarcaId(string $id): MarcaProduto
     {
-        return MarcaProduto::where('id', $id)->get();
+        return MarcaProduto::where('id', $id)->first();
     }
 
     public function encontrarMarcaNome(string $nomeMarca): LengthAwarePaginator
