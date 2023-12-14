@@ -1,7 +1,7 @@
 @section('titulo', 'Cadastrar Marca')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/components/marcaProduto/estilo-estilosGerais-marca-produto.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/estilo-estilosGerais-marca-produto.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/marcaProduto/criacao-atualizacao-delecao-marca-produto.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/componentesGerais/informacoes-pagina.css') }}">
 @endsection
@@ -11,7 +11,7 @@
 @endsection
 
 <x-layouts.estrutura-basica>
-    <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Cadastrar Marca'"/>
+    <x-informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Cadastrar Marca'"/>
 
     <form class="needs-validation" id="container-formulario" action="{{ route('marca.store') }}" method="POST" novalidate>
         @csrf

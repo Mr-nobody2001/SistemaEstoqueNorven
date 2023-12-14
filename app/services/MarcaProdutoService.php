@@ -3,24 +3,43 @@
 namespace App\services;
 
 use App\Http\Requests\CriarMarcaProdutoRequest;
+use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class MarcaProdutoService
 {
     public function __construct(private MarcaProdutoRepository $marcaProdutoRepository)
-    {}
-
-    public function listarTodasMarcas(Request $request): LengthAwarePaginator
     {
-        return $this->marcaProdutoRepository->listarTodasMarcas($request);
     }
 
-    public function criarMarcaProduto(CriarMarcaProdutoRequest $request) : bool
+    public function listarTodasMarcas(): LengthAwarePaginator
+    {
+        return MarcaProduto::paginate(20);
+    }
+
+    public function encontrarMarcaId(string $id): MarcaProduto
+    {
+        return MarcaProduto::where('id', $id)->get();
+    }
+
+    public function encontrarMarcaNome(string $nomeMarca): LengthAwarePaginator
+    {
+        return $this->marcaProdutoRepository->encontrarMarcasNome($nomeMarca);
+    }
+
+    public function criarMarcaProduto(CriarMarcaProdutoRequest $request): bool
     {
         $requestValidada = $request->validated();
 
-        return $this->marcaProdutoRepository->criarMarcaProduto($requestValidada);
+        try {
+            MarcaProduto::create($requestValidada);
+        } catch (Exception) {
+            return false;
+        }
+
+        return true;
     }
 }

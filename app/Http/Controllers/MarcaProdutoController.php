@@ -10,14 +10,23 @@ use Illuminate\View\View;
 class MarcaProdutoController extends Controller
 {
     public function __construct(private readonly MarcaProdutoService $marcaProdutoService)
-    {}
+    {
+    }
 
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
     {
-        $paginaMarcaProduto = $this->marcaProdutoService->listarTodasMarcas($request);
+        if ($request->nome_marca) {
+            $paginaMarcaProduto = $this->marcaProdutoService->encontrarMarcaNome($request->nome_marca);
+        } else {
+            $paginaMarcaProduto = $this->marcaProdutoService->listarTodasMarcas();
+        }
+
+        if (!$paginaMarcaProduto) {
+
+        }
 
         return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
     }
@@ -45,9 +54,8 @@ class MarcaProdutoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(): void
     {
-        //
     }
 
     /**
@@ -55,7 +63,14 @@ class MarcaProdutoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $marcaProduto = $this->marcaProdutoService->encontrarMarcaId($id);
+
+        if (is_null($marcaProduto)) {
+
+        }
+
+        return $marcaProduto;
+        //return view('marcaProduto.atualizacao-delecao-marca-produto', compact('marcaProduto'));
     }
 
     /**

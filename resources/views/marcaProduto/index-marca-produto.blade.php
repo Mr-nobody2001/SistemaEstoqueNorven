@@ -1,23 +1,23 @@
-@section('titulo', 'Marca')
+@section('titulo', 'Marcas')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/components/estiloGeral/index-geral.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/estiloGeral/index-estiloGeral.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/informacoes-pagina.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/index-geral.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/componentesGerais/informacoes-pagina.css') }}">
 @endsection
 
 @section('script')
     <script type="module" src="{{ asset('js/marcaProduto/indexMarcaProduto.js') }}"></script>
+    <script src="{{ asset("js/marcaProduto/atualizacaoDelecaoMarcaProduto.js") }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
-    <x-informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Marcas'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Marcas'"/>
 
     <div id="container-pesquisa">
         <form action="{{ route('marca.index') }}" method="GET">
             <div>
                 <label for="text" class="visually-hidden">Marca</label>
-                <input type="text" class="form-control" id="barra-pesquisa" name="marca"
+                <input type="text" class="form-control" id="barra-pesquisa" name="nome_marca"
                        placeholder="Pesquise por uma marca.">
             </div>
             <div>
@@ -37,7 +37,7 @@
         </thead>
         <tbody>
         @foreach ($paginaMarcaProduto as $marcaProduto)
-            <tr>
+            <tr data-id="{{ $marcaProduto->id }}">
                 <td>{{ $marcaProduto->id }}</td>
                 <td>{{ $marcaProduto->nome_marca }}</td>
             </tr>

@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('marca', MarcaProdutoController::class);
+Route::resource('marca', MarcaProdutoController::class)->except(['show']);
