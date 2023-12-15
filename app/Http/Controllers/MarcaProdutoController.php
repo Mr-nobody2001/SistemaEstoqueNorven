@@ -87,8 +87,10 @@ class MarcaProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): View
+    public function destroy(string $id)
     {
-        return view();
+        if ($this->marcaProdutoService->deletarMarcaProduto($id)) {
+
+        }
     }
 }

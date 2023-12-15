@@ -53,4 +53,11 @@ class MarcaProdutoService
 
         return $linhasAfetadas > 0;
     }
+
+    public function deletarMarcaProduto(string $id): bool
+    {
+        $colunasAfetadas = MarcaProduto::destroy($id);
+
+        return $colunasAfetadas > 0;
+    }
 }

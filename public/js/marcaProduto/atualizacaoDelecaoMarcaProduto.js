@@ -7,7 +7,10 @@ const avisoEscolhaAtualizacaoDelecao = document.querySelector("#escolha-atualiza
 const botaoFecharAviso = document.querySelector("#botao-fechar-aviso");
 const botaoAlterar = document.querySelector("#botao-opcao1");
 const linhasTabelaMarca = document.querySelectorAll("tbody tr");
+const botaoDeletar = document.querySelector("#botao-deletar");
+const botaoDeletarFormulario = document.querySelector("#botao-deletar-formulario");
 
+console.log(botaoDeletar)
 
 const exibirAvisoEscolhaAtualizacaoDelecao = (evento) => {
     const idMarca = evento.target.parentNode.dataset.id;
@@ -29,10 +32,17 @@ const prepararOpcaoAlteracao = (idMarca) => {
     escolherAlteracao(url, botaoAlterar);
 }
 
+const deletarMarcaProduto = (evento) => {
+    evento.preventDefault();
+
+    botaoDeletarFormulario.click();
+}
+
 window.onload = () => {
     for (let marca of listaItensMarca) {
         marca.addEventListener("click", exibirAvisoEscolhaAtualizacaoDelecao);
     }
 }
 
-botaoFecharAviso.addEventListener("click", ocultarAvisoEscolhaAtualizacaoDelecao);
+//botaoFecharAviso.addEventListener("click", ocultarAvisoEscolhaAtualizacaoDelecao);
+botaoDeletar.addEventListener("click", deletarMarcaProduto);

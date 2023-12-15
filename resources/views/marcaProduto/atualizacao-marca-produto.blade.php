@@ -7,6 +7,7 @@
 
 @section('script')
     <script type="module" src="{{ asset('js/marcaProduto/criacaoMarcaProduto.js') }}"></script>
+    <script type="module" src="{{ asset('js/marcaProduto/atualizacaoDelecaoMarcaProduto.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
@@ -19,6 +20,7 @@
         @csrf
         <div>
             <div>
+                <button class="btn" id="botao-deletar">Deletar</button>
                 <button class="btn" type="submit" id="botao-atualizar">Atualizar</button>
             </div>
 
@@ -33,5 +35,14 @@
                 Parece bom!
             </div>
         </div>
+    </form>
+
+    {{-- Formulário para a deleção (invisível para o usuário) --}}
+    <form class="d-none" id="formulario-delecao" action="{{ route('marca.destroy', ['marca' => $marcaProduto->id]) }}"
+          method="POST">
+        @method('DELETE')
+        @csrf
+
+        <button id="botao-deletar-formulario" type="submit"></button>
     </form>
 </x-layouts.estrutura-basica>
