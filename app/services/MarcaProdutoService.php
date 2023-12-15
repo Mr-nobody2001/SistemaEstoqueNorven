@@ -41,4 +41,16 @@ class MarcaProdutoService
 
         return true;
     }
+
+    public function atualizarMarcaProduto(CriarMarcaProdutoRequest $request): bool
+    {
+        $id = $request->id;
+
+        $requestValidada = $request->validated();
+
+        $linhasAfetadas = MarcaProduto::where('id', $id)
+            ->update(['nome_marca' => $requestValidada['nome_marca']]);
+
+        return $linhasAfetadas > 0;
+    }
 }

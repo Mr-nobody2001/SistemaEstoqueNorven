@@ -1,7 +1,6 @@
 @section('titulo', 'Atualizar Marca')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/estilo-estilosGerais-marca-produto.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/criacao-atualizacao-delecao-geral.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/componentesGerais/informacoes-pagina.css') }}">
 @endsection
@@ -13,17 +12,22 @@
 <x-layouts.estrutura-basica>
     <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Atualizar Marca'"/>
 
-    <form class="needs-validation" id="container-formulario" action="{{ route('marca.store') }}" method="POST"
+    <form class="needs-validation" id="container-formulario"
+          action="{{ route('marca.update', ['marca' => $marcaProduto->id]) }}" method="POST"
           novalidate>
+        @method('PUT')
         @csrf
         <div>
             <div>
                 <button class="btn" type="submit" id="botao-atualizar">Atualizar</button>
             </div>
 
-            <label for="validationCustom01" class="form-label">Nome da marca</label>
+            <div>
+                <input type="hidden" name="id" value="{{ $marcaProduto->id }}">
+            </div>
+            <label for="nome_marca" class="form-label">Nome da marca</label>
             <input type="text" class="form-control" value="{{ $marcaProduto->nome_marca }}" name="nome_marca"
-                   maxlength="50" id="validationCustom01" required
+                   maxlength="50" id="nome_marca" required
                    pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ\-]*$">
             <div class="valid-feedback">
                 Parece bom!

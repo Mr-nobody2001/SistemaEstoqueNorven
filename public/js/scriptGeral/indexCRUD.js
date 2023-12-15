@@ -1,16 +1,4 @@
-import {validarPesquisa} from "../validacao/validacaoPesquisa.js";
-
-const barraPesquisa = document.querySelector("#barra-pesquisa");
-const botaoPesquisa = document.querySelector("#botao-pesquisa");
-const botaoAtualizar = document.querySelector(".bi-arrow-clockwise");
-
-const validarPesquisaMarcaProduto = (evento) => {
-    const valorPesquisa = barraPesquisa.value;
-
-    validarPesquisa(evento, valorPesquisa);
-}
-
-const atualizarPagina = () => {
+export const atualizarPagina = () => {
     // Cria um formulário dinamicamente
     const formulario = document.createElement('form');
     formulario.method = "GET";
@@ -30,5 +18,13 @@ const atualizarPagina = () => {
     formulario.submit();
 }
 
-botaoPesquisa.addEventListener("click", validarPesquisaMarcaProduto);
-botaoAtualizar.addEventListener("click", atualizarPagina);
+export const limparSelecaoTabela = (linhasTabela) => {
+    for (let linhaTabela of linhasTabela)
+        if (linhaTabela.classList.contains("linha-selecionada")) linhaTabela.classList.remove("linha-selecionada");
+}
+
+export const indicarSelecaoElementoTabela = (linhasTabela, linhaTabelaSelecionada) => {
+    limparSelecaoTabela(linhasTabela);
+
+    if (!linhaTabelaSelecionada.classList.contains("linha-selecionada")) linhaTabelaSelecionada.classList.add("linha-selecionada");
+}

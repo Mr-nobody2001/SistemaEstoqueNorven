@@ -1,5 +1,5 @@
 :root {
-    --background-celula-tabela-hover: #F1F1F1;
+    --background-celula-tabela-hover-active: #F1F1F1;
     --borda-tabela: #F2F2F2;
 
     --borda-scrollbar-slide: #F2F2F2;
@@ -54,7 +54,7 @@
     width: 100%;
 }
 
-#container-barra-pesquisa  input[type="text"] {
+#container-barra-pesquisa input[type="text"] {
     min-width: 150px;
     width: 100%;
 }
@@ -83,6 +83,11 @@
 }
 
 tbody tr:hover {
-    background-color: var(--background-celula-tabela-hover);
+    background-color: var(--background-celula-tabela-hover-active);
     cursor: pointer;
+    transition: 0.7s;
+}
+
+.linha-selecionada {
+    background-color: var(--background-celula-tabela-hover-active) !important;
 }

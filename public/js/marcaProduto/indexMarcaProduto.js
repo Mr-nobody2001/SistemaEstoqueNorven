@@ -1,8 +1,10 @@
 import {validarPesquisa} from "../validacao/validacaoPesquisa.js";
+import {atualizarPagina, indicarSelecaoElementoTabela} from "../scriptGeral/indexCRUD.js";
 
 const barraPesquisa = document.querySelector("#barra-pesquisa");
 const botaoPesquisa = document.querySelector("#botao-pesquisa");
 const botaoAtualizar = document.querySelector(".bi-arrow-clockwise");
+const linhasTabelaMarca = document.querySelectorAll("tbody tr");
 
 const validarPesquisaMarcaProduto = (evento) => {
     const valorPesquisa = barraPesquisa.value;
@@ -10,26 +12,20 @@ const validarPesquisaMarcaProduto = (evento) => {
     validarPesquisa(evento, valorPesquisa);
 }
 
-const atualizarPagina = () => {
-    // Cria um formulário dinamicamente
-    const formulario = document.createElement('form');
-    formulario.method = "GET";
-    formulario.action = "http://localhost:8000/marca";
+const atualizarPaginaMarcaProduto = () => {
+    atualizarPagina();
+}
 
-    // Adiciona campos ao formulário
-    const input = document.createElement('input');
-    input.type = "text";
-    input.name = "marca";
-    input.value = " ";
-    formulario.appendChild(input);
+const indicarSelecaoElementoTabelaMarca = (evento) => {
+    const linhaTabelaMarcaSelecionada = evento.target.parentNode;
 
-    formulario.style.display = "none";
-    document.body.appendChild(formulario);
+    indicarSelecaoElementoTabela(linhasTabelaMarca, linhaTabelaMarcaSelecionada)
+}
 
-    // Submete o formulário
-    formulario.submit();
+
+for (let linhaTabelaMarca of linhasTabelaMarca) {
+    linhaTabelaMarca.addEventListener("click", indicarSelecaoElementoTabelaMarca)
 }
 
 botaoPesquisa.addEventListener("click", validarPesquisaMarcaProduto);
-botaoAtualizar.addEventListener("click", atualizarPagina);
-
+botaoAtualizar.addEventListener("click", atualizarPaginaMarcaProduto);

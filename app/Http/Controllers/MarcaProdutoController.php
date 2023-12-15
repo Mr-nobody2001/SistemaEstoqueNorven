@@ -75,8 +75,12 @@ class MarcaProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): View
+    public function update(CriarMarcaProdutoRequest $request): View
     {
+        if ($this->marcaProdutoService->atualizarMarcaProduto($request)) {
+
+        }
+
         return view();
     }
 

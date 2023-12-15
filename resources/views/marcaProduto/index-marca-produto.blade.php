@@ -3,17 +3,18 @@
 @section('estilo')
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/index-geral.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/componentesGerais/informacoes-pagina.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/avisos/aviso-confirmacao.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/avisos/aviso-escolha.css') }}">
 @endsection
 
 @section('script')
     <script type="module" src="{{ asset('js/scriptGeral/indexCRUD.js') }}"></script>
+    <script type="module" src="{{ asset('js/marcaProduto/indexMarcaProduto.js') }}"></script>
     <script type="module" src="{{ asset("js/marcaProduto/atualizacaoDelecaoMarcaProduto.js") }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
-    <x-avisos.aviso-confirmacao :textoAviso="'Você deseja fazer alguma alteração nesse registro de Marca?'"
-                                :idAviso="'confirmacao-atualizacao-delecao'" :opcao1="'Atualizar Marca'"
+    <x-avisos.aviso-escolha :textoAviso="'Você deseja fazer alguma alteração nesse registro de Marca?'"
+                                :idAviso="'escolha-atualizacao-delecao'" :opcao1="'Atualizar Marca'"
                                 :opcao2="'Deletar Marca'"/>
 
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}

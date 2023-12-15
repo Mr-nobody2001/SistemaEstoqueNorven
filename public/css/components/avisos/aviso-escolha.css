@@ -5,27 +5,23 @@
     --background-botao-deletar: #000000FF;
 }
 
-#opcoes-confirmacao {
+#opcoes {
     display: flex;
     justify-content: space-around;
 }
 
-.aviso > button {
-    background-color: var(--background-botao-fechar-aviso);
-}
-
-.aviso button {
+.aviso a {
     color: var(--cor-texto-botao-atualizar-deletar);
 }
 
-.aviso button:hover {
+.aviso a:hover {
     color: var(--cor-texto-botao-atualizar-deletar);
 }
 
-#opcoes-confirmacao button:first-child {
+#botao-opcao1 {
     background-color: var(--background-botao-atualizar);
 }
 
-#opcoes-confirmacao button:last-child {
+#botao-opcao2 {
     background-color: var(--background-botao-deletar);
 }
