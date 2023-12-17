@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CriarMarcaProdutoRequest;
 use App\services\MarcaProdutoService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 
 class MarcaProdutoController extends Controller
@@ -24,10 +27,6 @@ class MarcaProdutoController extends Controller
             $paginaMarcaProduto = $this->marcaProdutoService->listarTodasMarcas();
         }
 
-        /*if (!$paginaMarcaProduto) {
-
-        }*/
-
         return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
     }
 
@@ -42,13 +41,13 @@ class MarcaProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CriarMarcaProdutoRequest $request): View
+    public function store(CriarMarcaProdutoRequest $request): View|Application|RedirectResponse|Redirector
     {
-        if ($this->marcaProdutoService->criarMarcaProduto($request)) {
-            return view('marcaProduto.criacao-marca-produto');
+        if (!$this->marcaProdutoService->criarMarcaProduto($request)) {
+            return redirect(route('marca.create'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro', 'nome_marca' => $request->nome_marca]);
         }
 
-        return view('marcaProduto.criacao-marca-produto');
+        return redirect(route('marca.index'))->with(['msg' => 'Marca criada com sucesso', 'tipo' => 'sucesso',]);
     }
 
     /**
@@ -65,32 +64,30 @@ class MarcaProdutoController extends Controller
     {
         $marcaProduto = $this->marcaProdutoService->encontrarMarcaId($id);
 
-        /*if (is_null($marcaProduto)) {
-
-        }*/
-
         return view('marcaProduto.atualizacao-marca-produto', compact('marcaProduto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CriarMarcaProdutoRequest $request): View
+    public function update(CriarMarcaProdutoRequest $request): Application|RedirectResponse|Redirector
     {
-        if ($this->marcaProdutoService->atualizarMarcaProduto($request)) {
-
+        if (!$this->marcaProdutoService->atualizarMarcaProduto($request)) {
+            return redirect(route('marca.edit', ['marca' => $request->id]))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
         }
 
-        return view();
+        return redirect(route('marca.index'))->with(['msg' => 'Marca atualizada com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Application|RedirectResponse|Redirector
     {
-        if ($this->marcaProdutoService->deletarMarcaProduto($id)) {
-
+        if (!$this->marcaProdutoService->deletarMarcaProduto($id)) {
+            return redirect(route('marca.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
         }
+
+        return redirect(route('marca.index'))->with(['msg' => 'Marca removida com sucesso', 'tipo' => 'sucesso']);
     }
 }

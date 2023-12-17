@@ -6,7 +6,10 @@ use App\Http\Requests\CriarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class MarcaProdutoService
 {
@@ -31,11 +34,13 @@ class MarcaProdutoService
 
     public function criarMarcaProduto(CriarMarcaProdutoRequest $request): bool
     {
-        $requestValidada = $request->validated();
-
         try {
+            $requestValidada = $request->validated();
+
             MarcaProduto::create($requestValidada);
-        } catch (Exception) {
+        } catch (Exception $e) {
+            Log::error('Erro ao criar registro: ' . $e->getMessage());
+
             return false;
         }
 
@@ -44,20 +49,33 @@ class MarcaProdutoService
 
     public function atualizarMarcaProduto(CriarMarcaProdutoRequest $request): bool
     {
-        $id = $request->id;
+        try {
+            $id = $request->id;
 
-        $requestValidada = $request->validated();
+            $requestValidada = $request->validated();
 
-        $linhasAfetadas = MarcaProduto::where('id', $id)
-            ->update(['nome_marca' => $requestValidada['nome_marca']]);
+            MarcaProduto::where('id', $id)
+                ->update(['nome_marca' => $requestValidada['nome_marca']]);
 
-        return $linhasAfetadas > 0;
+            return true;
+        } catch (Exception $e) {
+            Log::error('Erro ao atualizar registro: ' . $e->getMessage());
+
+            return false;
+        }
     }
 
     public function deletarMarcaProduto(string $id): bool
     {
-        $colunasAfetadas = MarcaProduto::destroy($id);
+        try {
+            MarcaProduto::destroy($id);
 
-        return $colunasAfetadas > 0;
+            return true;
+        } catch (Exception $e) {
+            Log::error('Erro ao atualizar registro: ' . $e->getMessage());
+
+            return false;
+        }
+
     }
 }

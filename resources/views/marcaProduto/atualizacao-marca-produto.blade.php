@@ -6,11 +6,12 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/marcaProduto/criacaoMarcaProduto.js') }}"></script>
     <script type="module" src="{{ asset('js/marcaProduto/atualizacaoDelecaoMarcaProduto.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
+    <x-avisos.toast/>
+
     <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Atualizar Marca'"/>
 
     <form class="needs-validation" id="container-formulario"

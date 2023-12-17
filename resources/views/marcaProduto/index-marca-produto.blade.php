@@ -8,10 +8,11 @@
 
 @section('script')
     <script type="module" src="{{ asset('js/marcaProduto/indexMarcaProduto.js') }}"></script>
-    <script type="module" src="{{ asset("js/marcaProduto/atualizacaoDelecaoMarcaProduto.js") }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
+    <x-avisos.toast/>
+
     <x-avisos.aviso-escolha :textoAviso="'Você deseja fazer alguma alteração nesse registro de Marca?'"
                                 :idAviso="'escolha-atualizacao-delecao'" :opcao1="'Atualizar Marca'"
                                 :opcao2="'Deletar Marca'"/>
@@ -52,7 +53,7 @@
                 <td>{{ $marcaProduto->nome_marca }}</td>
             </tr>
         @empty
-
+            <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>
         @endforelse
         </tbody>
     </table>

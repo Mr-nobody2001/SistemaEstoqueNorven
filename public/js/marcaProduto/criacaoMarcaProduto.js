@@ -1,3 +1,7 @@
 import {validacaoBootstrap} from "../validacao/validacaoPesquisa.js";
+import {verificarMensagensSecao} from "../avisos/toast.js";
 
-window.onload = validacaoBootstrap;
+window.onload = () => {
+    validacaoBootstrap();
+    verificarMensagensSecao();
+}

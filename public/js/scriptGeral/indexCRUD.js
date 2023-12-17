@@ -1,5 +1,6 @@
 import {exibirAviso, ocultarAviso} from "../avisos/aviso.js";
 import {escolherAlteracao} from "../avisos/avisoEscolha.js";
+import {exibirToast} from "../avisos/toast.js";
 
 export const atualizarPagina = () => {
     // Cria um formulário dinamicamente

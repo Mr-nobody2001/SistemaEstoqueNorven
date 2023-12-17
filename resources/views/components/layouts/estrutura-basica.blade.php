@@ -37,9 +37,11 @@
 <body>
 <x-menuLateral.menu-lateral/>
 
-<section id="secao-principal">
-    {{ $slot }}
-</section>
+<main>
+    <section id="secao-principal">
+        {{ $slot }}
+    </section>
+</main>
 
 {{-- Script Bootstrap --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

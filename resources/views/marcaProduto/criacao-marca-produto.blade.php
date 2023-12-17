@@ -10,6 +10,8 @@
 @endsection
 
 <x-layouts.estrutura-basica>
+    <x-avisos.toast/>
+
     <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Cadastrar Marca'"/>
 
     <form class="needs-validation" id="container-formulario" action="{{ route('marca.store') }}" method="POST" novalidate>
@@ -20,7 +22,7 @@
             </div>
 
             <label for="nome_marca" class="form-label">Nome da marca</label>
-            <input type="text" class="form-control" name="nome_marca" maxlength="50" id="nome_marca" required
+            <input type="text" class="form-control" name="nome_marca" maxlength="50" id="nome_marca" value="{{ session('nome_marca') ?? '' }}" required
                    pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-]*$">
             <div class="valid-feedback">
                 Parece bom!

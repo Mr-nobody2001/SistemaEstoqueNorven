@@ -3,6 +3,7 @@ import {atualizarPagina, indicarSelecaoElementoTabela} from "../scriptGeral/inde
 import {ocultarAvisoEscolhaAtualizacaoDelecao} from "../scriptGeral/indexCRUD.js";
 import {prepararOpcaoAlteracao} from "../scriptGeral/indexCRUD.js";
 import {exibirAvisoEscolhaAtualizacaoDelecao} from "../scriptGeral/indexCRUD.js";
+import {verificarMensagensSecao} from "../avisos/toast.js";
 
 const barraPesquisa = document.querySelector("#barra-pesquisa");
 const botaoPesquisa = document.querySelector("#botao-pesquisa");
@@ -49,6 +50,8 @@ window.onload = () => {
         listaItenMarca.addEventListener("click", exibirAvisoEscolhaAtualizacaoDelecaoMarcaProduto);
         listaItenMarca.addEventListener("click", indicarSelecaoElementoTabelaMarca)
     }
+
+    verificarMensagensSecao();
 }
 
 botaoPesquisa.addEventListener("click", validarPesquisaMarcaProduto);
