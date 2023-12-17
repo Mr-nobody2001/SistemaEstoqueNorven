@@ -1,3 +1,6 @@
+import {exibirAviso, ocultarAviso} from "../avisos/aviso.js";
+import {escolherAlteracao} from "../avisos/avisoEscolha.js";
+
 export const atualizarPagina = () => {
     // Cria um formulário dinamicamente
     const formulario = document.createElement('form');
@@ -27,4 +30,26 @@ export const indicarSelecaoElementoTabela = (linhasTabela, linhaTabelaSelecionad
     limparSelecaoTabela(linhasTabela);
 
     if (!linhaTabelaSelecionada.classList.contains("linha-selecionada")) linhaTabelaSelecionada.classList.add("linha-selecionada");
+}
+
+export const ocultarAvisoEscolhaAtualizacaoDelecao = (linhasTabelaMarca, avisoEscolhaAtualizacaoDelecao) => {
+    limparSelecaoTabela(linhasTabelaMarca)
+
+    ocultarAviso(avisoEscolhaAtualizacaoDelecao)
+}
+export const prepararOpcaoAlteracao = (entidade, id, botaoAlterar) => {
+    const url = `http://127.0.0.1:8000/${entidade}/${id}/edit`;
+
+    escolherAlteracao(url, botaoAlterar);
+}
+
+export const exibirAvisoEscolhaAtualizacaoDelecao = (evento, botaoEscondido, botaoAlterar, avisoEscolhaAtualizacaoDelecao) => {
+    const id = evento.target.parentNode.dataset.id;
+
+    botaoEscondido.classList.add("d-none");
+    botaoEscondido.classList.add("d-none");
+
+    prepararOpcaoAlteracao("marca", id, botaoAlterar);
+
+    exibirAviso(avisoEscolhaAtualizacaoDelecao)
 }

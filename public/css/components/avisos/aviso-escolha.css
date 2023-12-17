@@ -10,7 +10,12 @@
     justify-content: space-around;
 }
 
+.aviso {
+    padding: 20px;
+}
+
 .aviso a {
+    padding: 10px;
     color: var(--cor-texto-botao-atualizar-deletar);
 }
 

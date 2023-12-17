@@ -21,7 +21,7 @@
 
             <label for="nome_marca" class="form-label">Nome da marca</label>
             <input type="text" class="form-control" name="nome_marca" maxlength="50" id="nome_marca" required
-                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ\-]*$">
+                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-]*$">
             <div class="valid-feedback">
                 Parece bom!
             </div>

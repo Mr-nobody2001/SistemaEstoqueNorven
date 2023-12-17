@@ -7,7 +7,6 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/scriptGeral/indexCRUD.js') }}"></script>
     <script type="module" src="{{ asset('js/marcaProduto/indexMarcaProduto.js') }}"></script>
     <script type="module" src="{{ asset("js/marcaProduto/atualizacaoDelecaoMarcaProduto.js") }}"></script>
 @endsection
@@ -38,7 +37,7 @@
         </form>
     </div>
 
-    {{-- Inclui tudo relacionado com a tabela que contém os registros --}}
+    {{-- Tabela de registros --}}
     <table class="tabela">
         <thead>
         <tr class="titulo-tabela-destaque">
