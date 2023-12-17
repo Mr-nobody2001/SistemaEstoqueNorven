@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\MarcaProdutoController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('marca', MarcaProdutoController::class)->except(['show']);
+Route::resource(['marca' => MarcaProdutoController::class, 'categoria' => CategoriaProdutoController::class])->except(['show']);
