@@ -1,6 +1,13 @@
 :root {
     --background-botao-salvar-atualizar: #000000FF;
+    --border-botao-salvar-atualizar-hover: #000000FF;
     --cor-texto-botao-salvar-atualizar: #FFFFFF;
+    --cor-texto-botao-salvar-atualizar-hover: #000000FF;
+
+    --cor-texto-botao-deletar: #000000;
+    --cor-texto-botao-deletar-hover: #FFFFFF;
+    --border-botao-deletar: #000000;
+    --border-botao-deletar-hover: #000000FF;
 }
 
 #container-formulario {
@@ -22,8 +29,7 @@
     border: none;
 }
 
-#botao-salvar:hover,
-#botao-atualizar:hover {
-    background-color: var(--cor-contraste);
-    transition: 0.5s;
+#botao-deletar {
+    color: var(--cor-texto-botao-deletar);
+    border: 1px solid var(--border-botao-deletar);
 }
