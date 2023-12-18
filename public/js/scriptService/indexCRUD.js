@@ -44,13 +44,8 @@ export const prepararOpcaoAlteracao = (entidade, id, botaoAlterar) => {
     escolherAlteracao(url, botaoAlterar);
 }
 
-export const exibirAvisoEscolhaAtualizacaoDelecao = (evento, botaoEscondido, botaoAlterar, avisoEscolhaAtualizacaoDelecao) => {
-    const id = evento.target.parentNode.dataset.id;
-
+export const exibirAvisoEscolhaAtualizacaoDelecao = (botaoEscondido, avisoEscolhaAtualizacaoDelecao) => {
     botaoEscondido.classList.add("d-none");
-    botaoEscondido.classList.add("d-none");
-
-    prepararOpcaoAlteracao("marca", id, botaoAlterar);
 
     exibirAviso(avisoEscolhaAtualizacaoDelecao)
 }

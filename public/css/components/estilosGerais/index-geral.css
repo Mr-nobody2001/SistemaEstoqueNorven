@@ -60,7 +60,8 @@
 }
 
 #botao-pesquisa {
-    padding: 10px;
+    width: 100px;
+    height: 40px;
     color: var(--cor-texto-botao-pesquisa);
     background-color: var(--background-botao-pesquisa);
     border: none;

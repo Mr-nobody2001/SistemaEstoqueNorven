@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CategoriaProdutoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $paginaCategoriaProduto = [];
+
+        return view('categoriaProduto.index-categoria-produto', compact('paginaCategoriaProduto'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('categoriaProduto.criacao-categoria-produto');
     }
 
     /**

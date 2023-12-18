@@ -13,23 +13,43 @@
 #container-formulario {
     display: flex;
     flex-direction: column;
+    gap: 25px;
 }
 
-#container-formulario > div div:first-child {
+#container-formulario > div {
     display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 40px;
+    flex-direction: column;
+}
+
+#container-botao-atualizar-deletar,
+#container-botao-salvar {
+    display: flex;
+    flex-direction: row !important;
+    align-self: flex-end;
     gap: 20px;
 }
 
 #botao-salvar,
 #botao-atualizar {
+    width: 100px;
+    height: 40px;
     color: var(--cor-texto-botao-salvar-atualizar) !important;
     background-color: var(--background-botao-salvar-atualizar);
     border: none;
 }
 
 #botao-deletar {
+    width: 100px;
+    height: 40px;
     color: var(--cor-texto-botao-deletar);
     border: 1px solid var(--border-botao-deletar);
+}
+
+textarea {
+    resize: none;
+}
+
+#container-file {
+    display: flex;
+    flex-direction: row !important;
 }

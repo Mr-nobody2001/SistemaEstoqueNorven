@@ -3,7 +3,7 @@ import {exibirToast} from "../avisos/toast.js";
 const forms = document.querySelectorAll('.needs-validation');
 export const validarPesquisa = (evento, valorPesquisa) => {
     // alfanumérica, permitindo espaços e exigindo que tenha pelo menos três caracteres
-    const regex = /^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'-]*$/;
+    const regex = /^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$/;
 
     if (!regex.test(valorPesquisa) || !valorPesquisa) {
         evento.preventDefault();

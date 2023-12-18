@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     {{-- Links css --}}
+    <link rel="stylesheet" href="{{ asset('css/components/componentesGerais/informacoes-pagina.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/layouts/estrutura-basica.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/menuLateral/menu-lateral.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/menuLateral/item-menu-lateral.css') }}">

@@ -15,4 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource(['marca' => MarcaProdutoController::class, 'categoria' => CategoriaProdutoController::class])->except(['show']);
+Route::resources([
+    'marca' => MarcaProdutoController::class,
+    'categoria' => CategoriaProdutoController::class,
+]);
