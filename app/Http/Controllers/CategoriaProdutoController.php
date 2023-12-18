@@ -39,23 +39,23 @@ class CategoriaProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): void
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $categoriaProduto = $this->categoriaProdutoService->encontrarCategoriaId($id);
+
+        return view('categoriaProduto.atualizacao-categoria-produto', compact('categoriaProduto'));
     }
 
     /**
@@ -71,6 +71,10 @@ class CategoriaProdutoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (!$this->categoriaProdutoService->deletarcategoriaProduto($id)) {
+            return redirect(route('categoria.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
+        }
+
+        return redirect(route('categoria.index'))->with(['msg' => 'categoria removida com sucesso', 'tipo' => 'sucesso']);
     }
 }

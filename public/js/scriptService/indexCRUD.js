@@ -1,12 +1,11 @@
 import {exibirAviso, ocultarAviso} from "../avisos/aviso.js";
 import {escolherAlteracao} from "../avisos/avisoEscolha.js";
-import {exibirToast} from "../avisos/toast.js";
 
-export const atualizarPagina = () => {
+export const atualizarPagina = (entidade) => {
     // Cria um formulário dinamicamente
     const formulario = document.createElement('form');
     formulario.method = "GET";
-    formulario.action = "http://localhost:8000/marca";
+    formulario.action = `http://localhost:8000/${entidade}`;
 
     // Adiciona campos ao formulário
     const input = document.createElement('input');

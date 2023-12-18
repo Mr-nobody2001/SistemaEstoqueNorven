@@ -38,7 +38,7 @@
     </div>
 
     {{-- Tabela de registros --}}
-    <table class="tabela" data-entidade="marca">
+    <table class="tabela alinhar-centro" data-entidade="marca">
         <thead>
         <tr class="titulo-tabela-destaque">
             <th>Id</th>

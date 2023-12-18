@@ -23,7 +23,9 @@ const validarPesquisaProduto = (evento) => {
 }
 
 const atualizarPaginaProduto = () => {
-    atualizarPagina();
+    const entidade = tabela.dataset.entidade;
+
+    atualizarPagina(entidade);
 }
 
 const indicarSelecaoElementoTabelaProduto = (evento) => {

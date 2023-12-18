@@ -4,7 +4,9 @@ namespace App\services;
 
 use App\Models\CategoriaProduto;
 use App\repositorys\CategoriaProdutoRepository;
+use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class CategoriaProdutoService
 {
@@ -25,5 +27,19 @@ class CategoriaProdutoService
     public function encontrarCategoriaNome(string $nomeCategoria): LengthAwarePaginator
     {
         return $this->categoriaProdutoRepository->encontrarCategoriasNome($nomeCategoria);
+    }
+
+    public function deletarCategoriaProduto(string $id): bool
+    {
+        try {
+            CategoriaProduto::destroy($id);
+
+            return true;
+        } catch (Exception $e) {
+            Log::error('Erro ao atualizar registro: ' . $e->getMessage());
+
+            return false;
+        }
+
     }
 }

@@ -6,10 +6,8 @@ use App\Http\Requests\CriarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class MarcaProdutoService
 {

@@ -14,7 +14,7 @@
     <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Atualizar Marca'"/>
 
     <form class="needs-validation" id="container-formulario"
-          action="{{ route('marca.update', ['marca' => $marcaProduto->id]) }}" method="POST"
+          action="{{ route('marca.update', ['marca' => $marcaProduto]) }}" method="POST"
           novalidate>
         @method('PUT')
         @csrf

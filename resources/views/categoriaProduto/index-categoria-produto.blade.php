@@ -53,6 +53,8 @@
             <tr data-id="{{ $categoriaProduto->id }}">
                 <td>{{ $categoriaProduto->id }}</td>
                 <td>{{ $categoriaProduto->nome_categoria }}</td>
+                <td>{{ substr($categoriaProduto->descricao_categoria, 0, 30) . ' . . .' }}</td>
+                <td>{{ substr($categoriaProduto->caminho_imagem, 0, 25) . ' . . .' }}</td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>
