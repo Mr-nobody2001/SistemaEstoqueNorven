@@ -31,9 +31,9 @@
     <div id="container-pesquisa">
         <form action="{{ route('categoria.index') }}" method="GET">
             <div id="container-barra-pesquisa">
-                <input type="text" class="form-control" id="barra-pesquisa" name="nome_categoria"
+                <input type="text" id="barra-pesquisa" class="form-control" name="nome_categoria"
                        placeholder="Pesquise por uma categoria.">
-                <button type="submit" class="btn" id="botao-pesquisa">Pesquisar</button>
+                <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>
     </div>
@@ -53,8 +53,8 @@
             <tr data-id="{{ $categoriaProduto->id }}">
                 <td>{{ $categoriaProduto->id }}</td>
                 <td>{{ $categoriaProduto->nome_categoria }}</td>
-                <td>{{ substr($categoriaProduto->descricao_categoria, 0, 30) . ' . . .' }}</td>
-                <td>{{ substr($categoriaProduto->caminho_imagem, 0, 25) . ' . . .' }}</td>
+                <td>{{ substr($categoriaProduto->descricao_categoria, 0, 30) . ' . . .' ?? 'Não informada'}}</td>
+                <td><img src="{{ Storage::url($categoriaProduto->caminho_imagem) }}" alt="{{ $categoriaProduto->nome_categoria }}"></td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>

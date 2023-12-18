@@ -13,7 +13,7 @@
 
     <x-componentesGerais.informacoes-pagina :textoIcone="'category'" :titulo="'Atualização Categoria'"/>
 
-    <form class="needs-validation" id="container-formulario" action="{{ route('categoria.store') }}" method="POST"
+    <form class="needs-validation" id="container-formulario" action="" method="POST"
           novalidate>
         @csrf
         <div id="container-botao-atualizar-deletar">
@@ -24,8 +24,9 @@
         <div>
             <label for="nome_categoria" class="form-label">Nome da categoria</label>
             <input type="text" class="form-control" name="nome_categoria" maxlength="50" id="nome_categoria"
-                   value="{{ $categoriaProduto->nome_categoria }}" required
-                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$">
+                   value="{{ $categoriaProduto->nome_categoria }}"
+                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required
+                   data-validadorequest>
             <div class="valid-feedback">
                 Parece bom!
             </div>
@@ -33,16 +34,16 @@
 
         <div>
             <label for="descricao" class="form-label">Descrição da categoria</label>
-            <textarea class="form-control" id="descricao" rows="3"
-                      required>{{ $categoriaProduto->descricao_categoria }}</textarea>
+            <textarea class="form-control" name="descricao_categoria" id="descricao"
+                      rows="3">{{ $categoriaProduto->descricao_categoria }}</textarea>
             <div class="invalid-feedback">
                 Por favor, forneça uma descrição válida.
             </div>
         </div>
 
         <div id="container-file" class="input-group">
-            <input type="file" class="form-control" id="foto_categoria" aria-describedby="foto_categoria"
-                   aria-label="Upload" accept="image/*" required>
+            <input type="file" id="foto_categoria" class="form-control" name="imagem_categoria"
+                   accept="image/jpeg, image/jpg" max="2048000" required>
             <div class="invalid-feedback">
                 Por favor, forneça uma foto válida.
             </div>

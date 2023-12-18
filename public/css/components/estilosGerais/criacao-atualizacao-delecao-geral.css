@@ -8,6 +8,8 @@
     --cor-texto-botao-deletar-hover: #FFFFFF;
     --border-botao-deletar: #000000;
     --border-botao-deletar-hover: #000000FF;
+
+    --cor-campo-invalido: #dc3545;
 }
 
 #container-formulario {
@@ -52,4 +54,11 @@ textarea {
 #container-file {
     display: flex;
     flex-direction: row !important;
+}
+
+.campo-invalido {
+    color: var(--cor-campo-invalido);
+    font-size: 80%;
+    display: block;
+    margin-top: .25rem;
 }

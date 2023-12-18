@@ -13,8 +13,8 @@
     <x-avisos.toast/>
 
     <x-avisos.aviso-escolha :textoAviso="'Você deseja fazer alguma alteração nesse registro de Marca?'"
-                                :idAviso="'escolha-atualizacao-delecao'" :opcao1="'Atualizar Marca'"
-                                :opcao2="'Deletar Marca'"/>
+                            :idAviso="'escolha-atualizacao-delecao'" :opcao1="'Atualizar Marca'"
+                            :opcao2="'Deletar Marca'"/>
 
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}
     <div id="topo-secao-principal">
@@ -30,9 +30,9 @@
     <div id="container-pesquisa">
         <form action="{{ route('marca.index') }}" method="GET">
             <div id="container-barra-pesquisa">
-                <input type="text" class="form-control" id="barra-pesquisa" name="nome_marca"
+                <input type="text" id="barra-pesquisa" class="form-control" name="nome_marca"
                        placeholder="Pesquise por uma marca.">
-                <button type="submit" class="btn" id="botao-pesquisa">Pesquisar</button>
+                <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>
     </div>

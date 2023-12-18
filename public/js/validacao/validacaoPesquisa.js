@@ -1,9 +1,10 @@
 import {exibirToast} from "../avisos/toast.js";
 
-const forms = document.querySelectorAll('.needs-validation');
+const forms = document.querySelectorAll(".needs-validation");
+const spansValidacaoRequest = document.querySelectorAll(".campo-invalido")
 export const validarPesquisa = (evento, valorPesquisa) => {
     // alfanumérica, permitindo espaços e exigindo que tenha pelo menos três caracteres
-    const regex = /^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$/;
+    const regex = /^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&"\-\s]*$/;
 
     if (!regex.test(valorPesquisa) || !valorPesquisa) {
         evento.preventDefault();
@@ -14,13 +15,19 @@ export const validarPesquisa = (evento, valorPesquisa) => {
 
 export const validacaoBootstrap = () => {
     Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
+        form.addEventListener("submit", event => {
             if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
+                event.preventDefault();
+                event.stopPropagation();
             }
 
-            form.classList.add('was-validated')
-        }, false)
+            form.classList.add("was-validated");
+        }, false);
+
+        form.addEventListener("input", () => {
+            for (let spanValidacaoRequest of spansValidacaoRequest)
+                spanValidacaoRequest.classList.add("d-none");
+
+        })
     })
 }

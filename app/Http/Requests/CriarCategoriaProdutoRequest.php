@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class criarMarcaProdutoRequest extends FormRequest
+class CriarCategoriaProdutoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,11 @@ class criarMarcaProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome_marca' => 'required|string|max:50|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/'
+            'nome_categoria' => 'required|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/|
+            unique:categoria_produtos,nome_categoria|string|max:50|',
+            'descricao_categoria' => 'nullable|string',
+            'imagem_categoria' => 'required|file|mimes:jpeg,jpg|max:2048',
         ];
+
     }
 }

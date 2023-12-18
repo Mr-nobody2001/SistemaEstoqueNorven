@@ -13,20 +13,20 @@
 
     <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Cadastrar Marca'"/>
 
-    <form class="needs-validation" id="container-formulario" action="{{ route('marca.store') }}" method="POST"
+    <form id="container-formulario" class="needs-validation" action="{{ route('marca.store') }}" method="POST"
           novalidate>
         @csrf
         <div id="container-botao-salvar">
-            <button class="btn" type="submit" id="botao-salvar">Salvar</button>
+            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
         </div>
 
         <div>
             <label for="nome_marca" class="form-label">Nome da marca</label>
-            <input type="text" class="form-control" name="nome_marca" maxlength="50" id="nome_marca"
-                   value="{{ session('nome_marca') ?? '' }}" required
-                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$">
-            <div class="valid-feedback">
-                Parece bom!
+            <input type="text" id="nome_marca" class="form-control" name="nome_marca"
+                   value="{{ old('nome_marca') ?? '' }}" maxlength="50"
+                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
+            <div class="invalid-feedback">
+                O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
             </div>
         </div>
     </form>

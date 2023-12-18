@@ -13,34 +13,40 @@
 
     <x-componentesGerais.informacoes-pagina :textoIcone="'category'" :titulo="'Cadastrar Categoria'"/>
 
-    <form class="needs-validation" id="container-formulario" action="{{ route('categoria.store') }}" method="POST"
-          novalidate>
+    <form id="container-formulario" class="needs-validation" action="{{ route('categoria.store') }}" method="POST"
+          enctype="multipart/form-data" novalidate>
         @csrf
         <div id="container-botao-salvar">
-            <button class="btn" type="submit" id="botao-salvar">Salvar</button>
+            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
         </div>
 
         <div>
             <label for="nome_categoria" class="form-label">Nome da categoria</label>
-            <input type="text" class="form-control" name="nome_categoria" maxlength="50" id="nome_categoria"
-                   value="{{ session('nome_categoria') ?? '' }}" required
-                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$">
-            <div class="valid-feedback">
-                Parece bom!
+            <input type="text" id="nome_categoria" class="form-control" name="nome_categoria"
+                   value="" maxlength="50"
+                   pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
+            <div class="invalid-feedback">
+                O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
             </div>
+            <span class="mt-1 campo-invalido" data-nomecategoria>
+                @error('nome_categoria')
+                Esta categoria já existe no banco de dados e não pode ser inserida novamente.
+                @enderror
+            </span>
         </div>
 
         <div>
-            <label for="descricao" class="form-label">Descrição da categoria</label>
-            <textarea class="form-control" id="descricao" rows="3" required></textarea>
+            <label for="descricao_categoria" class="form-label">Descrição da categoria</label>
+            <textarea id="descricao_categoria" class="form-control" name="descricao_categoria"
+                      rows="3">{{ old('descricao_categoria') ?? '' }}</textarea>
             <div class="invalid-feedback">
                 Por favor, forneça uma descrição válida.
             </div>
         </div>
 
         <div id="container-file" class="input-group">
-            <input type="file" class="form-control" id="foto_categoria" aria-describedby="foto_categoria"
-                   aria-label="Upload" accept="image/*" required>
+            <input type="file" id="imagem_categoria" class="form-control" name="imagem_categoria"
+                   accept="image/jpeg, image/jpg" max="2048000" required>
             <div class="invalid-feedback">
                 Por favor, forneça uma foto válida.
             </div>
