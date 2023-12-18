@@ -44,6 +44,8 @@
         <tr class="titulo-tabela-destaque">
             <th>Id</th>
             <th>Nome</th>
+            <th>Descrição</th>
+            <th>Imagem</th>
         </tr>
         </thead>
         <tbody>

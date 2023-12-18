@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\services\CategoriaProdutoService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoriaProdutoController extends Controller
 {
+    public function __construct(private readonly CategoriaProdutoService $categoriaProdutoService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $paginaCategoriaProduto = [];
+        if ($request->nome_categoria) {
+            $paginaCategoriaProduto = $this->categoriaProdutoService->encontrarCategoriaNome($request->nome_categoria);
+        } else {
+            $paginaCategoriaProduto = $this->categoriaProdutoService->listarTodasCategorias();
+        }
 
         return view('categoriaProduto.index-categoria-produto', compact('paginaCategoriaProduto'));
     }
