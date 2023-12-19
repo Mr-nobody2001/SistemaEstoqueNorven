@@ -5,7 +5,7 @@
         <x-menuLateral.item-menu-lateral :textoIcone="'category'" :link="route('categoria.index')"
                                          :categoria="'Categoria'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'lists'" :link="route('fornecedor.index')"
-                                         :categoria="'Fornecedores'"/>
+                                         :categoria="'Fornecedor'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'branding_watermark'" :link="route('marca.index')"
                                          :categoria="'Marca'"/>
     </ul>

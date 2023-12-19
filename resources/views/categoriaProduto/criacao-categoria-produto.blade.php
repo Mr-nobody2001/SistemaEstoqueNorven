@@ -28,7 +28,7 @@
             <div class="invalid-feedback">
                 O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
             </div>
-            <span class="mt-1 campo-invalido" data-nomecategoria>
+            <span class="mt-1 campo-invalido">
                 @error('nome_categoria')
                 Esta categoria já existe no banco de dados e não pode ser inserida novamente.
                 @enderror
