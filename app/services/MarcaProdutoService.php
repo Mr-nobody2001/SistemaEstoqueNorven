@@ -2,6 +2,7 @@
 
 namespace App\services;
 
+use App\Http\Requests\AtualizarMarcaProdutoRequest;
 use App\Http\Requests\CriarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class MarcaProdutoService
 {
-    public function __construct(private MarcaProdutoRepository $marcaProdutoRepository)
+    public function __construct(private readonly MarcaProdutoRepository $marcaProdutoRepository)
     {
     }
 
@@ -45,7 +46,7 @@ class MarcaProdutoService
         return true;
     }
 
-    public function atualizarMarcaProduto(CriarMarcaProdutoRequest $request): bool
+    public function atualizarMarcaProduto(AtualizarMarcaProdutoRequest $request): bool
     {
         try {
             $id = $request->id;

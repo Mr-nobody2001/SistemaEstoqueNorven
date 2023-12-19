@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AtualizarMarcaProdutoRequest;
 use App\Http\Requests\CriarMarcaProdutoRequest;
 use App\services\MarcaProdutoService;
 use Illuminate\Contracts\Foundation\Application;
@@ -70,7 +71,7 @@ class MarcaProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CriarMarcaProdutoRequest $request): Application|RedirectResponse|Redirector
+    public function update(AtualizarMarcaProdutoRequest $request): Application|RedirectResponse|Redirector
     {
         if (!$this->marcaProdutoService->atualizarMarcaProduto($request)) {
             return redirect(route('marca.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);

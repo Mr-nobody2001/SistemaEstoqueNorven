@@ -72,7 +72,7 @@ class CategoriaProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): int
+    public function update(Request $request): int
     {
         return 1;
     }
