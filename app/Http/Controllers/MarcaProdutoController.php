@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AtualizarMarcaProdutoRequest;
-use App\Http\Requests\CriarMarcaProdutoRequest;
+use App\Http\Requests\marcaProduto\AtualizarMarcaProdutoRequest;
+use App\Http\Requests\marcaProduto\CriarMarcaProdutoRequest;
 use App\services\MarcaProdutoService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;

@@ -9,7 +9,6 @@ const barraPesquisa = document.querySelector("#barra-pesquisa");
 const botaoPesquisa = document.querySelector("#botao-pesquisa");
 const botaoAtualizar = document.querySelector(".bi-arrow-clockwise");
 const linhasTabela = document.querySelectorAll("tbody tr");
-const listaItens = document.querySelectorAll("tbody tr");
 const tabela = document.querySelector(".tabela");
 const avisoEscolhaAtualizacaoDelecao = document.querySelector("#escolha-atualizacao-delecao");
 const botaoAlterar = document.querySelector("#botao-opcao1");
@@ -31,7 +30,7 @@ const atualizarPaginaProduto = () => {
 const indicarSelecaoElementoTabelaProduto = (evento) => {
     const linhaTabelaSelecionada = evento.target.parentNode;
 
-    indicarSelecaoElementoTabela(linhasTabela, linhaTabelaSelecionada, avisoEscolhaAtualizacaoDelecao);
+    if (linhaTabelaSelecionada.tagName === 'TR') indicarSelecaoElementoTabela(linhasTabela, linhaTabelaSelecionada, avisoEscolhaAtualizacaoDelecao);
 }
 
 const prepararOpcaoAlteracaoProduto = (evento) => {
@@ -42,6 +41,8 @@ const prepararOpcaoAlteracaoProduto = (evento) => {
 }
 
 const exibirAvisoEscolhaAtualizacaoDelecaoProduto = (evento) => {
+    if (evento.target.parentNode.tagName !== "TR") return;
+
     prepararOpcaoAlteracaoProduto(evento);
 
     exibirAvisoEscolhaAtualizacaoDelecao(botaoEscondido, avisoEscolhaAtualizacaoDelecao)
@@ -52,9 +53,9 @@ const ocultarAvisoEscolhaAtualizacaoDelecaoProduto = () => {
 }
 
 window.onload = () => {
-    for (let listaIten of listaItens) {
-        listaIten.addEventListener("click", exibirAvisoEscolhaAtualizacaoDelecaoProduto);
-        listaIten.addEventListener("click", indicarSelecaoElementoTabelaProduto)
+    for (let linhaTabela of linhasTabela) {
+        linhaTabela.addEventListener("click", exibirAvisoEscolhaAtualizacaoDelecaoProduto);
+        linhaTabela.addEventListener("click", indicarSelecaoElementoTabelaProduto)
     }
 
     verificarMensagensSecao();

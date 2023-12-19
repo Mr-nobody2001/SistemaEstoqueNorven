@@ -13,7 +13,7 @@ class CategoriaProduto extends Model
 
     protected $fillable = [
         'nome_categoria',
-        'descricao_produto',
+        'descricao_categoria',
         'caminho_imagem',
     ];
 }

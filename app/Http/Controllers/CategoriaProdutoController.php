@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CriarCategoriaProdutoRequest;
+use App\Http\Requests\categoriaProduto\AtualizarCategoriaProdutoRequest;
+use App\Http\Requests\categoriaProduto\CriarCategoriaProdutoRequest;
 use App\services\CategoriaProdutoService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class CategoriaProdutoController extends Controller
@@ -72,9 +72,13 @@ class CategoriaProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request): int
+    public function update(AtualizarCategoriaProdutoRequest $request): Application|RedirectResponse|Redirector
     {
-        return 1;
+        if (!$this->categoriaProdutoService->atualizarCategoriaProduto($request)) {
+            return redirect(route('categoria.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
+        }
+
+        return redirect(route('categoria.index'))->with(['msg' => 'Categoria atualizada com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
@@ -82,7 +86,7 @@ class CategoriaProdutoController extends Controller
      */
     public function destroy(string $id): Application|RedirectResponse|Redirector
     {
-        if (!$this->categoriaProdutoService->deletarcategoriaProduto($id)) {
+        if (!$this->categoriaProdutoService->deletarCategoriaProduto($id)) {
             return redirect(route('categoria.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
         }
 

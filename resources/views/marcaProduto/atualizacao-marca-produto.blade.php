@@ -22,13 +22,14 @@
             <button id="botao-deletar" class="btn">Deletar</button>
         </div>
 
+        <div class="d-none">
+            <input type="hidden" name="id" value="{{ $marcaProduto->id ?? old('id') }}">
+        </div>
+
         <div>
-            <div>
-                <input type="hidden" name="id" value="{{ old('id') ?? $marcaProduto->id }}">
-            </div>
             <label for="nome_marca" class="form-label">Nome da marca</label>
             <input type="text" id="nome_marca" class="form-control" name="nome_marca"
-                   value="{{ old('nome_marca') ?? $marcaProduto->nome_marca }}"
+                   value="{{ $marcaProduto->nome_marca ?? old('nome_marca') }}"
                    maxlength="50"
                    pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
             <div class="invalid-feedback">
@@ -38,7 +39,7 @@
     </form>
 
     {{-- Formulário para a deleção (invisível para o usuário) --}}
-    <form id="formulario-delecao" class="d-none" action="{{ route('marca.destroy', ['marca' => $marcaProduto->id]) }}"
+    <form id="formulario-delecao" class="d-none" action="{{ route('marca.destroy', ['marca' => $marcaProduto]) }}"
           method="POST">
         @method('DELETE')
         @csrf

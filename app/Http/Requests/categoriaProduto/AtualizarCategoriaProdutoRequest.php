@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\categoriaProduto;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CriarCategoriaProdutoRequest extends FormRequest
+class AtualizarCategoriaProdutoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class CriarCategoriaProdutoRequest extends FormRequest
     {
         return [
             'nome_categoria' => 'required|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/|
-            unique:categoria_produtos,nome_categoria|string|max:50|',
+             string|max:50',
             'descricao_categoria' => 'nullable|string',
-            'imagem_categoria' => 'required|file|mimes:jpeg,jpg|max:2048',
+            'imagem_categoria' => 'file|mimes:jpeg,jpg|max:2048',
         ];
-
     }
 }

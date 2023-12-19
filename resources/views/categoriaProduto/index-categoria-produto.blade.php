@@ -53,8 +53,12 @@
             <tr data-id="{{ $categoriaProduto->id }}">
                 <td>{{ $categoriaProduto->id }}</td>
                 <td>{{ $categoriaProduto->nome_categoria }}</td>
-                <td>{{ substr($categoriaProduto->descricao_categoria, 0, 30) . ' . . .' ?? 'Não informada'}}</td>
-                <td><img src="{{ Storage::url($categoriaProduto->caminho_imagem) }}" alt="{{ $categoriaProduto->nome_categoria }}"></td>
+                <td>{{ substr($categoriaProduto->descricao_categoria, 0, 30) . '...' ?? 'Não informada'}}</td>
+                <td>
+                    <a href="{{ Storage::disk('public')->url($categoriaProduto->caminho_imagem) }}" target="_blank">
+                        {{ substr(Storage::disk('public')->url($categoriaProduto->caminho_imagem), 0, 25) . '...' }}
+                    </a>
+                </td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>

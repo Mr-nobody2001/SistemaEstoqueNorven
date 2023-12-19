@@ -2,8 +2,8 @@
 
 namespace App\services;
 
-use App\Http\Requests\AtualizarMarcaProdutoRequest;
-use App\Http\Requests\CriarMarcaProdutoRequest;
+use App\Http\Requests\marcaProduto\AtualizarMarcaProdutoRequest;
+use App\Http\Requests\marcaProduto\CriarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
 use Exception;
@@ -54,7 +54,7 @@ class MarcaProdutoService
             $requestValidada = $request->validated();
 
             MarcaProduto::where('id', $id)
-                ->update(['nome_marca' => $requestValidada['nome_marca']]);
+                ->update($requestValidada);
 
             return true;
         } catch (Exception $e) {
