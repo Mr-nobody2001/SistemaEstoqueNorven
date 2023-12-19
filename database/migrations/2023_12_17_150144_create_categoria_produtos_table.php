@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('nome_categoria', 50)->unique('categoria_produtos_nome_categoria_unique')
                 ->nullable(false);
-            $table->text('descricao_categoria')->nullable(true);
+            $table->text('descricao_categoria');
             $table->string('caminho_imagem')->nullable(false);
             $table->timestamps();
         });

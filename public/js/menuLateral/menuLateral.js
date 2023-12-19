@@ -60,13 +60,11 @@ const retirarAbaAtual = () => {
     }
 }
 
+for (let itemMenu of listaItemMenu) {
+    itemMenu.addEventListener("mouseover", agitarItemMenu);
+    itemMenu.addEventListener("animationend", retirarAnimacao);
+}
+
 listaMenuLateral.addEventListener("mouseleave", estilizarAbaAtual);
 listaMenuLateral.addEventListener('mouseover', retirarAbaAtual);
 iconeHamburguer.addEventListener("click", animarMenu);
-
-window.onload = () => {
-    for (let itemMenu of listaItemMenu) {
-        itemMenu.addEventListener("mouseover", agitarItemMenu);
-        itemMenu.addEventListener("animationend", retirarAnimacao);
-    }
-};

@@ -52,7 +52,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 {{-- Script próprio --}}
-<script src="{{ asset('js/menuLateral/menuLateral.js') }}"></script>
+<script src="{{ asset('js/menuLateral/menuLateral.js') }}" defer></script>
 @yield('script')
 </body>
 
