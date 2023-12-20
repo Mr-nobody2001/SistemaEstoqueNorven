@@ -22,7 +22,8 @@ class AtualizarMarcaProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome_marca' => 'required|string|max:50|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/'
+            'nome_marca' => 'required|string|max:50|unique:marca_produtos,nome_marca|
+            regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/'
         ];
     }
 }

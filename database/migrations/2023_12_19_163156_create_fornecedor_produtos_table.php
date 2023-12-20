@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('nome_fornecedor', 50)->unique('fornecedor_produtos_nome_fornecedor_unique')
                 ->nullable(false);
-            $table->string('email', 50)->unique('fornecedor_produtos_email_unique');
+            $table->string('email', 50)->unique('fornecedor_produtos_email_unique')
+                ->nullable(false);
             $table->string('telefone', 11)->unique('fornecedor_produtos_telefone_unique')
                 ->nullable(false);
             $table->string('cnpj', 14)->unique('fornecedor_produtos_cnpj_unique');

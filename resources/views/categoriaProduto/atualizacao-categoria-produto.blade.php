@@ -35,15 +35,25 @@
             <div class="invalid-feedback">
                 O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
             </div>
+            <span class="mt-1 campo-invalido">
+                @error('nome_categoria')
+                O nome fornecido não está no formato adequado ou já existe na base de dados.
+                @enderror
+            </span>
         </div>
 
         <div>
             <label for="descricao_categoria" class="form-label">Descrição da categoria</label>
             <textarea id="descricao_categoria" class="form-control" name="descricao_categoria"
-                      rows="3">{{ $categoriaProduto->descricao_categoria ?? old('descricao_categoria') }}</textarea>
+                      rows="3">{{ $categoriaProduto->descricao_categoria ?? old('descricao_categoria')}}</textarea>
             <div class="invalid-feedback">
                 Por favor, forneça uma descrição válida.
             </div>
+            <span class="mt-1 campo-invalido">
+                @error('descricao_categoria')
+                Por favor, forneça uma descrição válida.
+                @enderror
+            </span>
         </div>
 
         <div id="container-file" class="input-group">

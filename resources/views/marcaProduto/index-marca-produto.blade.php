@@ -31,7 +31,7 @@
         <form action="{{ route('marca.index') }}" method="GET">
             <div id="container-barra-pesquisa">
                 <input type="text" id="barra-pesquisa" class="form-control" name="nome_marca"
-                       placeholder="Pesquise por uma marca.">
+                       placeholder="Pesquise por uma marca." required>
                 <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>

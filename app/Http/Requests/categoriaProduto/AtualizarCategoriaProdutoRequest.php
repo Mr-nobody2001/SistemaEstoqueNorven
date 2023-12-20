@@ -22,8 +22,8 @@ class AtualizarCategoriaProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome_categoria' => 'required|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/|
-             string|max:50',
+            'nome_categoria' => 'regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/|
+            string|max:50',
             'descricao_categoria' => 'nullable|string',
             'imagem_categoria' => 'file|mimes:jpeg,jpg|max:2048',
         ];

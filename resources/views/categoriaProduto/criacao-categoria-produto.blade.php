@@ -23,14 +23,14 @@
         <div>
             <label for="nome_categoria" class="form-label">Nome da categoria</label>
             <input type="text" id="nome_categoria" class="form-control" name="nome_categoria"
-                   value="" maxlength="50"
+                   value="{{ old('nome_categoria') ?? '' }}" maxlength="50"
                    pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
             <div class="invalid-feedback">
                 O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
             </div>
             <span class="mt-1 campo-invalido">
                 @error('nome_categoria')
-                Esta categoria já existe no banco de dados e não pode ser inserida novamente.
+                O nome fornecido não está no formato adequado ou já existe na base de dados.
                 @enderror
             </span>
         </div>
@@ -42,6 +42,11 @@
             <div class="invalid-feedback">
                 Por favor, forneça uma descrição válida.
             </div>
+            <span class="mt-1 campo-invalido">
+                @error('descricao_categoria')
+                Por favor, forneça uma descrição válida.
+                @enderror
+            </span>
         </div>
 
         <div id="container-file" class="input-group">
