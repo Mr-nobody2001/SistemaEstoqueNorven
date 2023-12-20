@@ -18,9 +18,10 @@ return new class extends Migration {
                 ->nullable(false);
             $table->string('telefone', 11)->unique('fornecedor_produtos_telefone_unique')
                 ->nullable(false);
-            $table->string('cnpj', 14)->unique('fornecedor_produtos_cnpj_unique');
-            $table->string('cpf', 11)->unique('fornecedor_produtos_cpf_unique');
-            $table->boolean('fornecedor_ativo')->nullable(false);
+            $table->string('cnpj', 14)->unique('fornecedor_produtos_cnpj_unique')
+                ->nullable(true);
+            $table->string('cpf', 11)->unique('fornecedor_produtos_cpf_unique')
+                ->nullable(true);
             $table->timestamps();
         });
     }

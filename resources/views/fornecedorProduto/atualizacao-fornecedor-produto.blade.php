@@ -1,30 +1,35 @@
-@section('titulo', 'Cadastrar Fornecedor')
+@section('titulo', 'Atualizar Fornecedor')
 
 @section('estilo')
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/criacao-atualizacao-delecao-geral.css') }}">
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/geral/criacaoGeral.js') }}"></script>
-    <script src="{{ asset('js/fornecedor/criacaoFornecedorProduto.js') }}"></script>
+    <script type="module" src="{{ asset('js/geral/atualizacaoDelecao.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'list'" :titulo="'Cadastrar Fornecedor'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'list'" :titulo="'Atualização Fornecedor'"/>
 
     <form id="container-formulario" class="needs-validation" action="{{ route('fornecedor.store') }}" method="POST"
           enctype="multipart/form-data" novalidate>
+        @method('PUT')
         @csrf
-        <div id="container-botao-salvar">
-            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
+        <div id="container-botao-atualizar-deletar">
+            <button type="submit" id="botao-atualizar" class="btn">Atualizar</button>
+            <button id="botao-deletar" class="btn">Deletar</button>
+        </div>
+
+        <div class="d-none">
+            <input type="hidden" name="id" value="{{ $fornecedorProduto->id ?? old('id') }}">
         </div>
 
         <div>
             <label for="nome_fornecedor" class="form-label">Nome do fornecedor</label>
             <input type="text" id="nome_fornecedor" class="form-control" name="nome_fornecedor"
-                   value="{{ old('nome_fornecedor') ?? '' }}" maxlength="50"
+                   value="{{ $fornecedorProduto->nome_fornecedor ?? old('nome_fornecedor') }}" maxlength="50"
                    pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
             <div class="invalid-feedback">
                 O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
@@ -38,7 +43,8 @@
 
         <div>
             <label for="email" class="form-label">Email do fornecedor</label>
-            <input type="email" id="email" class="form-control" name="email" value="{{ old('email') ?? '' }}"
+            <input type="email" id="email" class="form-control" name="email"
+                   value="{{ $fornecedorProduto->email ?? old('email') }}"
                    maxlength="50" required>
             <div class="invalid-feedback">
                 O email não pode ser nulo e deve estar num formato válido.
@@ -53,7 +59,8 @@
         <div>
             <label for="telefone" class="form-label">Telefone do fornecedor (deve estar no formato
                 (XX)XXXX-XXXX ou (XX)9XXXX-XXXX)</label>
-            <input type="text" id="telefone" class="form-control" name="telefone" value="{{ old('telefone') ?? '' }}"
+            <input type="text" id="telefone" class="form-control" name="telefone"
+                   value="{{ $fornecedorProduto->telefone ?? old('telefone') }}"
                    minlength="13" maxlength="14"
                    pattern="\([1-9]{2}\)(?:9[1-9]{1}|[2-9]{1})[0-9]{3,4}-[0-9]{4}" required>
             <div class="invalid-feedback">
@@ -69,8 +76,9 @@
         <div id="container-input-cnpj">
             <label for="cnpj" class="cnpj-label">Cnpj do fornecedor (deve estar no formato
                 XX.XXX.XXX/XXXX-XX)</label>
-            <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{ old('cnpj') ?? '' }}"
-                   minlength="18" maxlength="18" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}">
+            <input type="text" id="cnpj" class="form-control" name="cnpj"
+                   value="{{ $fornecedorProduto->cnpj ?? old('cnpj') ?? '' }}"
+                   minlength="18" maxlength="18" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" required>
             <div class="invalid-feedback">
                 O cnpj não pode ser nulo e deve estar num formato válido.
             </div>
@@ -84,7 +92,8 @@
         <div id="container-input-cpf" class="d-none">
             <label for="cpf" class="cpf-label">Cpf do fornecedor (deve estar no formato
                 XXX.XXX.XXX-XX)</label>
-            <input type="text" id="cpf" class="form-control" name="cpf" value="{{ old('cpf') ?? '' }}"
+            <input type="text" id="cpf" class="form-control" name="cpf"
+                   value="{{ $fornecedorProduto->cpf ?? old('cpf') ?? '' }}"
                    minlength="14" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
             <div class="invalid-feedback">
                 O cpf não pode ser nulo e deve estar num formato válido.
@@ -98,13 +107,18 @@
     </form>
 
     <div class="form-check form-switch d-flex">
-        @if(old('cpf'))
-            <input class="form-check-input me-2" type="checkbox" role="switch" id="tipo_fornecedor" checked>
-        @else
-            <input class="form-check-input me-2" type="checkbox" role="switch" id="tipo_fornecedor">
-        @endif
-
+        <input class="form-check-input me-2" type="checkbox" role="switch" id="tipo_fornecedor">
         <label class="form-check-label" for="tipo_fornecedor">Fornecedor pessoa física</label>
     </div>
+
+    {{-- Formulário para a deleção (invisível para o usuário) --}}
+    <form id="formulario-delecao" class="d-none"
+          action="{{ route('fornecedor.destroy', ['fornecedor' => $fornecedorProduto->id]) }}"
+          method="POST">
+        @method('DELETE')
+        @csrf
+
+        <button type="submit" id="botao-deletar-formulario"></button>
+    </form>
 </x-layouts.estrutura-basica>
 

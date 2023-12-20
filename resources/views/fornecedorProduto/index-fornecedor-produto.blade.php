@@ -7,7 +7,7 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/scriptGeral/indexCrudGeral.js') }}"></script>
+    <script type="module" src="{{ asset('js/geral/indexCrudGeral.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
@@ -39,30 +39,31 @@
     </div>
 
     {{-- Tabela de registros --}}
-    {{--<table class="tabela" data-entidade="categoria">
+    <table class="tabela" data-entidade="fornecedor">
         <thead>
         <tr class="titulo-tabela-destaque">
             <th>Id</th>
             <th>Nome</th>
-            <th>Descrição</th>
-            <th>Imagem</th>
+            <th>Telefone</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
-        @forelse ($paginaCategoriaProduto as $categoriaProduto)
-            <tr data-id="{{ $categoriaProduto->id }}">
-                <td>{{ $categoriaProduto->id }}</td>
-                <td>{{ $categoriaProduto->nome_categoria }}</td>
-                <td>{{ substr($categoriaProduto->descricao_categoria, 0, 30) . '...' ?? 'Não informada'}}</td>
-                <td>
-                    <a href="{{ Storage::disk('public')->url($categoriaProduto->caminho_imagem) }}" target="_blank">
-                        {{ substr(Storage::disk('public')->url($categoriaProduto->caminho_imagem), 0, 25) . '...' }}
-                    </a>
-                </td>
+        @forelse ($paginaFornecedorProduto as $fornecedorProduto)
+            @php
+                $telefoneFormatado = preg_replace('/^(\d{2})(\d{4,5})(\d{4})$/', '($1) $2-$3',
+                $fornecedorProduto->telefone);
+            @endphp
+
+            <tr data-id="{{ $fornecedorProduto->id }}">
+                <td>{{ $fornecedorProduto->id }}</td>
+                <td>{{ $fornecedorProduto->nome_fornecedor }}</td>
+                <td>{{ $telefoneFormatado }}</td>
+                <td>{{ $fornecedorProduto->email }}</td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>
         @endforelse
         </tbody>
-    </table>--}}
+    </table>
 </x-layouts.estrutura-basica>

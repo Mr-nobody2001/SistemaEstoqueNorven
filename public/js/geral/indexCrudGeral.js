@@ -1,8 +1,8 @@
 import {validarPesquisa} from "../validacao/validacaoPesquisa.js";
-import {atualizarPagina, indicarSelecaoElementoTabela} from "../scriptService/indexCRUD.js";
-import {ocultarAvisoEscolhaAtualizacaoDelecao} from "../scriptService/indexCRUD.js";
-import {prepararOpcaoAlteracao} from "../scriptService/indexCRUD.js";
-import {exibirAvisoEscolhaAtualizacaoDelecao} from "../scriptService/indexCRUD.js";
+import {atualizarPagina, indicarSelecaoElementoTabela} from "../service/indexCRUD.js";
+import {ocultarAvisoEscolhaAtualizacaoDelecao} from "../service/indexCRUD.js";
+import {prepararOpcaoAlteracao} from "../service/indexCRUD.js";
+import {exibirAvisoEscolhaAtualizacaoDelecao} from "../service/indexCRUD.js";
 import {verificarMensagensSecao} from "../avisos/toast.js";
 
 const barraPesquisa = document.querySelector("#barra-pesquisa");

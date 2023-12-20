@@ -5,7 +5,7 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/scriptGeral/criacaoGeral.js') }}"></script>
+    <script type="module" src="{{ asset('js/geral/criacaoGeral.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>

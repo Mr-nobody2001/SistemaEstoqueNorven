@@ -1,4 +1,4 @@
-import {deletar} from "../scriptService/alteracaoDelecao.js";
+import {deletar} from "../service/alteracaoDelecao.js";
 import {validacaoBootstrap} from "../validacao/validacaoPesquisa.js";
 import {verificarMensagensSecao} from "../avisos/toast.js";
 

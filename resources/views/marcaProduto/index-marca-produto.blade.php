@@ -6,7 +6,7 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/scriptGeral/indexCrudGeral.js') }}"></script>
+    <script type="module" src="{{ asset('js/geral/indexCrudGeral.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>
