@@ -32,7 +32,7 @@
         <form action="{{ route('fornecedor.index') }}" method="GET">
             <div id="container-barra-pesquisa">
                 <input type="text" id="barra-pesquisa" class="form-control" name="nome_fornecedor"
-                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nomede uma fornecedor.">
+                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nome de um fornecedor.">
                 <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>

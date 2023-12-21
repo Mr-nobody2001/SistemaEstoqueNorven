@@ -13,13 +13,12 @@
 
 /* Scrollbar */
 
-body::-webkit-scrollbar {
-    width: 0;
-}
-
 body {
     padding-left: 80px;
+    min-width: 1200px;
+    min-height: 100vh;
     background-color: var(--background-secao-principal);
+    overflow-y: auto;
 }
 
 #secao-principal {

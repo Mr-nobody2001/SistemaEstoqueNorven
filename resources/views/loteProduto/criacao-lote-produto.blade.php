@@ -87,14 +87,18 @@
             </span>
         </div>
 
-        <div>
-            <select id="fornecedor_id" class="form-select" aria-label="fornecedor" name="fornecedor_id" required>
+        <div class="input-group d-flex flex-row w-100">
+            <select id="fornecedor_id" class="form-select w-25" aria-label="fornecedor" name="fornecedor_id" required>
                 <option selected>Informe o fornecedor desse lote</option>
                 @foreach($listaTodosFornecedores as $fornecedor)
                     <option value="{{ $fornecedor->id }}" @selected(old('fornecedor_id') ==
-                    $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}</option>
+                    $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
+                    </option>
                 @endforeach
             </select>
+
+            <input type="text" id="filtro_fornecedor_id" class="form-control" placeholder="Pesquise pelo nome de um fornecedor."
+                   aria-label="Recipient's username">
         </div>
     </form>
 </x-layouts.estrutura-basica>
