@@ -19,7 +19,7 @@
 
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}
     <div id="topo-secao-principal">
-        <x-componentesGerais.informacoes-pagina :textoIcone="'list'" :titulo="'Fornecedores'"/>
+        <x-componentesGerais.informacoes-pagina :textoIcone="'local_shipping'" :titulo="'Fornecedores'"/>
         <div>
             <a href="{{ route('fornecedor.create') }}"><i class="bi bi-plus-square"></i></a>
             <i class="bi bi-arrow-clockwise"></i>
@@ -32,7 +32,7 @@
         <form action="{{ route('fornecedor.index') }}" method="GET">
             <div id="container-barra-pesquisa">
                 <input type="text" id="barra-pesquisa" class="form-control" name="nome_fornecedor"
-                       placeholder="Pesquise por uma fornecedor.">
+                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nomede uma fornecedor.">
                 <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>

@@ -9,16 +9,22 @@ use App\repositorys\FornecedorProdutoRepository;
 use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Collection;
 
 class FornecedorProdutoService
 {
-    public function __construct(public FornecedorProdutoRepository $fornecedorProdutoRepository)
+    public function __construct(private readonly FornecedorProdutoRepository $fornecedorProdutoRepository)
     {
     }
 
     public function listarTodosFornecedores(): LengthAwarePaginator
     {
         return FornecedorProduto::orderBy('id')->paginate(20);
+    }
+
+    public function listarTodosFornecedoresSemPaginacao(): Collection
+    {
+        return FornecedorProduto::orderBy('id')->get();
     }
 
     public function encontrarFornecedorId(string $id): FornecedorProduto

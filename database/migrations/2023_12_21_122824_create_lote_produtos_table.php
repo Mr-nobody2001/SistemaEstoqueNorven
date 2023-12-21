@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\FornecedorProduto;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration {
             $table->double('preco_custo', 8, 2)->nullable(false);
             $table->double('preco_venda', 8, 2)->nullable(false);
             $table->date('data_validade')->nullable(false);
+            $table->foreignId('fornecedor_id')->constrained('fornecedor_produtos');
             $table->timestamps();
         });
     }

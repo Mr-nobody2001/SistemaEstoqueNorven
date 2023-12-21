@@ -11,7 +11,7 @@
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Cadastrar Marca'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'copyright'" :titulo="'Cadastrar Marca'"/>
 
     <form id="container-formulario" class="needs-validation" action="{{ route('marca.store') }}" method="POST"
           novalidate>

@@ -13,7 +13,7 @@ use Illuminate\View\View;
 
 class FornecedorProdutoController extends Controller
 {
-    public function __construct(public FornecedorProdutoService $fornecedorProdutoService)
+    public function __construct(private readonly FornecedorProdutoService $fornecedorProdutoService)
     {
     }
 
@@ -22,13 +22,17 @@ class FornecedorProdutoController extends Controller
      */
     public function index(Request $request): View
     {
+        $valorPesquisa = null;
+
         if ($request->nome_fornecedor) {
-            $paginaFornecedorProduto = $this->fornecedorProdutoService->encontrarFornecedorNome($request->nome_fornecedor);
+            $valorPesquisa = $request->nome_fornecedor;
+            $paginaFornecedorProduto = $this->fornecedorProdutoService->encontrarFornecedorNome($valorPesquisa);
         } else {
             $paginaFornecedorProduto = $this->fornecedorProdutoService->listarTodosFornecedores();
         }
 
-        return view('fornecedorProduto.index-fornecedor-produto', compact('paginaFornecedorProduto'));
+        return view('fornecedorProduto.index-fornecedor-produto', compact('paginaFornecedorProduto',
+            'valorPesquisa'));
     }
 
     /**
@@ -42,7 +46,7 @@ class FornecedorProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CriarFornecedorProdutoRequest $request): View|Application|RedirectResponse|Redirector
+    public function store(CriarFornecedorProdutoRequest $request): Application|RedirectResponse|Redirector
     {
         if (!$this->fornecedorProdutoService->criarFornecedorProduto($request)) {
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);
@@ -61,7 +65,7 @@ class FornecedorProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         $fornecedorProduto = $this->fornecedorProdutoService->encontrarFornecedorId($id);
 
@@ -71,7 +75,7 @@ class FornecedorProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AtualizarFornecedorProdutoRequest $request)
+    public function update(AtualizarFornecedorProdutoRequest $request): Application|RedirectResponse|Redirector
     {
         if (!$this->fornecedorProdutoService->atualizarFornecedorProduto($request)) {
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
@@ -83,7 +87,7 @@ class FornecedorProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Application|RedirectResponse|Redirector
     {
         if (!$this->fornecedorProdutoService->deletarFornecedorProduto($id)) {
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);

@@ -11,10 +11,10 @@
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Atualizar Marca'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'copyright'" :titulo="'Atualizar Marca'"/>
 
     <form id="container-formulario" class="needs-validation" action="{{ route('marca.update',
-        ['marca' => $marcaProduto]) }}" method="POST" novalidate>
+        ['marca' => $marcaProduto ?? old('id')]) }}" method="POST" novalidate>
         @method('PUT')
         @csrf
         <div id="container-botao-atualizar-deletar">

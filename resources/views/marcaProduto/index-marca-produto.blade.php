@@ -18,7 +18,7 @@
 
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}
     <div id="topo-secao-principal">
-        <x-componentesGerais.informacoes-pagina :textoIcone="'branding_watermark'" :titulo="'Marcas'"/>
+        <x-componentesGerais.informacoes-pagina :textoIcone="'copyright'" :titulo="'Marcas'"/>
         <div>
             <a href="{{ route('marca.create') }}"><i class="bi bi-plus-square"></i></a>
             <i class="bi bi-arrow-clockwise"></i>
@@ -31,7 +31,7 @@
         <form action="{{ route('marca.index') }}" method="GET">
             <div id="container-barra-pesquisa">
                 <input type="text" id="barra-pesquisa" class="form-control" name="nome_marca"
-                       placeholder="Pesquise por uma marca." required>
+                       VALUE="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nome de uma marca." required>
                 <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>

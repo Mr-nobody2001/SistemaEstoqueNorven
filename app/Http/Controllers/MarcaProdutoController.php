@@ -22,13 +22,17 @@ class MarcaProdutoController extends Controller
      */
     public function index(Request $request): View
     {
+        $valorPesquisa = null;
+
         if ($request->nome_marca) {
-            $paginaMarcaProduto = $this->marcaProdutoService->encontrarMarcaNome($request->nome_marca);
+            $valorPesquisa = $request->nome_marca;
+            $paginaMarcaProduto = $this->marcaProdutoService->encontrarMarcaNome($valorPesquisa);
         } else {
             $paginaMarcaProduto = $this->marcaProdutoService->listarTodasMarcas();
         }
 
-        return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto'));
+        return view('marcaProduto.index-marca-produto', compact('paginaMarcaProduto',
+            'valorPesquisa'));
     }
 
     /**
@@ -42,7 +46,7 @@ class MarcaProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CriarMarcaProdutoRequest $request): View|Application|RedirectResponse|Redirector
+    public function store(CriarMarcaProdutoRequest $request): Application|RedirectResponse|Redirector
     {
         if (!$this->marcaProdutoService->criarMarcaProduto($request)) {
             return redirect(route('marca.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro', 'nome_marca' => $request->nome_marca]);

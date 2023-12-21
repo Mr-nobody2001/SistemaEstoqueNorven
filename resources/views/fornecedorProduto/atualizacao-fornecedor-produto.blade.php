@@ -16,10 +16,10 @@
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'list'" :titulo="'Atualização Fornecedor'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'local_shipping'" :titulo="'Atualização Fornecedor'"/>
 
     <form id="container-formulario" class="needs-validation"
-          action="{{ route('fornecedor.update', ['fornecedor' => $fornecedorProduto->id]) }}" method="POST"
+          action="{{ route('fornecedor.update', ['fornecedor' => $fornecedorProduto->id ?? old('id')]) }}" method="POST"
           enctype="multipart/form-data" novalidate>
         @method('PUT')
         @csrf

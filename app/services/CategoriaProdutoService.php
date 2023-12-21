@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoriaProdutoService
 {
-    public function __construct(public readonly CategoriaProdutoRepository $categoriaProdutoRepository)
+    public function __construct(private readonly CategoriaProdutoRepository $categoriaProdutoRepository)
     {
     }
 

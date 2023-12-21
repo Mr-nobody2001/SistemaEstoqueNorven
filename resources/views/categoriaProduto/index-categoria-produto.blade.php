@@ -32,7 +32,7 @@
         <form action="{{ route('categoria.index') }}" method="GET">
             <div id="container-barra-pesquisa">
                 <input type="text" id="barra-pesquisa" class="form-control" name="nome_categoria"
-                       placeholder="Pesquise por uma categoria." required>
+                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nome de uma categoria." required>
                 <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
             </div>
         </form>

@@ -22,13 +22,17 @@ class CategoriaProdutoController extends Controller
      */
     public function index(Request $request): View
     {
+        $valorPesquisa = null;
+
         if ($request->nome_categoria) {
-            $paginaCategoriaProduto = $this->categoriaProdutoService->encontrarCategoriaNome($request->nome_categoria);
+            $valorPesquisa = $request->nome_categoria;
+            $paginaCategoriaProduto = $this->categoriaProdutoService->encontrarCategoriaNome($valorPesquisa);
         } else {
             $paginaCategoriaProduto = $this->categoriaProdutoService->listarTodasCategorias();
         }
 
-        return view('categoriaProduto.index-categoria-produto', compact('paginaCategoriaProduto'));
+        return view('categoriaProduto.index-categoria-produto', compact('paginaCategoriaProduto',
+            'valorPesquisa'));
     }
 
     /**
@@ -43,7 +47,7 @@ class CategoriaProdutoController extends Controller
      * Store a newly created resource in storage.
      */
 //    public function store(CriarCategoriaProdutoRequest $request)
-    public function store(CriarCategoriaProdutoRequest $request)
+    public function store(CriarCategoriaProdutoRequest $request): View|Application|RedirectResponse|Redirector
     {
         if (!$this->categoriaProdutoService->criarCategoriaProduto($request)) {
             return redirect(route('categoria.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);

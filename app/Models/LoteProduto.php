@@ -14,5 +14,11 @@ class LoteProduto extends Model
         'preco_custo',
         'preco_venda',
         'data_validade',
+        'fornecedor_id'
     ];
+
+    public function fornecedor()
+    {
+        return $this->belongsTo(FornecedorProduto::class);
+    }
 }

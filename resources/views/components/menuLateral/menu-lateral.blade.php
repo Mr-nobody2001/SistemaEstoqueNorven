@@ -2,11 +2,13 @@
     <span id="icone-hamburguer" class="material-symbols-outlined">menu</span>
     <ul id="lista-menu-lateral">
         <x-menuLateral.item-menu-lateral :textoIcone="'inventory_2'" :link="'#'" :categoria="'Produto'"/>
+        <x-menuLateral.item-menu-lateral :textoIcone="'barcode'" :link="route('lote.index')"
+                                         :categoria="'Lote'"/>
+        <x-menuLateral.item-menu-lateral :textoIcone="'local_shipping'" :link="route('fornecedor.index')"
+                                         :categoria="'Fornecedor'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'category'" :link="route('categoria.index')"
                                          :categoria="'Categoria'"/>
-        <x-menuLateral.item-menu-lateral :textoIcone="'lists'" :link="route('fornecedor.index')"
-                                         :categoria="'Fornecedor'"/>
-        <x-menuLateral.item-menu-lateral :textoIcone="'branding_watermark'" :link="route('marca.index')"
+        <x-menuLateral.item-menu-lateral :textoIcone="'copyright'" :link="route('marca.index')"
                                          :categoria="'Marca'"/>
     </ul>
 </nav>

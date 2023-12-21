@@ -16,7 +16,7 @@
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'list'" :titulo="'Cadastrar Fornecedor'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'local_shipping'" :titulo="'Cadastrar Fornecedor'"/>
 
     <form id="container-formulario" class="needs-validation" action="{{ route('fornecedor.store') }}" method="POST"
           enctype="multipart/form-data" novalidate>

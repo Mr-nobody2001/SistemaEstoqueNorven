@@ -14,7 +14,7 @@
     <x-componentesGerais.informacoes-pagina :textoIcone="'category'" :titulo="'Atualização Categoria'"/>
 
     <form id="container-formulario" class="needs-validation"
-          action="{{ route('categoria.update', ['categorium' => $categoriaProduto]) }}" method="POST"
+          action="{{ route('categoria.update', ['categorium' => $categoriaProduto ?? old('id')]) }}" method="POST"
           enctype="multipart/form-data" novalidate>
         @method('PUT')
         @csrf
