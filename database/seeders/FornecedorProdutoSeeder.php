@@ -16,45 +16,43 @@ class FornecedorProdutoSeeder extends Seeder
         DB::table('fornecedor_produtos')->insert([
             'nome_fornecedor' => 'Bebidas Express',
             'email' => 'bebidasexpress@example.com',
-            'telefone' => '11912345678',
-            'cnpj' => '12345678000190',
-            'cpf' => '12345678901',
+            'telefone' => '(11) 91234-5678',
+            'cnpj' => '12.345.678/0001-90',
         ]);
 
         DB::table('fornecedor_produtos')->insert([
             'nome_fornecedor' => 'Cereais Saudáveis',
             'email' => 'cereaissaudaveis@example.com',
-            'telefone' => '21923456789',
-            'cpf' => '23456789012',
+            'telefone' => '(21) 92345-6789',
+            'cpf' => '234.567.890-12',
         ]);
 
         DB::table('fornecedor_produtos')->insert([
             'nome_fornecedor' => 'Leite Puro',
             'email' => 'leitepuro@example.com',
-            'telefone' => '31934567890',
-            'cpf' => '34567890123',
+            'telefone' => '(31) 93456-7890',
+            'cpf' => '345.678.901-23',
         ]);
 
         DB::table('fornecedor_produtos')->insert([
             'nome_fornecedor' => 'Doces Gourmet',
             'email' => 'docesgourmet@example.com',
-            'telefone' => '41945678901',
-            'cnpj' => '45678901000193',
+            'telefone' => '(41) 94567-8901',
+            'cnpj' => '45.678.901/0001-93',
         ]);
 
         DB::table('fornecedor_produtos')->insert([
             'nome_fornecedor' => 'Higiene Total',
             'email' => 'higienetotal@example.com',
-            'telefone' => '51956789012',
-            'cnpj' => '56789012000194',
+            'telefone' => '(51) 95678-9012',
+            'cnpj' => '56.789.012/0001-94',
         ]);
 
         DB::table('fornecedor_produtos')->insert([
             'nome_fornecedor' => 'Prontos para Saborear',
             'email' => 'prontosparasaborear@example.com',
-            'telefone' => '61967890123',
-            'cnpj' => '67890123000195',
+            'telefone' => '(61) 96789-0123',
+            'cnpj' => '67.890.123/0001-95',
         ]);
-
     }
 }

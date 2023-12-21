@@ -46,20 +46,19 @@
             <th>Nome</th>
             <th>Telefone</th>
             <th>Email</th>
+            <th>CNPJ</th>
+            <th>CPF</th>
         </tr>
         </thead>
         <tbody>
         @forelse ($paginaFornecedorProduto as $fornecedorProduto)
-            @php
-                $telefoneFormatado = preg_replace('/^(\d{2})(\d{4,5})(\d{4})$/', '($1) $2-$3',
-                $fornecedorProduto->telefone);
-            @endphp
-
             <tr data-id="{{ $fornecedorProduto->id }}">
                 <td>{{ $fornecedorProduto->id }}</td>
                 <td>{{ $fornecedorProduto->nome_fornecedor }}</td>
-                <td>{{ $telefoneFormatado }}</td>
+                <td>{{ $fornecedorProduto->telefone }}</td>
                 <td>{{ $fornecedorProduto->email }}</td>
+                <td>{{ $fornecedorProduto->cnpj }}</td>
+                <td>{{ $fornecedorProduto->cpf }}</td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>

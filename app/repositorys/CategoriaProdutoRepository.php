@@ -11,7 +11,7 @@ class CategoriaProdutoRepository
     public function encontrarCategoriasNome(string $nomeCategoria): LengthAwarePaginator
     {
         return CategoriaProduto::query()->when($nomeCategoria, function (Builder $builder) use ($nomeCategoria) {
-            $builder->where('nome_categoria', 'ilike', "%$nomeCategoria%");
+            $builder->where('nome_categoria', 'ilike', "%$nomeCategoria%")->orderBy('id');
         })->paginate(20);
     }
 }

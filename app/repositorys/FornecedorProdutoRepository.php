@@ -11,7 +11,7 @@ class FornecedorProdutoRepository
     public function encontrarFornecedorNome(string $nomeFornecedor): LengthAwarePaginator
     {
         return FornecedorProduto::query()->when($nomeFornecedor, function (Builder $builder) use ($nomeFornecedor) {
-            $builder->where('nome_fornecedor', 'ilike', "%$nomeFornecedor%");
+            $builder->where('nome_fornecedor', 'ilike', "%$nomeFornecedor%")->orderBy('id');
         })->paginate(20);
     }
 }

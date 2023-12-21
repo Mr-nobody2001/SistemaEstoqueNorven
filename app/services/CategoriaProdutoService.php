@@ -19,7 +19,7 @@ class CategoriaProdutoService
 
     public function listarTodasCategorias(): LengthAwarePaginator
     {
-        return CategoriaProduto::paginate(20);
+        return CategoriaProduto::orderBy('id')->paginate(20);
     }
 
     public function encontrarCategoriaId(string $id): CategoriaProduto

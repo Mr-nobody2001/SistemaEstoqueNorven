@@ -16,11 +16,11 @@ return new class extends Migration {
                 ->nullable(false);
             $table->string('email', 50)->unique('fornecedor_produtos_email_unique')
                 ->nullable(false);
-            $table->string('telefone', 11)->unique('fornecedor_produtos_telefone_unique')
+            $table->string('telefone', 15)->unique('fornecedor_produtos_telefone_unique')
                 ->nullable(false);
-            $table->string('cnpj', 14)->unique('fornecedor_produtos_cnpj_unique')
+            $table->string('cnpj', 18)->unique('fornecedor_produtos_cnpj_unique')
                 ->nullable(true);
-            $table->string('cpf', 11)->unique('fornecedor_produtos_cpf_unique')
+            $table->string('cpf', 14)->unique('fornecedor_produtos_cpf_unique')
                 ->nullable(true);
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ namespace App\Http\Requests\fornecedorProduto;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CriarFornecedorProdutoRequest extends FormRequest
+class AtualizarFornecedorProdutoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,11 @@ class CriarFornecedorProdutoRequest extends FormRequest
     {
         return [
             'nome_fornecedor' => 'required|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/|
-            unique:fornecedor_produtos,nome_fornecedor|string|max:50',
-            'email' => 'required|email|unique:fornecedor_produtos,email|max:50',
-            'telefone' => 'required|unique:fornecedor_produtos,telefone|string|min:14|max:15',
-            'cpf' => 'nullable|unique:fornecedor_produtos,cpf|string|min:14|max:14',
-            'cnpj' => 'nullable|unique:fornecedor_produtos,cnpj|string|min:18|max:18',
+             string|max:50',
+            'email' => 'required|email|max:50',
+            'telefone' => 'required|string|min:14|max:15',
+            'cpf' => 'nullable|string|min:14|max:14',
+            'cnpj' => 'nullable|string|min:18|max:18',
         ];
     }
 }

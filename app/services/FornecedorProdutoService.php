@@ -2,6 +2,7 @@
 
 namespace App\services;
 
+use App\Http\Requests\fornecedorProduto\AtualizarFornecedorProdutoRequest;
 use App\Http\Requests\fornecedorProduto\CriarFornecedorProdutoRequest;
 use App\Models\FornecedorProduto;
 use App\repositorys\FornecedorProdutoRepository;
@@ -17,7 +18,7 @@ class FornecedorProdutoService
 
     public function listarTodosFornecedores(): LengthAwarePaginator
     {
-        return FornecedorProduto::paginate(20);
+        return FornecedorProduto::orderBy('id')->paginate(20);
     }
 
     public function encontrarFornecedorId(string $id): FornecedorProduto
@@ -35,12 +36,8 @@ class FornecedorProdutoService
         try {
             $requestValidada = $request->validated();
 
-            $requestValidada['telefone'] = preg_replace("/[^0-9]/", "", $requestValidada['telefone']);
-
-            if (!is_null($requestValidada['cpf'])) {
-                $requestValidada['cpf'] = preg_replace("/[^0-9]/", "", $requestValidada['cpf']);
-            } else {
-                $requestValidada['cnpj'] = preg_replace("/[^0-9]/", "", $requestValidada['cnpj']);
+            if ($requestValidada['cnpj'] && $requestValidada['cpf']) {
+                throw new Exception('Os dados enviados apresentam inconsistências.');
             }
 
             FornecedorProduto::create($requestValidada);
@@ -59,6 +56,10 @@ class FornecedorProdutoService
             $id = $request->id;
 
             $requestValidada = $request->validated();
+
+            if ($requestValidada['cnpj'] && $requestValidada['cpf']) {
+                throw new Exception('Os dados enviados apresentam inconsistências.');
+            }
 
             FornecedorProduto::where('id', $id)
                 ->update($requestValidada);

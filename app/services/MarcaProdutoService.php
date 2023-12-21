@@ -18,7 +18,7 @@ class MarcaProdutoService
 
     public function listarTodasMarcas(): LengthAwarePaginator
     {
-        return MarcaProduto::paginate(20);
+        return MarcaProduto::orderBy('id')->paginate(20);
     }
 
     public function encontrarMarcaId(string $id): MarcaProduto

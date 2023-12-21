@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\fornecedorProduto\AtualizarFornecedorProdutoRequest;
 use App\Http\Requests\fornecedorProduto\CriarFornecedorProdutoRequest;
 use App\services\FornecedorProdutoService;
 use Illuminate\Contracts\Foundation\Application;
@@ -70,7 +71,7 @@ class FornecedorProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(AtualizarFornecedorProdutoRequest $request)
     {
         if (!$this->fornecedorProdutoService->atualizarFornecedorProduto($request)) {
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
