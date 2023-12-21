@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\FornecedorProdutoController;
+use App\Http\Controllers\LoteProdutoController;
 use App\Http\Controllers\MarcaProdutoController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,5 @@ Route::resources([
     'marca' => MarcaProdutoController::class,
     'categoria' => CategoriaProdutoController::class,
     'fornecedor' => FornecedorProdutoController::class,
+    'lote' => LoteProdutoController::class,
 ]);
