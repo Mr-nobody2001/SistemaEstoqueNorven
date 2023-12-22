@@ -2,24 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\services\CategoriaProdutoService;
+use App\services\MarcaProdutoService;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProdutoController extends Controller
 {
+    public function __construct(
+        private readonly CategoriaProdutoService $categoriaProdutoService,
+        private readonly MarcaProdutoService     $marcaProdutoService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('produto.index-produto');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $listaTodasCategorias = $this->categoriaProdutoService->listarTodosCategoriaesSemPaginacao();
+
+        $listaTodasMarcas = $this->marcaProdutoService->listarTodosMarcasSemPaginacao();
+
+        return view('produto.criacao-produto', compact('listaTodasCategorias', 'listaTodasMarcas'));
     }
 
     /**

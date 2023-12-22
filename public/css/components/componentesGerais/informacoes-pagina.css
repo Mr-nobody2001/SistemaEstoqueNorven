@@ -11,3 +11,8 @@
 #container-informacoes-pagina h1 {
     font-size: 2rem;
 }
+
+.titulo-destaque {
+    margin: 20px 0;
+    font-size: 1.3rem;
+}

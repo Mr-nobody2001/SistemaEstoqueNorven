@@ -7,6 +7,7 @@ use App\Http\Requests\marcaProduto\CriarMarcaProdutoRequest;
 use App\Models\MarcaProduto;
 use App\repositorys\MarcaProdutoRepository;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
@@ -19,6 +20,11 @@ class MarcaProdutoService
     public function listarTodasMarcas(): LengthAwarePaginator
     {
         return MarcaProduto::orderBy('id')->paginate(20);
+    }
+
+    public function listarTodosMarcasSemPaginacao(): Collection
+    {
+        return MarcaProduto::orderBy('id')->get();
     }
 
     public function encontrarMarcaId(string $id): MarcaProduto

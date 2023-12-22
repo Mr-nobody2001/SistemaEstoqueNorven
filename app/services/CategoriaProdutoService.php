@@ -7,6 +7,7 @@ use App\Http\Requests\categoriaProduto\CriarCategoriaProdutoRequest;
 use App\Models\CategoriaProduto;
 use App\repositorys\CategoriaProdutoRepository;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +21,11 @@ class CategoriaProdutoService
     public function listarTodasCategorias(): LengthAwarePaginator
     {
         return CategoriaProduto::orderBy('id')->paginate(20);
+    }
+
+    public function listarTodosCategoriaesSemPaginacao(): Collection
+    {
+        return CategoriaProduto::orderBy('id')->get();
     }
 
     public function encontrarCategoriaId(string $id): CategoriaProduto

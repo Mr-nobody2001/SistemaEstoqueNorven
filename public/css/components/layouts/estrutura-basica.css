@@ -29,4 +29,9 @@ body {
     padding: 35px 40px 40px 40px;
 }
 
+.titulo-destaque {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: var(--cor-contraste);
+}
 

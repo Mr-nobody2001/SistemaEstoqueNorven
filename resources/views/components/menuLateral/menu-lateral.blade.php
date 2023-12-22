@@ -3,7 +3,7 @@
     <ul id="lista-menu-lateral">
         <x-menuLateral.item-menu-lateral :textoIcone="'inventory'" :link="'#'"
                                          :categoria="'Estoque'"/>
-        <x-menuLateral.item-menu-lateral :textoIcone="'inventory_2'" :link="'#'" :categoria="'Produto'"/>
+        <x-menuLateral.item-menu-lateral :textoIcone="'inventory_2'" :link="route('produto.index')" :categoria="'Produto'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'barcode'" :link="route('lote.index')"
                                          :categoria="'Lote'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'local_shipping'" :link="route('fornecedor.index')"

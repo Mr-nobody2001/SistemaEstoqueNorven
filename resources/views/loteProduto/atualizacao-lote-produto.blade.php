@@ -77,20 +77,27 @@
             </span>
         </div>
 
-        <div class="input-group d-flex flex-row w-100">
-            <select id="select-fornecedor-id" class="form-select w-25" aria-label="fornecedor" name="fornecedor_id"
-                    required>
-                <option data-texto="null" selected>Informe o fornecedor desse lote</option>
-                @foreach($listaTodosFornecedores as $fornecedor)
-                    <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected($loteProduto->fornecedor_id ?? old('fornecedor_id') ==
+        <div>
+            <div class="input-group d-flex flex-row w-100">
+                <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id" name="fornecedor_id"
+                        required>
+                    <option data-texto="null" disabled selected>Informe o fornecedor desse lote</option>
+                    @foreach($listaTodosFornecedores as $fornecedor)
+                        <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected($loteProduto->fornecedor_id ?? old('fornecedor_id') ==
                     $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
-                    </option>
-                @endforeach
-            </select>
+                        </option>
+                    @endforeach
+                </select>
 
-            <input type="text" id="filtro-fornecedor-id" class="form-control"
-                   placeholder="Pesquise pelo nome de um fornecedor."
-                   aria-label="Recipient's username">
+                <input type="text" id="filtro-fornecedor-id" class="form-control"
+                       placeholder="Pesquise pelo nome de um fornecedor.">
+            </div>
+
+            <span class="mt-1 campo-invalido">
+                @error('fornecedor_id')
+                 A presença do fornecedor é obrigatória.
+                @enderror
+            </span>
         </div>
     </form>
 

@@ -37,8 +37,8 @@
         </div>
 
         @php
-        $dataAtual = new DateTime();
-        $dataAtual->modify('+1 day')
+            $dataAtual = new DateTime();
+            $dataAtual->modify('+1 day');
         @endphp
 
         <div>
@@ -75,40 +75,47 @@
             </span>
         </div>
 
-       {{--<div>
-            <div class="d-flex flex-row input-group">
-                <span class="input-group-text">$</span>
-                <span class="input-group-text">0.00</span>
-                <input type="text" id="preco-venda" class="form-control rounded-end" name="preco_venda"
-                       placeholder="Informe o valor de venda associado a este lote do produto."
-                       value="{{ old('preco_venda') }}" maxlength="9"
-                       pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
-                <div class="invalid-feedback">
-                    O valor de venda não pode ser nulo e deve conter apenas caracteres numéricos e ".".
-                </div>
+        {{--<div>
+             <div class="d-flex flex-row input-group">
+                 <span class="input-group-text">$</span>
+                 <span class="input-group-text">0.00</span>
+                 <input type="text" id="preco-venda" class="form-control rounded-end" name="preco_venda"
+                        placeholder="Informe o valor de venda associado a este lote do produto."
+                        value="{{ old('preco_venda') }}" maxlength="9"
+                        pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                 <div class="invalid-feedback">
+                     O valor de venda não pode ser nulo e deve conter apenas caracteres numéricos e ".".
+                 </div>
+             </div>
+
+             <span class="mt-1 campo-invalido">
+                 @error('preco_venda')
+                  O valor de venda fornecido não está no formato adequado.
+                 @enderror
+             </span>
+         </div>--}}
+
+        <div>
+            <div class="input-group d-flex flex-row w-100">
+                <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id"
+                        name="fornecedor_id" required>
+                    <option data-texto="null" disabled selected>Informe o fornecedor desse lote</option>
+                    @foreach($listaTodosFornecedores as $fornecedor)
+                        <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected(old('fornecedor_id') ==
+                    $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <input type="text" id="filtro-fornecedor-id" class="form-control"
+                       placeholder="Pesquise pelo nome de um fornecedor.">
             </div>
 
             <span class="mt-1 campo-invalido">
-                @error('preco_venda')
-                 O valor de venda fornecido não está no formato adequado.
+                @error('fornecedor_id')
+                 A presença do fornecedor é obrigatória.
                 @enderror
             </span>
-        </div>--}}
-
-        <div class="input-group d-flex flex-row w-100">
-            <select id="select-fornecedor-id" class="form-select w-25" aria-label="fornecedor" name="fornecedor_id"
-                    required>
-                <option data-texto="null" selected>Informe o fornecedor desse lote</option>
-                @foreach($listaTodosFornecedores as $fornecedor)
-                    <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected(old('fornecedor_id') ==
-                    $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
-                    </option>
-                @endforeach
-            </select>
-
-            <input type="text" id="filtro-fornecedor-id" class="form-control"
-                   placeholder="Pesquise pelo nome de um fornecedor."
-                   aria-label="Recipient's username">
         </div>
     </form>
 </x-layouts.estrutura-basica>

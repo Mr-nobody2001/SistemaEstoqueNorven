@@ -56,7 +56,7 @@ class LoteProdutoController extends Controller
             return redirect(route('lote.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('lote.index'))->with(['msg' => 'lote criada com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('lote.index'))->with(['msg' => 'Lote criado com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
@@ -89,7 +89,7 @@ class LoteProdutoController extends Controller
             return redirect(route('lote.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('lote.index'))->with(['msg' => 'Lote atualizada com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('lote.index'))->with(['msg' => 'Lote atualizado com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
@@ -101,6 +101,6 @@ class LoteProdutoController extends Controller
             return redirect(route('lote.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('lote.index'))->with(['msg' => 'lote removida com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('lote.index'))->with(['msg' => 'Lote removido com sucesso', 'tipo' => 'sucesso']);
     }
 }

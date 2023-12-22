@@ -18,9 +18,14 @@
     gap: 25px;
 }
 
+#container-formulario > fieldset,
 #container-formulario > div {
     display: flex;
     flex-direction: column;
+}
+
+#container-formulario > fieldset {
+    gap: 10px;
 }
 
 #container-botao-atualizar-deletar,

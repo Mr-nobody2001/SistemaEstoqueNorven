@@ -52,7 +52,7 @@ class FornecedorProdutoController extends Controller
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('fornecedor.index'))->with(['msg' => 'Fornecedor criada com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('fornecedor.index'))->with(['msg' => 'Fornecedor criado com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
@@ -81,7 +81,7 @@ class FornecedorProdutoController extends Controller
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('fornecedor.index'))->with(['msg' => 'Fornecedor atualizada com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('fornecedor.index'))->with(['msg' => 'Fornecedor atualizado com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
@@ -93,6 +93,6 @@ class FornecedorProdutoController extends Controller
             return redirect(route('fornecedor.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('fornecedor.index'))->with(['msg' => 'Fornecedor removida com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('fornecedor.index'))->with(['msg' => 'Fornecedor removido com sucesso', 'tipo' => 'sucesso']);
     }
 }
