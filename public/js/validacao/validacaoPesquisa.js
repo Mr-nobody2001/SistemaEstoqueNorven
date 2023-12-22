@@ -27,7 +27,6 @@ export const validacaoBootstrap = () => {
         form.addEventListener("input", () => {
             for (let spanValidacaoRequest of spansValidacaoRequest)
                 spanValidacaoRequest.classList.add("d-none");
-
         })
     })
 }
