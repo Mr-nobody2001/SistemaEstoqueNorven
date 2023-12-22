@@ -1,6 +1,8 @@
 <nav id="menu-lateral" data-expandido="false">
     <span id="icone-hamburguer" class="material-symbols-outlined">menu</span>
     <ul id="lista-menu-lateral">
+        <x-menuLateral.item-menu-lateral :textoIcone="'inventory'" :link="'#'"
+                                         :categoria="'Estoque'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'inventory_2'" :link="'#'" :categoria="'Produto'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'barcode'" :link="route('lote.index')"
                                          :categoria="'Lote'"/>

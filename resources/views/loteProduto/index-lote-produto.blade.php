@@ -45,7 +45,6 @@
             <th>Número do Lote</th>
             <th>Data de Validade</th>
             <th>Preço de Custo</th>
-            <th>Preço de Venda</th>
             <th>Nome do Fornecedor</th>
         </tr>
         </thead>
@@ -56,7 +55,6 @@
                 <td>{{ $loteProduto->numero_lote }}</td>
                 <td>{{ $loteProduto->data_validade }}</td>
                 <td>{{ 'R$ ' . number_format($loteProduto->preco_custo, 2, '.', ',') }}</td>
-                <td>{{ 'R$ ' . number_format($loteProduto->preco_venda, 2, '.', ',') }}</td>
                 <td>{{ $loteProduto->fornecedor->nome_fornecedor }}</td>
             </tr>
         @empty

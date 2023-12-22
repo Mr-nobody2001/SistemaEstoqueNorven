@@ -25,7 +25,6 @@ class CriarLoteProdutoRequest extends FormRequest
             'numero_lote' => 'required|alpha_num|unique:lote_produtos,numero_lote',
             'data_validade' => 'required|date|after:now',
             'preco_custo' => 'required|numeric|min:1|max:99999999',
-            'preco_venda' => 'required|numeric|min:1|max:99999999',
             'fornecedor_id' => 'required|numeric|min:1'
         ];
     }

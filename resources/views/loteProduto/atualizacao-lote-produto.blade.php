@@ -77,27 +77,6 @@
             </span>
         </div>
 
-        <div>
-            <div class="d-flex flex-row input-group">
-                <span class="input-group-text">$</span>
-                <span class="input-group-text">0.00</span>
-                <input type="text" id="preco-venda" class="form-control rounded-end" name="preco_venda"
-                       placeholder="Informe o valor de venda associado a este lote do produto."
-                       value="{{ number_format($loteProduto->preco_venda, 2, '.', ',') ??
-                       number_format(old('preco_venda'), 2, '.', ',') }}" maxlength="9"
-                       pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
-                <div class="invalid-feedback">
-                    O valor de venda não pode ser nulo e deve conter apenas caracteres numéricos e ".".
-                </div>
-            </div>
-
-            <span class="mt-1 campo-invalido">
-                @error('preco_venda')
-                 O valor de venda fornecido não está no formato adequado.
-                @enderror
-            </span>
-        </div>
-
         <div class="input-group d-flex flex-row w-100">
             <select id="select-fornecedor-id" class="form-select w-25" aria-label="fornecedor" name="fornecedor_id"
                     required>

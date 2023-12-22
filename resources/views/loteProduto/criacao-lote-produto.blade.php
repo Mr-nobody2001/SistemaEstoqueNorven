@@ -70,7 +70,7 @@
             </span>
         </div>
 
-        <div>
+       {{--<div>
             <div class="d-flex flex-row input-group">
                 <span class="input-group-text">$</span>
                 <span class="input-group-text">0.00</span>
@@ -88,7 +88,7 @@
                  O valor de venda fornecido não está no formato adequado.
                 @enderror
             </span>
-        </div>
+        </div>--}}
 
         <div class="input-group d-flex flex-row w-100">
             <select id="select-fornecedor-id" class="form-select w-25" aria-label="fornecedor" name="fornecedor_id"
