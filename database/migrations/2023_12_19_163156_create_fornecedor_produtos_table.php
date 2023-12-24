@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('fornecedor_produtos', function (Blueprint $table) {
+        Schema::create('fornecedor_produtos', static function (Blueprint $table) {
             $table->id();
             $table->string('nome_fornecedor', 50)->unique('fornecedor_produtos_nome_fornecedor_unique')
                 ->nullable(false);

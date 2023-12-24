@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
-class MarcaProdutoService
+readonly class MarcaProdutoService
 {
-    public function __construct(private readonly MarcaProdutoRepository $marcaProdutoRepository)
+    public function __construct(private MarcaProdutoRepository $marcaProdutoRepository)
     {
     }
 

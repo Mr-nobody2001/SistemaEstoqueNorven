@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('categoria_produtos', function (Blueprint $table) {
+        Schema::create('categoria_produtos', static function (Blueprint $table) {
             $table->id();
             $table->string('nome_categoria', 50)->unique('categoria_produtos_nome_categoria_unique')
                 ->nullable(false);

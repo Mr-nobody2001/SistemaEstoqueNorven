@@ -1,3 +1,4 @@
+@php use App\Enums\UnidadeMedidaMassaVolume;use App\Enums\UnidadeMedidaQuantidade; @endphp
 @section('titulo', 'Cadastrar Produto')
 
 @section('estilo')
@@ -14,7 +15,7 @@
 
     <x-componentesGerais.informacoes-pagina :textoIcone="'inventory_2'" :titulo="'Cadastrar Produto'"/>
 
-    <form id="container-formulario" class="needs-validation" action="{{'#' /*route('Produto.store')*/ }}" method="POST"
+    <form id="container-formulario" class="needs-validation" action="{{ route('produto.store') }}" method="POST"
           novalidate>
         @csrf
         <div id="container-botao-salvar">
@@ -24,16 +25,16 @@
         <fieldset>
             <legend class="titulo-destaque">Informaçẽos gerais do produto</legend>
             <div>
-                <label for="numero_produto" class="form-label">Número do produto</label>
-                <input type="text" id="numero-produto" class="form-control" name="numero_produto"
-                       value="{{ old('numero_produto') ?? '' }}"
-                       pattern="^[a-zA-Z0-9]+$" required>
+                <label for="codigo_produto" class="form-label">Código do produto</label>
+                <input type="text" id="codigo-produto" class="form-control" name="codigo_produto"
+                       value="{{ old('codigo_produto') ?? '' }}"
+                       pattern="^[0-9]+$" required>
                 <div class="invalid-feedback">
                     O número do produto não pode ser nulo e deve conter apenas caracteres alfanuméricos.
                 </div>
                 <span class="mt-1 campo-invalido">
-                @error('numero_produto')
-                 O número do produto fornecido não está no formato adequado ou já existe na base de dados.
+                @error('codigo_produto')
+                 O código do produto fornecido não está no formato adequado ou já existe na base de dados.
                 @enderror
             </span>
             </div>
@@ -70,12 +71,14 @@
             <div>
                 <select class="form-select" aria-label="unidade_medida" name="unidade_medida" required>
                     <option disabled selected>Selecione a unidade de medida para o produto</option>
-                    <option value="unidade">Unidade</option>
-                    <option value="mg">Miligrama</option>
-                    <option value="g">Grama</option>
-                    <option value="kg">Quilograma</option>
-                    <option value="mL">Mililitros</option>
-                    <option value="L">Litro</option>
+                    @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
+                        <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                    @endforeach
+                    @foreach(UnidadeMedidaMassaVolume::getConstants() as $unidadeMedida)
+                        <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                    @endforeach
                 </select>
 
                 <div class="invalid-feedback">
@@ -94,7 +97,7 @@
                             name="categoria_id" required>
                         <option data-texto="null" disabled selected>Informe a categoria desse produto</option>
                         @foreach($listaTodasCategorias as $categoria)
-                            <option value="{{ $categoria->id }}" data-texto="{{ $categoria->nome_categoria }}" @selected(old('fornecedor_id') ==
+                            <option value="{{ $categoria->id }}" data-texto="{{ $categoria->nome_categoria }}" @selected(old('categoria_id') ==
                             $categoria->id )>{{ $categoria->nome_categoria }}
                             </option>
                         @endforeach
@@ -117,7 +120,7 @@
                             name="marca_id" required>
                         <option data-texto="null" disabled selected>Informe a marca desse produto</option>
                         @foreach($listaTodasMarcas as $marca)
-                            <option value="{{ $marca->id }}" data-texto="{{ $marca->nome_marca }}" @selected(old('fornecedor_id') ==
+                            <option value="{{ $marca->id }}" data-texto="{{ $marca->nome_marca }}" @selected(old('marca_id') ==
                             $marca->id )>{{ $marca->nome_marca }}
                             </option>
                         @endforeach
@@ -135,7 +138,7 @@
             </div>
         </fieldset>
 
-        <fieldset>
+        {{--<fieldset>
             <legend class="titulo-destaque">Informações nutricionais do produto</legend>
 
             <div class="d-flex flex-column w-100">
@@ -281,7 +284,7 @@
                     </div>
                 </div>
             </fieldset>
-        </fieldset>
+        </fieldset>--}}
     </form>
 </x-layouts.estrutura-basica>
 

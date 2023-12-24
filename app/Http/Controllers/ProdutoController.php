@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\produto\CriarProdutoRequest;
 use App\services\CategoriaProdutoService;
 use App\services\MarcaProdutoService;
 use Illuminate\Http\Request;
@@ -38,9 +39,9 @@ class ProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CriarProdutoRequest $request)
     {
-        //
+        dd($request->validated());
     }
 
     /**
@@ -62,9 +63,8 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
     }
 
     /**

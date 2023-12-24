@@ -12,9 +12,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class CategoriaProdutoService
+readonly class CategoriaProdutoService
 {
-    public function __construct(private readonly CategoriaProdutoRepository $categoriaProdutoRepository)
+    public function __construct(private CategoriaProdutoRepository $categoriaProdutoRepository)
     {
     }
 
@@ -60,7 +60,7 @@ class CategoriaProdutoService
         return true;
     }
 
-    public function atualizarCategoriaProduto(AtualizarCategoriaProdutoRequest $request)
+    public function atualizarCategoriaProduto(AtualizarCategoriaProdutoRequest $request): bool
     {
         try {
             $id = $request->id;

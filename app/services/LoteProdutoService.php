@@ -10,9 +10,9 @@ use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
-class LoteProdutoService
+readonly class LoteProdutoService
 {
-    public function __construct(private readonly LoteProdutoRepository $loteProdutoRepository)
+    public function __construct(private LoteProdutoRepository $loteProdutoRepository)
     {
     }
 
@@ -31,7 +31,7 @@ class LoteProdutoService
         return $this->loteProdutoRepository->encontrarLoteNumero($numeroLote);
     }
 
-    public function criarLoteProduto(CriarLoteProdutoRequest $request)
+    public function criarLoteProduto(CriarLoteProdutoRequest $request): bool
     {
         try {
             $requestValidada = $request->validated();

@@ -62,8 +62,8 @@
                 <span class="input-group-text">0.00</span>
                 <input type="text" id="preco-custo" class="form-control rounded-end" name="preco_custo"
                        placeholder="Informe o valor de custo associado a este lote do produto."
-                       value="{{ number_format($loteProduto->preco_custo, 2, '.', ',') ??
-                       number_format(old('preco_custo'), 2, '.', ',') }}" maxlength="9"
+                       value="{{ number_format($loteProduto->preco_custo, 2) ??
+                       number_format(old('preco_custo'), 2) }}" maxlength="9"
                        pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
                 <div class="invalid-feedback">
                     O custo não pode ser nulo e deve conter apenas caracteres numéricos e ".".
