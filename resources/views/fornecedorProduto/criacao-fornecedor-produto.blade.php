@@ -81,7 +81,7 @@
                 O cnpj não pode ser nulo e deve estar num formato válido.
             </div>
             <span class="mt-1 campo-invalido">
-                @error('telefone')
+                @error('cnpj')
                 O cnpj fornecido não está no formato adequado ou já existe na base de dados.
                 @enderror
             </span>
@@ -97,8 +97,9 @@
             <div class="invalid-feedback">
                 O cpf não pode ser nulo e deve estar num formato válido.
             </div>
+
             <span class="mt-1 campo-invalido">
-                @error('telefone')
+                @error('cpf')
                 O cpf fornecido não está no formato adequado ou já existe na base de dados.
                 @enderror
             </span>

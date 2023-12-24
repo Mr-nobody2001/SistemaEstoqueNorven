@@ -6,6 +6,7 @@
 
 @section('script')
     <script type="module" src="{{ asset('js/geral/criacaoGeral.js') }}"></script>
+    <script type="module" src="{{ asset('js/especifico/produto/criacaoAtualizacaoProduto.js') }}"></script>
 @endsection
 
 <x-layouts.estrutura-basica>

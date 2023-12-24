@@ -26,8 +26,8 @@ class CriarFornecedorProdutoRequest extends FormRequest
             unique:fornecedor_produtos,nome_fornecedor|string|max:50',
             'email' => 'required|email|unique:fornecedor_produtos,email|max:50',
             'telefone' => 'required|unique:fornecedor_produtos,telefone|string|min:14|max:15',
-            'cpf' => 'nullable|unique:fornecedor_produtos,cpf|string|min:14|max:14',
-            'cnpj' => 'nullable|unique:fornecedor_produtos,cnpj|string|min:18|max:18',
+            'cpf' => 'nullable|regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/|unique:fornecedor_produtos,cpf|string|min:14|max:14',
+            'cnpj' => 'nullable|regex:/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/|unique:fornecedor_produtos,cnpj|string|min:18|max:18',
         ];
     }
 }

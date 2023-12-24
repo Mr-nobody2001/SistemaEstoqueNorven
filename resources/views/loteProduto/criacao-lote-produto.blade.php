@@ -99,7 +99,7 @@
             <div class="input-group d-flex flex-row w-100">
                 <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id"
                         name="fornecedor_id" required>
-                    <option data-texto="null" disabled selected>Informe o fornecedor desse lote</option>
+                    <option data-texto="null" value="" disabled selected>Informe o fornecedor desse lote</option>
                     @foreach($listaTodosFornecedores as $fornecedor)
                         <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected(old('fornecedor_id') ==
                     $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
@@ -110,6 +110,10 @@
                 <input type="text" id="filtro-fornecedor-id" class="form-control"
                        placeholder="Pesquise pelo nome de um fornecedor.">
             </div>
+
+            <span id="aviso-fornecedor-id" class="d-none campo-invalido">
+                A presença do fornecedor é obrigatória.
+            </span>
 
             <span class="mt-1 campo-invalido">
                 @error('fornecedor_id')

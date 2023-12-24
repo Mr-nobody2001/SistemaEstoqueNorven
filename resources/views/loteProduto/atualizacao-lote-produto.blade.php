@@ -79,7 +79,8 @@
 
         <div>
             <div class="input-group d-flex flex-row w-100">
-                <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id" name="fornecedor_id"
+                <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id"
+                        name="fornecedor_id"
                         required>
                     <option data-texto="null" disabled selected>Informe o fornecedor desse lote</option>
                     @foreach($listaTodosFornecedores as $fornecedor)
@@ -88,6 +89,10 @@
                         </option>
                     @endforeach
                 </select>
+
+                <span id="aviso-fornecedor-id" class="d-none campo-invalido">
+                     A presença do fornecedor é obrigatória.
+                </span>
 
                 <input type="text" id="filtro-fornecedor-id" class="form-control"
                        placeholder="Pesquise pelo nome de um fornecedor.">

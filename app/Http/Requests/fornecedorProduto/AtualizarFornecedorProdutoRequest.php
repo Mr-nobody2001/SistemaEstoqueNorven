@@ -26,8 +26,8 @@ class AtualizarFornecedorProdutoRequest extends FormRequest
              string|max:50',
             'email' => 'required|email|max:50',
             'telefone' => 'required|string|min:14|max:15',
-            'cpf' => 'nullable|string|min:14|max:14',
-            'cnpj' => 'nullable|string|min:18|max:18',
+            'cpf' => 'nullable|regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/|string|min:14|max:14',
+            'cnpj' => 'nullable|regex:/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/|string|min:18|max:18',
         ];
     }
 }
