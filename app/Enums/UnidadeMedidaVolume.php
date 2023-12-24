@@ -4,11 +4,8 @@ namespace App\Enums;
 
 use ReflectionClass;
 
-class UnidadeMedidaMassaVolume
+class UnidadeMedidaVolume
 {
-    public const MILIGRAMA = 'mg';
-    public const GRAMA = 'g';
-    public const QUILOGRAMA = 'kg';
     public const MILILITRO = 'mL';
     public const LITRO = 'L';
     public static function getConstants(): array

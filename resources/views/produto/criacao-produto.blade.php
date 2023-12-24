@@ -1,4 +1,4 @@
-@php use App\Enums\UnidadeMedidaMassaVolume;use App\Enums\UnidadeMedidaQuantidade; @endphp
+@php use App\Enums\UnidadeMedidaEnergia;use App\Enums\UnidadeMedidaMassa;use App\Enums\UnidadeMedidaVolume;use App\Enums\UnidadeMedidaQuantidade; @endphp
 @section('titulo', 'Cadastrar Produto')
 
 @section('estilo')
@@ -24,8 +24,9 @@
 
         <fieldset>
             <legend class="titulo-destaque">Informaçẽos gerais do produto</legend>
+
             <div>
-                <label for="codigo_produto" class="form-label">Código do produto</label>
+                <label for="codigo-produto" class="form-label">Código do produto</label>
                 <input type="text" id="codigo-produto" class="form-control" name="codigo_produto"
                        value="{{ old('codigo_produto') ?? '' }}"
                        pattern="^[0-9]+$" required>
@@ -40,8 +41,8 @@
             </div>
 
             <div>
-                <label for="nome_produto" class="form-label">Nome do produto</label>
-                <input type="text" id="nome_produto" class="form-control" name="nome_produto"
+                <label for="nome-produto" class="form-label">Nome do produto</label>
+                <input type="text" id="nome-produto" class="form-control" name="nome_produto"
                        value="{{ old('nome_produto') ?? '' }}" maxlength="50"
                        pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
                 <div class="invalid-feedback">
@@ -55,8 +56,8 @@
             </div>
 
             <div>
-                <label for="descricao_produto" class="form-label">Descrição do produto</label>
-                <textarea id="descricao_produto" class="form-control" name="descricao_produto"
+                <label for="descricao-produto" class="form-label">Descrição do produto</label>
+                <textarea id="descricao-produto" class="form-control" name="descricao_produto"
                           rows="3">{{ old('descricao_produto') ?? '' }}</textarea>
                 <div class="invalid-feedback">
                     Por favor, forneça uma descrição válida.
@@ -69,13 +70,17 @@
             </div>
 
             <div>
-                <select class="form-select" aria-label="unidade_medida" name="unidade_medida" required>
+                <select class="form-select" aria-label="unidade-medida" name="unidade_medida">
                     <option disabled selected>Selecione a unidade de medida para o produto</option>
                     @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
                         <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                     @endforeach
-                    @foreach(UnidadeMedidaMassaVolume::getConstants() as $unidadeMedida)
+                    @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
+                        <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                    @endforeach
+                    @foreach(UnidadeMedidaVolume::getConstants() as $unidadeMedida)
                         <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                     @endforeach
@@ -108,7 +113,7 @@
                 </div>
 
                 <span class="mt-1 campo-invalido">
-                @error('fornecedor_id')
+                @error('categoria_id')
                  A presença da categoria é obrigatória.
                 @enderror
                 </span>
@@ -131,116 +136,166 @@
                 </div>
 
                 <span class="mt-1 campo-invalido">
-                @error('fornecedor_id')
-                 A presença da categoria é obrigatória.
+                @error('marca_id')
+                 A presença da marca é obrigatória.
                 @enderror
                 </span>
             </div>
         </fieldset>
 
-        {{--<fieldset>
+        <fieldset>
             <legend class="titulo-destaque">Informações nutricionais do produto</legend>
 
             <div class="d-flex flex-column w-100">
-                <label for="quantidade_porcao" class="form-label">Informe o tamanho da porção</label>
+                <label for="quantidade-porcao" class="form-label">Informe o tamanho da porção</label>
 
                 <div class="input-group d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade_porcao" class="form-control w-25" name="quantidade_porcao"
-                           min="1"
-                           required>
-                    <select class="form-select" aria-label="unidade_medida_porcao" name="unidade_medida_porcao"
-                            required>
+                    <input type="text" id="quantidade-porcao" class="form-control w-25" name="quantidade_porcao"
+                           value="{{ old('quantidade_porcao' ?? '') }}" maxlength="9"
+                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$">
+                    <select class="form-select" aria-label="unidade-medida-porcao" name="unidade_medida_porcao"
+                            >
                         <option disabled selected>Selecione a unidade de medida para a porção</option>
-                        <option value="unidade">Unidade</option>
-                        <option value="fatia">Fatia</option>
-                        <option value="xícara">Xícara</option>
-                        <option value="g">Quilograma</option>
+                        @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
+                        @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
+                        @foreach(UnidadeMedidaVolume::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <span class="mt-1 campo-invalido">
+                @error('quantidade_porcao')
+                 A presença da quantidade de porção é obrigatória.
+                @enderror
+                </span>
             </div>
 
             <div class="d-flex flex-column w-100">
-                <label for="quantidade_energia" class="form-label">Informe a quantidade de energia da porção</label>
+                <label for="quantidade-energia" class="form-label">Informe a quantidade de energia da porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade_energia" class="form-control w-25" name="quantidade_energia"
-                           min="1" required>
-                    <select class="form-select" aria-label="unidade_medida_energia" name="unidade_medida_energia"
+                    <input type="text" id="quantidade-energia" class="form-control w-25" name="quantidade_energia"
+                           value="{{ old('quantidade_energia' ?? '') }}" maxlength="9"
+                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <select class="form-select" aria-label="unidade-medida-energia" name="unidade_medida_energia"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quantidade de energia</option>
-                        <option value="kcal">Quilocaloria</option>
-                        <option value="J">Joule</option>
+                        @foreach(UnidadeMedidaEnergia::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_energia') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <span class="mt-1 campo-invalido">
+                @error('quantidade_energia')
+                 A presença da quantidade de energia é obrigatória.
+                @enderror
+                </span>
             </div>
 
             <div class="d-flex flex-column w-100">
-                <label for="quantidade_proteina" class="form-label">Informe a quantidade de proteína da porção</label>
+                <label for="quantidade-proteina" class="form-label">Informe a quantidade de proteína da porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade_proteina" class="form-control w-25" name="quantidade_proteina"
-                           min="0" required>
-                    <select class="form-select" aria-label="unidade_medida_proteina" name="unidade_medida_proteina"
+                    <input type="number" id="quantidade-proteina" class="form-control w-25" name="quantidade_proteina"
+                           value="{{ old('quantidade_proteina') ?? '0' }}" maxlength="9"
+                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <select class="form-select" aria-label="unidade-medida-proteina" name="unidade_medida_proteina"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de proteína</option>
-                        <option value="mg">Miligrama</option>
-                        <option value="g">Grama</option>
-                        <option value="kg">Quilograma</option>
+                        @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_proteina') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <span class="mt-1 campo-invalido">
+                @error('quantidade_proteina')
+                 A presença da quantidade de proteína é obrigatória.
+                @enderror
+                </span>
             </div>
 
             <div class="d-flex flex-column w-100">
-                <label for="quantidade_gordura" class="form-label">Informe a quantidade de gorduras totais da
+                <label for="quantidade-gordura" class="form-label">Informe a quantidade de gorduras totais da
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade_gordura" class="form-control w-25" name="quantidade_gordura"
-                           min="0" required>
-                    <select class="form-select" aria-label="unidade_medida_gordura" name="unidade_medida_gordura"
+                    <input type="number" id="quantidade-gordura" class="form-control w-25" name="quantidade_gordura"
+                           value="{{ old('quantidade_gordura') ?? '0' }}" maxlength="9"
+                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <select class="form-select" aria-label="unidade-medida-gordura" name="unidade_medida_gordura"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de gordura</option>
-                        <option value="mg">Miligrama</option>
-                        <option value="g">Grama</option>
-                        <option value="kg">Quilograma</option>
+                        @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_gordura') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <span class="mt-1 campo-invalido">
+                @error('quantidade_gordura')
+                 A presença da quantidade de gorduras totais é obrigatória.
+                @enderror
+                </span>
             </div>
 
             <div class="d-flex flex-column">
-                <label for="quantidade_acucar" class="form-label">Informe a quantidade de açucares da
+                <label for="quantidade-acucar" class="form-label">Informe a quantidade de açucares da
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center w-100">
-                    <input type="number" id="quantidade_acucar" class="form-control w-25" name="quantidade_acucar"
-                           min="0" required>
-                    <select class="form-select" aria-label="unidade_medida_acucar" name="unidade_medida_acucar"
+                    <input type="number" id="quantidade-acucar" class="form-control w-25" name="quantidade_acucar"
+                           value="{{ old('quantidade_acucar') ?? 0 }}" maxlength="9"
+                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <select class="form-select" aria-label="unidade-medida-acucar" name="unidade_medida_acucar"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de açucar</option>
-                        <option value="mg">Miligrama</option>
-                        <option value="g">Grama</option>
-                        <option value="kg">Quilograma</option>
+                        @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_acucar') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <span class="mt-1 campo-invalido">
+                @error('quantidade_acucar')
+                A presença da quantidade de açucar é obrigatória.
+                @enderror
+                </span>
             </div>
 
             <div class="d-flex flex-column w-100">
-                <label for="quantidade_sodio" class="form-label">Informe a quantidade de sódio da
+                <label for="quantidade-sodio" class="form-label">Informe a quantidade de sódio da
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade_sodio" class="form-control w-25" name="quantidade_sodio" min="0"
-                           required>
-                    <select class="form-select" aria-label="unidade_medida_sodio" name="unidade_medida_sodio" required>
+                    <input type="number" id="quantidade-sodio" class="form-control w-25" name="quantidade_sodio" maxlength="9"
+                           value="{{ old('quantidade_sodio') ?? '0' }}"
+                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" >
+                    <select class="form-select" aria-label="unidade-medida-sodio"
+                            name="unidade_medida_sodio" >
                         <option disabled selected>Selecione a unidade de medida da quatidade de sódio</option>
-                        <option value="mg">Miligrama</option>
-                        <option value="g">Grama</option>
-                        <option value="kg">Quilograma</option>
+                        @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
+                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_sodio') ==
+                        $unidadeMedida)>{{ $unidadeMedida }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <span class="mt-1 campo-invalido">
+                @error('quantidade_sodio')
+                A presença da quantidade de sódio é obrigatória.
+                @enderror
+                </span>
             </div>
 
-            <fieldset>
+            {{--<fieldset>
                 <legend class="titulo-destaque">Alérgenos</legend>
                 <div>
                     <div>
@@ -283,8 +338,8 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
-        </fieldset>--}}
+            </fieldset>--}}
+        </fieldset>
     </form>
 </x-layouts.estrutura-basica>
 
