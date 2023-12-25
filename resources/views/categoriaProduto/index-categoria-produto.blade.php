@@ -20,23 +20,12 @@
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}
     <div id="topo-secao-principal">
         <x-componentesGerais.informacoes-pagina :textoIcone="'category'" :titulo="'Categorias'"/>
-        <div>
-            <a href="{{ route('categoria.create') }}"><i class="bi bi-plus-square"></i></a>
-            <i class="bi bi-arrow-clockwise"></i>
-        </div>
+        <x-componentesGerais.index.opcoes-index :entidadeRota="'categoria'"/>
     </div>
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <div id="container-pesquisa">
-        <form action="{{ route('categoria.index') }}" method="GET">
-            <div id="container-barra-pesquisa">
-                <input type="text" id="barra-pesquisa" class="form-control" name="nome_categoria"
-                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nome de uma categoria." required>
-                <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
-            </div>
-        </form>
-    </div>
+    <x-componentesGerais.index.pesquisa-index :entidade="'categoria'" :nome="'nome_categoria'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela" data-entidade="categoria">

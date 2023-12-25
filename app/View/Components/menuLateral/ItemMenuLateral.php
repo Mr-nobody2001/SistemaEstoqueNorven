@@ -11,8 +11,7 @@ class ItemMenuLateral extends Component
     /**
      * Create a new component instance.
      */
-    public
-    function __construct(public string $textoIcone, public string $link, public string $categoria)
+    public function __construct(public string $textoIcone, public string $link, public string $categoria)
     {
         //
     }

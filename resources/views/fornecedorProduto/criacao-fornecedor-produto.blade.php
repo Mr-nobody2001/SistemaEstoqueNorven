@@ -21,9 +21,7 @@
     <form id="container-formulario" class="needs-validation" action="{{ route('fornecedor.store') }}" method="POST"
           enctype="multipart/form-data" novalidate>
         @csrf
-        <div id="container-botao-salvar">
-            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
-        </div>
+        <x-componentesGerais.criacao.opcao-salvar/>
 
         <div>
             <label for="nome_fornecedor" class="form-label">Nome do fornecedor</label>

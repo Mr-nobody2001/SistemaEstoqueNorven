@@ -6,7 +6,7 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/geral/criacaoGeral.js') }}"></script>
+    <script type="module" src="{{ asset('js/geral/atualizacaoDelecao.js') }}"></script>
     <script type="module" src="{{ asset('js/especifico/produto/criacaoAtualizacaoProduto.js') }}"></script>
 @endsection
 
@@ -18,9 +18,7 @@
     <form id="container-formulario" class="needs-validation" action="{{ route('produto.store') }}" method="POST"
           novalidate>
         @csrf
-        <div id="container-botao-salvar">
-            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
-        </div>
+        <x-componentesGerais.atualizacao.opcoes-atualizacao/>
 
         <fieldset>
             <legend class="titulo-destaque">Informaçẽos gerais do produto</legend>
@@ -371,5 +369,8 @@
             </fieldset>
         </fieldset>
     </form>
+
+    {{-- Formulário para a deleção (invisível para o usuário) --}}
+    <x-componentesGerais.atualizacao.formulario-delecao :entidadeRota="'produto'" :entidade="'produto'" :objeto="$produto"/>
 </x-layouts.estrutura-basica>
 

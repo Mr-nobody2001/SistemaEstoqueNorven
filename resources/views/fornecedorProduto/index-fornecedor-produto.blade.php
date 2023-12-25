@@ -20,23 +20,12 @@
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}
     <div id="topo-secao-principal">
         <x-componentesGerais.informacoes-pagina :textoIcone="'local_shipping'" :titulo="'Fornecedores'"/>
-        <div>
-            <a href="{{ route('fornecedor.create') }}"><i class="bi bi-plus-square"></i></a>
-            <i class="bi bi-arrow-clockwise"></i>
-        </div>
+        <x-componentesGerais.index.opcoes-index :entidadeRota="'fornecedor'"/>
     </div>
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <div id="container-pesquisa">
-        <form action="{{ route('fornecedor.index') }}" method="GET">
-            <div id="container-barra-pesquisa">
-                <input type="text" id="barra-pesquisa" class="form-control" name="nome_fornecedor"
-                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo nome de um fornecedor.">
-                <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
-            </div>
-        </form>
-    </div>
+    <x-componentesGerais.index.pesquisa-index :entidade="'fornecedor'" :nome="'nome_fornecedor'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela" data-entidade="fornecedor">

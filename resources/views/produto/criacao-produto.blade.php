@@ -18,9 +18,7 @@
     <form id="container-formulario" class="needs-validation" action="{{ route('produto.store') }}" method="POST"
           novalidate>
         @csrf
-        <div id="container-botao-salvar">
-            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
-        </div>
+        <x-componentesGerais.criacao.opcao-salvar/>
 
         <fieldset>
             <legend class="titulo-destaque">Informaçẽos gerais do produto</legend>

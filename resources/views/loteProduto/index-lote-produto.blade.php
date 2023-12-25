@@ -19,26 +19,15 @@
     {{-- Inclui as informações da página e as opções de adicionar e de refresh --}}
     <div id="topo-secao-principal">
         <x-componentesGerais.informacoes-pagina :textoIcone="'barcode'" :titulo="'Lotes'"/>
-        <div>
-            <a href="{{ route('lote.create') }}"><i class="bi bi-plus-square"></i></a>
-            <i class="bi bi-arrow-clockwise"></i>
-        </div>
+        <x-componentesGerais.index.opcoes-index :entidadeRota="'lote'"/>
     </div>
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <div id="container-pesquisa">
-        <form action="{{ route('lote.index') }}" method="GET">
-            <div id="container-barra-pesquisa">
-                <input type="text" id="barra-pesquisa" class="form-control" name="numero_lote"
-                       value="{{ $valorPesquisa ?? '' }}" placeholder="Pesquise pelo número de um lote." required>
-                <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
-            </div>
-        </form>
-    </div>
+    <x-componentesGerais.index.pesquisa-index :entidade="'lote'"  :nome="'numero_lote'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
-    <table class="tabela" data-entidade="lote">
+    <table class="tabela alinhar-centro" data-entidade="lote">
         <thead>
         <tr class="titulo-tabela-destaque">
             <th>Id</th>

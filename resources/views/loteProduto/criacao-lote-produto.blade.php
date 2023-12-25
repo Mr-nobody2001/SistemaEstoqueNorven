@@ -17,9 +17,7 @@
     <form id="container-formulario" class="needs-validation" action="{{ route('lote.store') }}" method="POST"
           novalidate>
         @csrf
-        <div id="container-botao-salvar">
-            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
-        </div>
+        <x-componentesGerais.criacao.opcao-salvar/>
 
         <div>
             <label for="numero_lote" class="form-label">Número do lote</label>

@@ -16,9 +16,7 @@
     <form id="container-formulario" class="needs-validation" action="{{ route('categoria.store') }}" method="POST"
           enctype="multipart/form-data" novalidate>
         @csrf
-        <div id="container-botao-salvar">
-            <button type="submit" id="botao-salvar" class="btn">Salvar</button>
-        </div>
+        <x-componentesGerais.criacao.opcao-salvar/>
 
         <div>
             <label for="nome_categoria" class="form-label">Nome da categoria</label>
@@ -49,11 +47,14 @@
             </span>
         </div>
 
-        <div id="container-file" class="input-group">
-            <input type="file" id="imagem_categoria" class="form-control" name="imagem_categoria"
-                   accept="image/jpeg, image/jpg" max="2048000" required>
-            <div class="invalid-feedback">
-                Por favor, forneça uma foto válida.
+        <div>
+            <label for="imagem_categoria" class="form-label">Insira a imagem da categoria</label>
+            <div id="container-file" class="input-group">
+                <input type="file" id="imagem_categoria" class="form-control" name="imagem_categoria"
+                       accept="image/jpeg, image/jpg" max="2048000" required>
+                <div class="invalid-feedback">
+                    Por favor, forneça uma foto válida.
+                </div>
             </div>
         </div>
     </form>

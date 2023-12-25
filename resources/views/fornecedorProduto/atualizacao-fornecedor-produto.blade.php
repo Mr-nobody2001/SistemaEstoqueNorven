@@ -23,10 +23,7 @@
           enctype="multipart/form-data" novalidate>
         @method('PUT')
         @csrf
-        <div id="container-botao-atualizar-deletar">
-            <button type="submit" id="botao-atualizar" class="btn">Atualizar</button>
-            <button id="botao-deletar" class="btn">Deletar</button>
-        </div>
+        <x-componentesGerais.atualizacao.opcoes-atualizacao/>
 
         <div class="d-none">
             <input type="hidden" name="id" value="{{ $fornecedorProduto->id ?? old('id') }}">
@@ -124,13 +121,6 @@
     </div>
 
     {{-- Formulário para a deleção (invisível para o usuário) --}}
-    <form id="formulario-delecao" class="d-none"
-          action="{{ route('fornecedor.destroy', ['fornecedor' => $fornecedorProduto->id]) }}"
-          method="POST">
-        @method('DELETE')
-        @csrf
-
-        <button type="submit" id="botao-deletar-formulario"></button>
-    </form>
+    <x-componentesGerais.atualizacao.formulario-delecao :entidadeRota="'fornecedor'" :entidade="'fornecedor'" :objeto="$fornecedorProduto"/>
 </x-layouts.estrutura-basica>
 
