@@ -50,11 +50,16 @@
         </thead>
         <tbody>
         @forelse ($paginaLoteProduto as $loteProduto)
+            @php
+                $dataValidadeFormatada = new DateTime($loteProduto->data_validade);
+                $dataValidadeFormatada = $dataValidadeFormatada->format('d/m/Y');
+            @endphp
+
             <tr data-id="{{ $loteProduto->id }}">
                 <td>{{ $loteProduto->id }}</td>
                 <td>{{ $loteProduto->numero_lote }}</td>
-                <td>{{ $loteProduto->data_validade }}</td>
-                <td>{{ 'R$ ' . number_format($loteProduto->preco_custo, 2) }}</td>
+                <td>{{ $dataValidadeFormatada }}</td>
+                <td>{{ 'R$ ' . number_format($loteProduto->preco_custo, 2, ',', '.') }}</td>
                 <td>{{ $loteProduto->fornecedor->nome_fornecedor }}</td>
             </tr>
         @empty

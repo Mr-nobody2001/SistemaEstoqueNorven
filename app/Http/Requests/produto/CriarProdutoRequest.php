@@ -49,6 +49,17 @@ class CriarProdutoRequest extends FormRequest
             'unidade_medida_acucar' => ['required', Rule::in(array_merge(UnidadeMedidaMassa::getConstants()))],
             'quantidade_sodio' => 'required|numeric|min:0',
             'unidade_medida_sodio' => ['required', Rule::in(array_merge(UnidadeMedidaMassa::getConstants()))],
+
+            // Alérgenos
+            'leite' => 'string|in:leite',
+            'ovos' => 'string|in:ovos',
+            'amendoim' => 'string|in:amendoim',
+            'nozes' => 'string|in:nozes',
+            'trigo' => 'string|in:trigo',
+            'soja' => 'string|in:soja',
+            'mostarda' => 'string|in:mostarda',
+            'sulfitos' => 'string|in:sulfitos',
+            'sementes_gergelim' => 'string|in:sementes_gergelim',
         ];
     }
 }

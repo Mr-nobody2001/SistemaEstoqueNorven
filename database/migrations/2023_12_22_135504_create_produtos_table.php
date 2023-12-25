@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->foreignId('categoria_id')->constrained('categoria_produtos');
             $table->foreignId('marca_id')->constrained('marca_produtos');
             $table->timestamps();
+            $table->renameColumn('created_at', 'data_cadastro');
         });
     }
 

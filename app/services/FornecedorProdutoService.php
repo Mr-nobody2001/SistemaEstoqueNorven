@@ -43,6 +43,10 @@ readonly class FornecedorProdutoService
         try {
             $requestValidada = $request->validated();
 
+            if ($requestValidada['cnpj'] && $requestValidada['cpf']) {
+                throw new RuntimeException('Os dados enviados apresentam inconsistências.');
+            }
+
             FornecedorProduto::create($requestValidada);
         } catch (Exception $e) {
             Log::error('Erro ao criar registro: ' . $e->getMessage());

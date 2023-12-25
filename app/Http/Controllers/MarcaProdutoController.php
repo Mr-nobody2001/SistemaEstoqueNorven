@@ -49,10 +49,10 @@ class MarcaProdutoController extends Controller
     public function store(CriarMarcaProdutoRequest $request): Application|RedirectResponse|Redirector
     {
         if (!$this->marcaProdutoService->criarMarcaProduto($request)) {
-            return redirect(route('marca.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro', 'nome_marca' => $request->nome_marca]);
+            return redirect(route('marca.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect(route('marca.index'))->with(['msg' => 'Marca criada com sucesso', 'tipo' => 'sucesso',]);
+        return redirect(route('marca.index'))->with(['msg' => 'Marca criada com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**

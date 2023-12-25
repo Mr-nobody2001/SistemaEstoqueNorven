@@ -38,22 +38,37 @@
     </div>
 
     {{-- Tabela de registros --}}
-    {{--<table class="tabela alinhar-centro" data-entidade="marca">
+    <table class="tabela alinhar-centro" data-entidade="produto">
         <thead>
         <tr class="titulo-tabela-destaque">
             <th>Id</th>
+            <th>Código</th>
             <th>Nome</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Marca</th>
+            <th>Data de Cadastro</th>
         </tr>
         </thead>
         <tbody>
-        @forelse ($paginaMarcaProduto as $marcaProduto)
-            <tr data-id="{{ $marcaProduto->id }}">
-                <td>{{ $marcaProduto->id }}</td>
-                <td>{{ $marcaProduto->nome_marca }}</td>
+        @forelse ($paginaProduto as $produto)
+            @php
+                $dataCriacaoProdutoFormatada = new DateTime($produto->data_cadastro);
+                $dataCriacaoProdutoFormatada = $dataCriacaoProdutoFormatada->format('d/m/Y H:i:s')
+            @endphp
+
+            <tr data-id="{{ $produto->id }}">
+                <td>{{ $produto->id }}</td>
+                <td>{{ $produto->codigo_produto }}</td>
+                <td>{{ $produto->nome_produto }}</td>
+                <td>{{ substr($produto->descricao_produto, 0, 30) . '...' }}</td>
+                <td>{{ $produto->categoria->nome_categoria }}</td>
+                <td>{{ $produto->marca->nome_marca }}</td>
+                <td>{{ $dataCriacaoProdutoFormatada }}</td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>
         @endforelse
         </tbody>
-    </table>--}}
+    </table>
 </x-layouts.estrutura-basica>

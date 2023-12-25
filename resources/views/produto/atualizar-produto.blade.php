@@ -1,5 +1,5 @@
 @php use App\Enums\UnidadeMedidaEnergia;use App\Enums\UnidadeMedidaMassa;use App\Enums\UnidadeMedidaVolume;use App\Enums\UnidadeMedidaQuantidade; @endphp
-@section('titulo', 'Cadastrar Produto')
+@section('titulo', 'Atualizar Produto')
 
 @section('estilo')
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/criacao-atualizacao-delecao-geral.css') }}">
