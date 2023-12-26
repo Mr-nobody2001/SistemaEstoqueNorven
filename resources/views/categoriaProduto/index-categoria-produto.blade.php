@@ -25,7 +25,7 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :entidade="'categoria'" :nome="'nome_categoria'" :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('categoria.index')" :nome="'nome_categoria'" :placeholder="'Pesquise pelo nome da categoria.'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela" data-entidade="categoria">

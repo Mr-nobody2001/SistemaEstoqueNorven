@@ -24,7 +24,7 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :entidade="'marca'" :nome="'nome_marca'" :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('marca.index')" :nome="'nome_marca'" :placeholder="'Pesquise pelo nome da marca.'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela alinhar-centro" data-entidade="marca">

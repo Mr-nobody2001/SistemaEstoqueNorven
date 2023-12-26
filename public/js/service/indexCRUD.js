@@ -1,7 +1,7 @@
 import {exibirAviso, ocultarAviso} from "../avisos/aviso.js";
 import {escolherAlteracao} from "../avisos/avisoEscolha.js";
 
-export const atualizarPagina = (entidade) => {
+export const atualizarPagina = (entidade = "") => {
     // Cria um formulário dinamicamente
     const formulario = document.createElement('form');
     formulario.method = "GET";

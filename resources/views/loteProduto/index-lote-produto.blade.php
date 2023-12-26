@@ -24,7 +24,7 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :entidade="'lote'"  :nome="'numero_lote'" :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('lote.index')"  :nome="'numero_lote'" :placeholder="'Pesquise pelo número do lote.'"  :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela alinhar-centro" data-entidade="lote">

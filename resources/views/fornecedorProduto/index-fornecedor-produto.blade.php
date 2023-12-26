@@ -25,7 +25,7 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :entidade="'fornecedor'" :nome="'nome_fornecedor'" :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('fornecedor.index')" :nome="'nome_fornecedor'" :placeholder="'Pesquise pelo nome do fornecedor.'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela" data-entidade="fornecedor">
