@@ -50,7 +50,7 @@
     transition: 0.5s;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .body-menu-expandido {
         padding-left: 250px !important;
         transition: 0.5s;

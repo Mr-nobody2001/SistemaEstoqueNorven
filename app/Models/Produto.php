@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produto extends Model
 {
     use HasFactory;
 
-    const CREATED_AT = 'data_cadastro';
+    public const CREATED_AT = 'data_cadastro';
 
     protected $fillable = [
         'codigo_produto',
@@ -21,13 +23,18 @@ class Produto extends Model
         'marca_id',
     ];
 
-    public function categoria()
+    public function categoria(): BelongsTo
     {
         return $this->belongsTo(CategoriaProduto::class);
     }
 
-    public function marca()
+    public function marca(): BelongsTo
     {
         return $this->belongsTo(MarcaProduto::class);
+    }
+
+    public function registros(): HasMany
+    {
+        return $this->hasMany(RegistroEstoque::class);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\FornecedorProdutoController;
 use App\Http\Controllers\LoteProdutoController;
 use App\Http\Controllers\MarcaProdutoController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\RegistroEstoqueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,5 @@ Route::resources([
     'fornecedor' => FornecedorProdutoController::class,
     'lote' => LoteProdutoController::class,
     'produto' => ProdutoController::class,
+    'registro' => RegistroEstoqueController::class,
 ]);

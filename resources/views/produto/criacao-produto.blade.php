@@ -147,23 +147,27 @@
             <div class="d-flex flex-column w-100">
                 <label for="quantidade-porcao" class="form-label">Informe o tamanho da porção</label>
 
+                @php
+                    $unidadeMedidaPorcaoPreenchimento = old('unidade_medida_porcao') ?? UnidadeMedidaMassa::GRAMA;
+                @endphp
+
                 <div class="input-group d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-porcao" class="form-control w-25" name="quantidade_porcao"
-                           value="{{ old('quantidade_porcao' ?? '') }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$">
+                           value="{{ old('quantidade_porcao') ?? '0.0' }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-porcao" name="unidade_medida_porcao"
                     >
                         <option disabled selected>Selecione a unidade de medida para a porção</option>
                         @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
-                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                            <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPorcaoPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                         @endforeach
                         @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
-                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                            <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPorcaoPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                         @endforeach
                         @foreach(UnidadeMedidaVolume::getConstants() as $unidadeMedida)
-                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                            <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPorcaoPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                         @endforeach
                     </select>
@@ -184,8 +188,8 @@
 
                 <div class="input-group  d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-energia" class="form-control w-25" name="quantidade_energia"
-                           value="{{ old('quantidade_energia' ?? '') }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                           value="{{ old('quantidade_energia') ?? '0.0' }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-energia" name="unidade_medida_energia"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quantidade de energia</option>
@@ -210,9 +214,9 @@
                 <label for="quantidade-proteina" class="form-label">Informe a quantidade de proteína da porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade-proteina" class="form-control w-25" name="quantidade_proteina"
-                           value="{{ old('quantidade_proteina') ?? '0' }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <input type="text" id="quantidade-proteina" class="form-control w-25" name="quantidade_proteina"
+                           value="{{ old('quantidade_proteina') ?? '0.0' }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-proteina" name="unidade_medida_proteina"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de proteína</option>
@@ -238,9 +242,9 @@
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade-gordura" class="form-control w-25" name="quantidade_gordura"
-                           value="{{ old('quantidade_gordura') ?? '0' }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <input type="text" id="quantidade-gordura" class="form-control w-25" name="quantidade_gordura"
+                           value="{{ old('quantidade_gordura') ?? '0.0' }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-gordura" name="unidade_medida_gordura"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de gordura</option>
@@ -266,9 +270,9 @@
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center w-100">
-                    <input type="number" id="quantidade-acucar" class="form-control w-25" name="quantidade_acucar"
-                           value="{{ old('quantidade_acucar') ?? 0 }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <input type="text" id="quantidade-acucar" class="form-control w-25" name="quantidade_acucar"
+                           value="{{ old('quantidade_acucar') ?? '0.0' }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-acucar" name="unidade_medida_acucar"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de açucar</option>
@@ -294,10 +298,10 @@
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade-sodio" class="form-control w-25" name="quantidade_sodio"
+                    <input type="text" id="quantidade-sodio" class="form-control w-25" name="quantidade_sodio"
                            maxlength="9"
-                           value="{{ old('quantidade_sodio') ?? '0' }}"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$">
+                           value="{{ old('quantidade_sodio') ?? '0.0' }}"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-sodio"
                             name="unidade_medida_sodio">
                         <option disabled selected>Selecione a unidade de medida da quatidade de sódio</option>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\produto\AtualizarProdutoRequest;
 use App\Http\Requests\produto\CriarProdutoRequest;
 use App\services\CategoriaProdutoService;
 use App\services\MarcaProdutoService;
@@ -86,15 +87,24 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(AtualizarProdutoRequest $request): Application|RedirectResponse|Redirector
     {
+        if (!$this->produtoService->atualizarProduto($request)) {
+            return redirect(route('produto.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
+        }
+
+        return redirect(route('produto.index'))->with(['msg' => 'Produto atualizado com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Application|RedirectResponse|Redirector
     {
-        //
+        if (!$this->produtoService->deletarProduto($id)) {
+            return redirect(route('produto.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
+        }
+
+        return redirect(route('produto.index'))->with(['msg' => 'Produto removido com sucesso', 'tipo' => 'sucesso']);
     }
 }

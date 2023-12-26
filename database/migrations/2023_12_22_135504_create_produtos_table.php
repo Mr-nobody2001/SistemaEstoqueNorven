@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('produtos', static function (Blueprint $table) {
             $table->id();
             $table->string('codigo_produto')->unique('produtos_codigo_produto_unique')
                 ->nullable(false);
@@ -21,7 +21,7 @@ return new class extends Migration {
                 ->nullable(false);
             $table->text('descricao_produto')->nullable(true);
             $table->enum('unidade_medida', array_merge(UnidadeMedidaMassa::getConstants() ,UnidadeMedidaVolume::getConstants(), UnidadeMedidaQuantidade::getConstants()))->nullable(false);
-            $table->json('informacoes_nutricionais')->nullable(false);
+            $table->json('informacoes_nutricionais')->nullable(true);
             $table->foreignId('categoria_id')->constrained('categoria_produtos');
             $table->foreignId('marca_id')->constrained('marca_produtos');
             $table->timestamps();

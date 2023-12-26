@@ -13,12 +13,17 @@
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'inventory_2'" :titulo="'Cadastrar Produto'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'inventory_2'" :titulo="'Atualizar Produto'"/>
 
-    <form id="container-formulario" class="needs-validation" action="{{ route('produto.store') }}" method="POST"
-          novalidate>
+    <form id="container-formulario" class="needs-validation" action="{{ route('produto.update',
+        ['produto' => $produto ?? old('id')]) }}" method="POST" novalidate>
+        @method('PUT')
         @csrf
         <x-componentesGerais.atualizacao.opcoes-atualizacao/>
+
+        <div class="d-none">
+            <input type="hidden" name="id" value="{{ $produto->id ?? old('id') }}">
+        </div>
 
         <fieldset>
             <legend class="titulo-destaque">Informaçẽos gerais do produto</legend>
@@ -26,7 +31,7 @@
             <div>
                 <label for="codigo-produto" class="form-label">Código do produto</label>
                 <input type="text" id="codigo-produto" class="form-control" name="codigo_produto"
-                       value="{{ old('codigo_produto') ?? '' }}"
+                       value="{{ $produto->codigo_produto ?? old('codigo_produto') }}"
                        pattern="^[0-9]+$" required>
                 <div class="invalid-feedback">
                     O número do produto não pode ser nulo e deve conter apenas caracteres alfanuméricos.
@@ -41,7 +46,7 @@
             <div>
                 <label for="nome-produto" class="form-label">Nome do produto</label>
                 <input type="text" id="nome-produto" class="form-control" name="nome_produto"
-                       value="{{ old('nome_produto') ?? '' }}" maxlength="50"
+                       value="{{ $produto->nome_produto ?? old('nome_produto') }}" maxlength="50"
                        pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
                 <div class="invalid-feedback">
                     O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
@@ -56,7 +61,7 @@
             <div>
                 <label for="descricao-produto" class="form-label">Descrição do produto</label>
                 <textarea id="descricao-produto" class="form-control" name="descricao_produto"
-                          rows="3">{{ old('descricao_produto') ?? '' }}</textarea>
+                          rows="3">{{ $produto->descricao_produto ?? old('descricao_produto') }}</textarea>
                 <div class="invalid-feedback">
                     Por favor, forneça uma descrição válida.
                 </div>
@@ -67,19 +72,23 @@
             </span>
             </div>
 
+            @php
+                $unidadeMedidaPreenchimento = $produto->unidade_medida ?? old('unidade_medida');
+            @endphp
+
             <div>
                 <select class="form-select" aria-label="unidade-medida" name="unidade_medida">
                     <option disabled selected>Selecione a unidade de medida para o produto</option>
                     @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
-                        <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
+                        <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                     @endforeach
                     @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
-                        <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
+                        <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                     @endforeach
                     @foreach(UnidadeMedidaVolume::getConstants() as $unidadeMedida)
-                        <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
+                        <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                     @endforeach
                 </select>
@@ -94,13 +103,17 @@
                 </span>
             </div>
 
+            @php
+                $categoriaPreenchimento = $produto->categoria_id ?? old('categoria_id');
+            @endphp
+
             <div>
                 <div class="input-group d-flex flex-row w-100">
                     <select id="select-categoria-id" class="form-select w-25" aria-label="select-categoria-id"
                             name="categoria_id" required>
                         <option data-texto="null" disabled selected>Informe a categoria desse produto</option>
                         @foreach($listaTodasCategorias as $categoria)
-                            <option value="{{ $categoria->id }}" data-texto="{{ $categoria->nome_categoria }}" @selected(old('categoria_id') ==
+                            <option value="{{ $categoria->id }}" data-texto="{{ $categoria->nome_categoria }}" @selected($categoriaPreenchimento ==
                             $categoria->id )>{{ $categoria->nome_categoria }}
                             </option>
                         @endforeach
@@ -117,13 +130,17 @@
                 </span>
             </div>
 
+            @php
+                $marcaPreenchimento = $produto->marca_id ?? old('marca_id');
+            @endphp
+
             <div>
                 <div class="input-group d-flex flex-row w-100">
                     <select id="select-marca-id" class="form-select w-25" aria-label="select-marca-id"
                             name="marca_id" required>
                         <option data-texto="null" disabled selected>Informe a marca desse produto</option>
                         @foreach($listaTodasMarcas as $marca)
-                            <option value="{{ $marca->id }}" data-texto="{{ $marca->nome_marca }}" @selected(old('marca_id') ==
+                            <option value="{{ $marca->id }}" data-texto="{{ $marca->nome_marca }}" @selected($marcaPreenchimento ==
                             $marca->id )>{{ $marca->nome_marca }}
                             </option>
                         @endforeach
@@ -144,26 +161,31 @@
         <fieldset>
             <legend class="titulo-destaque">Informações nutricionais do produto</legend>
 
+            @php
+                $informacoesNutricionais = json_decode($produto->informacoes_nutricionais, 512, JSON_THROW_ON_ERROR);
+                $unidadeMedidaPorcaoPreenchimento = $informacoesNutricionais['unidade_medida_porcao'];
+            @endphp
+
             <div class="d-flex flex-column w-100">
                 <label for="quantidade-porcao" class="form-label">Informe o tamanho da porção</label>
 
                 <div class="input-group d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-porcao" class="form-control w-25" name="quantidade_porcao"
-                           value="{{ old('quantidade_porcao' ?? '') }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$">
+                           value="{{ $informacoesNutricionais['quantidade_porcao'] ?? old('quantidade_porcao') }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$">
                     <select class="form-select" aria-label="unidade-medida-porcao" name="unidade_medida_porcao"
                     >
                         <option disabled selected>Selecione a unidade de medida para a porção</option>
                         @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
-                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                            <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPorcaoPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                         @endforeach
                         @foreach(UnidadeMedidaMassa::getConstants() as $unidadeMedida)
-                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                            <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPorcaoPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                         @endforeach
                         @foreach(UnidadeMedidaVolume::getConstants() as $unidadeMedida)
-                            <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida_porcao') ==
+                            <option value="{{ $unidadeMedida }}" @selected($unidadeMedidaPorcaoPreenchimento ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
                         @endforeach
                     </select>
@@ -176,7 +198,7 @@
             </div>
 
             @php
-                $unidadeMedidaEnergiaPreenchimento = old('unidade_medida_energia') ?? UnidadeMedidaEnergia::QUILOCALORIA;
+                $unidadeMedidaEnergiaPreenchimento = $informacoesNutricionais['unidade_medida_energia'] ?? old('unidade_medida_energia');
             @endphp
 
             <div class="d-flex flex-column w-100">
@@ -184,8 +206,8 @@
 
                 <div class="input-group  d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-energia" class="form-control w-25" name="quantidade_energia"
-                           value="{{ old('quantidade_energia' ?? '') }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                           value="{{ $informacoesNutricionais['quantidade_energia'] ?? old('quantidade_energia') }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-energia" name="unidade_medida_energia"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quantidade de energia</option>
@@ -203,16 +225,16 @@
             </div>
 
             @php
-                $unidadeMedidaProteinaPreenchimento = old('unidade_medida_proteina') ?? UnidadeMedidaMassa::GRAMA;
+                $unidadeMedidaProteinaPreenchimento = $informacoesNutricionais['unidade_medida_proteina'] ?? old('unidade_medida_proteina');
             @endphp
 
             <div class="d-flex flex-column w-100">
                 <label for="quantidade-proteina" class="form-label">Informe a quantidade de proteína da porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade-proteina" class="form-control w-25" name="quantidade_proteina"
-                           value="{{ old('quantidade_proteina') ?? '0' }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <input type="text" id="quantidade-proteina" class="form-control w-25" name="quantidade_proteina"
+                           value="{{ $informacoesNutricionais['quantidade_proteina'] ?? old('quantidade_proteina') }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-proteina" name="unidade_medida_proteina"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de proteína</option>
@@ -230,7 +252,7 @@
             </div>
 
             @php
-                $unidadeMedidaGorduraPreenchimento = old('unidade_medida_gordura') ?? UnidadeMedidaMassa::GRAMA;
+                $unidadeMedidaGorduraPreenchimento = $informacoesNutricionais['unidade_medida_gordura'] ?? old('unidade_medida_gordura');
             @endphp
 
             <div class="d-flex flex-column w-100">
@@ -238,9 +260,9 @@
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade-gordura" class="form-control w-25" name="quantidade_gordura"
-                           value="{{ old('quantidade_gordura') ?? '0' }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <input type="text" id="quantidade-gordura" class="form-control w-25" name="quantidade_gordura"
+                           value="{{ $informacoesNutricionais['quantidade_gordura'] ?? old('quantidade_gordura') }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-gordura" name="unidade_medida_gordura"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de gordura</option>
@@ -258,7 +280,7 @@
             </div>
 
             @php
-                $unidadeMedidaAcucarPreenchimento = old('unidade_medida_acucar') ?? UnidadeMedidaMassa::GRAMA;
+                $unidadeMedidaAcucarPreenchimento = $informacoesNutricionais['unidade_medida_acucar'] ?? old('unidade_medida_acucar');
             @endphp
 
             <div class="d-flex flex-column">
@@ -266,9 +288,9 @@
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center w-100">
-                    <input type="number" id="quantidade-acucar" class="form-control w-25" name="quantidade_acucar"
-                           value="{{ old('quantidade_acucar') ?? 0 }}" maxlength="9"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$" required>
+                    <input type="text" id="quantidade-acucar" class="form-control w-25" name="quantidade_acucar"
+                           value="{{ $informacoesNutricionais['quantidade_acucar'] ?? old('quantidade_acucar') }}" maxlength="9"
+                           pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-acucar" name="unidade_medida_acucar"
                             required>
                         <option disabled selected>Selecione a unidade de medida da quatidade de açucar</option>
@@ -286,7 +308,7 @@
             </div>
 
             @php
-                $unidadeMedidaSodioPreenchimento = old('unidade_medida_sodio') ?? UnidadeMedidaMassa::MILIGRAMA;
+                $unidadeMedidaSodioPreenchimento = $informacoesNutricionais['unidade_medida_sodio'] ?? old('unidade_medida_sodio');
             @endphp
 
             <div class="d-flex flex-column w-100">
@@ -294,10 +316,10 @@
                     porção</label>
 
                 <div class="input-group  d-flex flex-row align-items-center">
-                    <input type="number" id="quantidade-sodio" class="form-control w-25" name="quantidade_sodio"
+                    <input type="text" id="quantidade-sodio" class="form-control w-25" name="quantidade_sodio"
                            maxlength="9"
-                           value="{{ old('quantidade_sodio') ?? '0' }}"
-                           pattern="^(?!0+(\.0{1,2})?$)\d{0,8}(\.\d{1,2})?$">
+                           value="{{ $informacoesNutricionais['quantidade_sodio'] ?? old('quantidade_sodio') }}"
+                           pattern="^\d{0,8}(\.\d{1})?$">
                     <select class="form-select" aria-label="unidade-medida-sodio"
                             name="unidade_medida_sodio">
                         <option disabled selected>Selecione a unidade de medida da quatidade de sódio</option>
@@ -314,54 +336,103 @@
                 </span>
             </div>
 
+            @php
+                $alergenos = $informacoesNutricionais['alergenos'];
+            @endphp
+
             <fieldset>
                 <legend class="titulo-destaque">Alérgenos</legend>
                 <div>
                     <div>
+
+                        @php
+                            $temLeite = $alergenos['leite'] ?? old('leite') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="leite" name="leite"
-                                   value="leite" @checked(old('leite'))>
+                                   value="leite" @checked($temLeite)>
                             <label class="form-check-label" for="leite">Leite</label>
                         </div>
+
+                        @php
+                            $temOvos = $alergenos['ovos'] ?? old('ovos') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="ovos" name="ovos"
-                                   value="ovos" @checked(old('ovos'))>
+                                   value="ovos" @checked($temOvos)>
                             <label class="form-check-label" for="ovos">Ovos</label>
                         </div>
+
+                        @php
+                            $temAmendoim = $alergenos['amendoim'] ?? old('amendoim') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="amendoim" name="amendoim"
-                                   value="amendoim" @checked(old('amendoim'))>
+                                   value="amendoim" @checked($temAmendoim)>
                             <label class="form-check-label" for="amendoim">Amendoim</label>
                         </div>
+
+                        @php
+                            $temNozes = $alergenos['nozes'] ?? old('nozes') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="nozes" name="nozes"
-                                   value="nozes" @checked(old('nozes'))>
+                                   value="nozes" @checked($temNozes)>
                             <label class="form-check-label" for="nozes">Nozes</label>
                         </div>
+
+                        @php
+                            $temTrigo = $alergenos['trigo'] ?? old('trigo') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="trigo" name="trigo"
-                                   value="trigo" @checked(old('trigo'))>
+                                   value="trigo" @checked($temTrigo)>
                             <label class="form-check-label" for="trigo">Trigo</label>
                         </div>
+
+                        @php
+                            $temSoja = $alergenos['soja'] ?? old('soja') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="soja" name="soja"
-                                   value="soja" @checked(old('soja'))>
+                                   value="soja" @checked($temSoja)>
                             <label class="form-check-label" for="soja">Soja</label>
                         </div>
+
+                        @php
+                            $temMostarda = $alergenos['mostarda'] ?? old('mostarda') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="mostarda" name="mostarda"
-                                   value="mostarda" @checked(old('mostarda'))>
+                                   value="mostarda" @checked($temMostarda)>
                             <label class="form-check-label" for="mostarda">Mostarda</label>
                         </div>
+
+                        @php
+                            $temSulfitos = $alergenos['sulfitos'] ?? old('sulfitos') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="sulfitos" name="sulfitos"
-                                   value="sulfitos" @checked(old('sulfitos'))>
+                                   value="sulfitos" @checked($temSulfitos)>
                             <label class="form-check-label" for="sulfitos">Sulfitos</label>
                         </div>
+
+                        @php
+                            $temGergelim = $alergenos['sementes_gergelim'] ?? old('sementes_gergelim') ?? '';
+                        @endphp
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="sementes_gergelim"
                                    name="sementes_gergelim"
-                                   value="sementes_gergelim" @checked(old('sementes_gergelim'))>
+                                   value="sementes_gergelim" @checked($temGergelim)>
                             <label class="form-check-label" for="sementes_gergelim">Sementes de Gergelim</label>
                         </div>
                     </div>
@@ -371,6 +442,7 @@
     </form>
 
     {{-- Formulário para a deleção (invisível para o usuário) --}}
-    <x-componentesGerais.atualizacao.formulario-delecao :entidadeRota="'produto'" :entidade="'produto'" :objeto="$produto"/>
+    <x-componentesGerais.atualizacao.formulario-delecao :entidadeRota="'produto'" :entidade="'produto'"
+                                                        :objeto="$produto"/>
 </x-layouts.estrutura-basica>
 

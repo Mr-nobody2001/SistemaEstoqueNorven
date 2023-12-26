@@ -2,6 +2,7 @@
 
 namespace App\services;
 
+use App\Http\Requests\produto\AtualizarProdutoRequest;
 use App\Http\Requests\produto\CriarProdutoRequest;
 use App\Models\Produto;
 use App\repositorys\ProdutoRepository;
@@ -45,6 +46,40 @@ class ProdutoService
         }
 
         return true;
+    }
+
+    public function atualizarProduto(AtualizarProdutoRequest $request): bool
+    {
+        try {
+            $id = $request->id;
+
+            $requestValidada = $request->validated();
+
+            $requestValidada = $this->formatarRequestValidada($requestValidada);
+
+            Produto::where('id', $id)
+                ->update($requestValidada);
+
+            return true;
+        } catch (Exception $e) {
+            Log::error('Erro ao atualizar registro: ' . $e->getMessage());
+
+            return false;
+        }
+    }
+
+    public function deletarProduto(string $id): bool
+    {
+        try {
+            Produto::destroy($id);
+
+            return true;
+        } catch (Exception $e) {
+            Log::error('Erro ao atualizar registro: ' . $e->getMessage());
+
+            return false;
+        }
+
     }
 
     private function formatarRequestValidada(array $requestValidada)

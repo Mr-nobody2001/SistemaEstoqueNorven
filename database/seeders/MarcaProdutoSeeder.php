@@ -24,10 +24,6 @@ class MarcaProdutoSeeder extends Seeder
         ]);
 
         DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Mars',
-        ]);
-
-        DB::table('marca_produtos')->insert([
             'nome_marca' => 'Unilever',
         ]);
 
@@ -41,27 +37,7 @@ class MarcaProdutoSeeder extends Seeder
         ]);
 
         DB::table('marca_produtos')->insert([
-            'nome_marca' => 'General Mills',
-        ]);
-
-        DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Kraft Heinz',
-        ]);
-
-        DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Procter & Gamble',
-        ]);
-
-        DB::table('marca_produtos')->insert([
             'nome_marca' => 'Danone',
-        ]);
-
-        DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Mondelez International',
-        ]);
-
-        DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Nestea',
         ]);
 
         DB::table('marca_produtos')->insert([
@@ -69,11 +45,7 @@ class MarcaProdutoSeeder extends Seeder
         ]);
 
         DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Heinz',
-        ]);
-
-        DB::table('marca_produtos')->insert([
-            'nome_marca' => 'Knorr',
+            'nome_marca' => 'Kraft Heinz',
         ]);
     }
 }

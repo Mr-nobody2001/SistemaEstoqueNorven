@@ -53,11 +53,14 @@
             </span>
         </div>
 
-        <div id="container-file" class="input-group">
-            <input type="file" id="imagem_categoria" class="form-control" name="imagem_categoria"
-                   accept="image/jpeg, image/jpg" max="2048000">
-            <div class="invalid-feedback">
-                Por favor, forneça uma foto válida.
+        <div>
+            <label for="imagem_categoria" class="form-label">Insira a imagem da categoria</label>
+            <div id="container-file" class="input-group">
+                <input type="file" id="imagem_categoria" class="form-control" name="imagem_categoria"
+                       accept="image/jpeg, image/jpg" max="2048000">
+                <div class="invalid-feedback">
+                    Por favor, forneça uma foto válida.
+                </div>
             </div>
         </div>
     </form>

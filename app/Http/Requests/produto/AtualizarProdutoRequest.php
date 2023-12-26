@@ -4,12 +4,12 @@ namespace App\Http\Requests\produto;
 
 use App\Enums\UnidadeMedidaEnergia;
 use App\Enums\UnidadeMedidaMassa;
-use App\Enums\UnidadeMedidaVolume;
 use App\Enums\UnidadeMedidaQuantidade;
+use App\Enums\UnidadeMedidaVolume;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CriarProdutoRequest extends FormRequest
+class AtualizarProdutoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,8 @@ class CriarProdutoRequest extends FormRequest
     {
         return [
             // Informaçẽos gerais do produto
-            'codigo_produto' => 'required|string|regex:/^[0-9]+$/|unique:produtos,codigo_produto',
-            'nome_produto' => 'required|string|max:50|unique:produtos,nome_produto|
+            'codigo_produto' => 'required|string|regex:/^[0-9]+$/',
+            'nome_produto' => 'required|string|max:50|
             regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/',
             'descricao_produto' => 'nullable|string',
             'unidade_medida' => ['required', Rule::in(array_merge(UnidadeMedidaMassa::getConstants(), UnidadeMedidaVolume::getConstants(), UnidadeMedidaQuantidade::getConstants()))],
@@ -37,9 +37,9 @@ class CriarProdutoRequest extends FormRequest
             'marca_id' => 'required|numeric|min:1',
 
             //Informaçẽos nutricionais
-            'quantidade_porcao' => 'required|numeric|min:0',
+            'quantidade_porcao' => 'required|numeric|min:1',
             'unidade_medida_porcao' => ['required', 'requiredIf:quantidade_porcao,min:1', Rule::in(array_merge(UnidadeMedidaMassa::getConstants(), UnidadeMedidaVolume::getConstants(), UnidadeMedidaQuantidade::getConstants()))],
-            'quantidade_energia' => 'required|numeric|min:0',
+            'quantidade_energia' => 'required|numeric|min:1',
             'unidade_medida_energia' => ['required', Rule::in(array_merge(UnidadeMedidaEnergia::getConstants()))],
             'quantidade_proteina' => 'required|numeric|min:0',
             'unidade_medida_proteina' => ['required', Rule::in(array_merge(UnidadeMedidaMassa::getConstants()))],
