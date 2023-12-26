@@ -21,7 +21,7 @@ return new class extends Migration {
                 ->nullable(false);
             $table->text('descricao_produto')->nullable(true);
             $table->enum('unidade_medida', array_merge(UnidadeMedidaMassa::getConstants() ,UnidadeMedidaVolume::getConstants(), UnidadeMedidaQuantidade::getConstants()))->nullable(false);
-            $table->json('informacoes_nutricionais')->nullable(true);
+            $table->json('informacoes_nutricionais')->nullable(false);
             $table->foreignId('categoria_id')->constrained('categoria_produtos');
             $table->foreignId('marca_id')->constrained('marca_produtos');
             $table->timestamps();

@@ -7,6 +7,7 @@ use App\Http\Requests\produto\CriarProdutoRequest;
 use App\Models\Produto;
 use App\repositorys\ProdutoRepository;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
@@ -19,6 +20,11 @@ class ProdutoService
     public function listarTodosProdutos(): LengthAwarePaginator
     {
         return Produto::orderBy('id')->paginate(20);
+    }
+
+    public function listarTodosProdutosSemPaginacao(): Collection
+    {
+        return Produto::orderBy('id')->get();
     }
 
     public function encontrarProdutoId(string $id): Produto

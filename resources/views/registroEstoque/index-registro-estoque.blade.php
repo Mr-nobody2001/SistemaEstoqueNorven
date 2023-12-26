@@ -27,37 +27,37 @@
     <x-componentesGerais.index.pesquisa-index :entidade="'registro'" :nome="'nome_registro'" :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
-    {{--<table class="tabela alinhar-centro" data-entidade="produto">
+    <table class="tabela alinhar-centro" data-entidade="registro">
         <thead>
         <tr class="titulo-tabela-destaque">
             <th>Id</th>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Marca</th>
-            <th>Data de Cadastro</th>
+            <th>Lote Produto</th>
+            <th>Nome Produto</th>
+            <th>Tipo da Transação</th>
+            <th>Quantidade Transacionada</th>
+            <th>Preço de Venda do Produto</th>
+            <th>Data de Registro</th>
         </tr>
         </thead>
         <tbody>
-        @forelse ($paginaProduto as $produto)
+        @forelse ($paginaRegistro as $registro)
             @php
-                $dataCriacaoProdutoFormatada = new DateTime($produto->data_cadastro);
-                $dataCriacaoProdutoFormatada = $dataCriacaoProdutoFormatada->format('d/m/Y H:i:s')
+                $dataRegistro = new DateTime($registro->data_registro);
+                $dataRegistro = $dataRegistro->format('d/m/Y H:i:s')
             @endphp
 
-            <tr data-id="{{ $produto->id }}">
-                <td>{{ $produto->id }}</td>
-                <td>{{ $produto->codigo_produto }}</td>
-                <td>{{ $produto->nome_produto }}</td>
-                <td>{{ substr($produto->descricao_produto, 0, 30) . '...' }}</td>
-                <td>{{ $produto->categoria->nome_categoria }}</td>
-                <td>{{ $produto->marca->nome_marca }}</td>
-                <td>{{ $dataCriacaoProdutoFormatada }}</td>
+            <tr data-id="{{ $registro->id }}">
+                <td>{{ $registro->id }}</td>
+                <td>{{ $registro->lote->numero_lote }}</td>
+                <td>{{ $registro->produto->nome_produto }}</td>
+                <td>{{ $registro->tipo_transacao }}</td>
+                <td>{{ $registro->quantidade_transacao }}</td>
+                <td>{{ 'R$ ' . number_format($registro->preco_venda , 2, ',', '.') }}</td>
+                <td>{{ $dataRegistro }}</td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>
         @endforelse
         </tbody>
-    </table>--}}
+    </table>
 </x-layouts.estrutura-basica>

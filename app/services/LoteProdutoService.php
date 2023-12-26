@@ -7,6 +7,7 @@ use App\Http\Requests\loteProduto\CriarLoteProdutoRequest;
 use App\Models\LoteProduto;
 use App\repositorys\LoteProdutoRepository;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
@@ -19,6 +20,11 @@ readonly class LoteProdutoService
     public function listarTodosLotes(): LengthAwarePaginator
     {
         return LoteProduto::orderBy('id')->paginate(20);
+    }
+
+    public function listarTodosLotesSemPaginacao(): Collection
+    {
+        return LoteProduto::orderBy('id')->get();
     }
 
     public function encontrarLoteId(string $id): LoteProduto

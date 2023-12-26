@@ -37,9 +37,9 @@ class AtualizarProdutoRequest extends FormRequest
             'marca_id' => 'required|numeric|min:1',
 
             //Informaçẽos nutricionais
-            'quantidade_porcao' => 'required|numeric|min:1',
+            'quantidade_porcao' => 'required|numeric|min:0',
             'unidade_medida_porcao' => ['required', 'requiredIf:quantidade_porcao,min:1', Rule::in(array_merge(UnidadeMedidaMassa::getConstants(), UnidadeMedidaVolume::getConstants(), UnidadeMedidaQuantidade::getConstants()))],
-            'quantidade_energia' => 'required|numeric|min:1',
+            'quantidade_energia' => 'required|numeric|min:0',
             'unidade_medida_energia' => ['required', Rule::in(array_merge(UnidadeMedidaEnergia::getConstants()))],
             'quantidade_proteina' => 'required|numeric|min:0',
             'unidade_medida_proteina' => ['required', Rule::in(array_merge(UnidadeMedidaMassa::getConstants()))],

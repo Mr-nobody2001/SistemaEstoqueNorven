@@ -6,9 +6,9 @@ use ReflectionClass;
 
 class TipoTransacao
 {
-    const VENDA = 'v';
-    const COMPRA = 'c';
-    const BAIXA = 'b';
+    const VENDA = 'venda';
+    const COMPRA = 'compra';
+    const BAIXA = 'baixa';
 
     public static function getConstants(): array
     {

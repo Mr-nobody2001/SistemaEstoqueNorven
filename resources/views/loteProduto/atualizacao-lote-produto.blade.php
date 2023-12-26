@@ -74,6 +74,10 @@
             </span>
         </div>
 
+        @php
+            $fornecedorIdPreenchimento = $loteProduto->fornecedor_id ?? old('fornecedor_id');
+        @endphp
+
         <div>
             <div class="input-group d-flex flex-row w-100">
                 <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id"
@@ -81,7 +85,7 @@
                         required>
                     <option data-texto="null" disabled selected>Informe o fornecedor desse lote</option>
                     @foreach($listaTodosFornecedores as $fornecedor)
-                        <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected($loteProduto->fornecedor_id ?? old('fornecedor_id') ==
+                        <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected($fornecedorIdPreenchimento ==
                     $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
                         </option>
                     @endforeach

@@ -14,20 +14,20 @@
     <x-componentesGerais.informacoes-pagina :textoIcone="'category'" :titulo="'Atualização Categoria'"/>
 
     <form id="container-formulario" class="needs-validation"
-          action="{{ route('categoria.update', ['categorium' => $categoriaProduto ?? old('id')]) }}" method="POST"
+          action="{{ route('categoria.update', ['categorium' => old('id') ?? $categoriaProduto]) }}" method="POST"
           enctype="multipart/form-data" novalidate>
         @method('PUT')
         @csrf
         <x-componentesGerais.atualizacao.opcoes-atualizacao/>
 
         <div class="d-none">
-            <input type="hidden" name="id" value="{{ $categoriaProduto->id ?? old('id') }}">
+            <input type="hidden" name="id" value="{{ old('id') ?? $categoriaProduto->id }}">
         </div>
 
         <div>
             <label for="nome_categoria" class="form-label">Nome da categoria</label>
             <input type="text" id="nome_categoria" class="form-control" name="nome_categoria"
-                   value="{{ $categoriaProduto->nome_categoria ?? old('nome_categoria') }}" maxlength="50"
+                   value="{{ old('nome_categoria') ?? $categoriaProduto->nome_categoria }}" maxlength="50"
                    pattern="^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&'\-\s]*$" required>
             <div class="invalid-feedback">
                 O nome não pode ser nulo e deve conter apenas caracteres alfanuméricos, "-", "&" e "'.
@@ -42,7 +42,7 @@
         <div>
             <label for="descricao_categoria" class="form-label">Descrição da categoria</label>
             <textarea id="descricao_categoria" class="form-control" name="descricao_categoria"
-                      rows="3">{{ $categoriaProduto->descricao_categoria ?? old('descricao_categoria')}}</textarea>
+                      rows="3">{{ old('descricao_categoria')  ?? $categoriaProduto->descricao_categoria }}</textarea>
             <div class="invalid-feedback">
                 Por favor, forneça uma descrição válida.
             </div>

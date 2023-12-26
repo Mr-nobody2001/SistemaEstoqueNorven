@@ -24,7 +24,7 @@ class AtualizarLoteProdutoRequest extends FormRequest
         return [
             'numero_lote' => 'required|alpha_num',
             'data_validade' => 'required|date|after:now',
-            'preco_custo' => 'required|decimal:2|min:1|max:99999999',
+            'preco_custo' => 'required|decimal:2|min:0|max:99999999',
             'fornecedor_id' => 'required|numeric|min:1',
         ];
     }
