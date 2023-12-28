@@ -16,7 +16,7 @@
     <x-componentesGerais.informacoes-pagina :textoIcone="'inventory_2'" :titulo="'Cadastrar Produto'"/>
 
     <form id="container-formulario" class="needs-validation" action="{{ route('produto.store') }}" method="POST"
-          novalidate>
+          enctype="multipart/form-data" novalidate>
         @csrf
         <x-componentesGerais.criacao.opcao-salvar/>
 
@@ -68,8 +68,9 @@
             </div>
 
             <div>
-                <select class="form-select" aria-label="unidade-medida" name="unidade_medida">
-                    <option disabled selected>Selecione a unidade de medida para o produto</option>
+                <select id="unidade-medida" class="form-select" aria-label="unidade-medida" name="unidade_medida"
+                        required>
+                    <option value="" disabled selected>Selecione a unidade de medida para o produto</option>
                     @foreach(UnidadeMedidaQuantidade::getConstants() as $unidadeMedida)
                         <option value="{{ $unidadeMedida }}" @selected(old('unidade_medida') ==
                         $unidadeMedida)>{{ $unidadeMedida }}</option>
@@ -84,9 +85,10 @@
                     @endforeach
                 </select>
 
-                <div class="invalid-feedback">
+                <span id="aviso-unidade-medida" class="d-none campo-invalido">
                     A presença da unidade de medida é obrigatória.
-                </div>
+                </span>
+
                 <span class="mt-1 campo-invalido">
                 @error('unidade_medida')
                 A presença da unidade de medida é obrigatória.
@@ -98,7 +100,7 @@
                 <div class="input-group d-flex flex-row w-100">
                     <select id="select-categoria-id" class="form-select w-25" aria-label="select-categoria-id"
                             name="categoria_id" required>
-                        <option data-texto="null" disabled selected>Informe a categoria desse produto</option>
+                        <option data-texto="null" value="" disabled selected>Informe a categoria desse produto</option>
                         @foreach($listaTodasCategorias as $categoria)
                             <option value="{{ $categoria->id }}" data-texto="{{ $categoria->nome_categoria }}" @selected(old('categoria_id') ==
                             $categoria->id )>{{ $categoria->nome_categoria }}
@@ -109,6 +111,10 @@
                     <input type="text" id="filtro-categoria-id" class="form-control"
                            placeholder="Pesquise pelo nome de uma categoria.">
                 </div>
+
+                <span id="aviso-categoria-id" class="d-none campo-invalido">
+                 A presença da categoria é obrigatória.
+                </span>
 
                 <span class="mt-1 campo-invalido">
                 @error('categoria_id')
@@ -121,7 +127,7 @@
                 <div class="input-group d-flex flex-row w-100">
                     <select id="select-marca-id" class="form-select w-25" aria-label="select-marca-id"
                             name="marca_id" required>
-                        <option data-texto="null" disabled selected>Informe a marca desse produto</option>
+                        <option data-texto="null" value="" disabled selected>Informe a marca desse produto</option>
                         @foreach($listaTodasMarcas as $marca)
                             <option value="{{ $marca->id }}" data-texto="{{ $marca->nome_marca }}" @selected(old('marca_id') ==
                             $marca->id )>{{ $marca->nome_marca }}
@@ -133,10 +139,31 @@
                            placeholder="Pesquise pelo nome de uma marca.">
                 </div>
 
+                <span id="aviso-marca-id" class="d-none campo-invalido">
+                    A presença da marca é obrigatória.
+                </span>
+
                 <span class="mt-1 campo-invalido">
                 @error('marca_id')
                  A presença da marca é obrigatória.
                 @enderror
+                </span>
+            </div>
+
+            <div>
+                <label for="imagem_produto" class="form-label">Insira a imagem do produto</label>
+                <div id="container-file" class="input-group">
+                    <input type="file" id="imagem_produto" class="form-control" name="imagem_produto"
+                           accept="image/jpeg, image/jpg" max="2048000" required>
+                    <div class="invalid-feedback">
+                        Por favor, forneça uma foto válida.
+                    </div>
+                </div>
+
+                <span class="mt-1 campo-invalido">
+                    @error('imagem_produto')
+                    Por favor, forneça uma foto válida.
+                    @enderror
                 </span>
             </div>
         </fieldset>

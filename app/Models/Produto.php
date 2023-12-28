@@ -21,6 +21,7 @@ class Produto extends Model
         'informacoes_nutricionais',
         'categoria_id',
         'marca_id',
+        'caminho_imagem'
     ];
 
     public function categoria(): BelongsTo

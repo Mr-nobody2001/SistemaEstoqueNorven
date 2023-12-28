@@ -31,12 +31,12 @@ export const validacaoBootstrap = () => {
     })
 }
 
-export const validarSelect = (select, filtro = null, avisoFornecedorId) => {
+export const validarSelect = (select, aviso, filtro = null) => {
     for (let opcao of select.children) {
         if (opcao.selected && opcao.value) return;
     }
 
     select.classList.add("border", "border-danger");
     if (filtro) filtro.classList.add("border", "border-danger");
-    avisoFornecedorId.classList.remove("d-none");
+    aviso.classList.remove("d-none");
 }

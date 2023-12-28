@@ -16,7 +16,7 @@
     <x-componentesGerais.informacoes-pagina :textoIcone="'inventory_2'" :titulo="'Atualizar Produto'"/>
 
     <form id="container-formulario" class="needs-validation" action="{{ route('produto.update',
-        ['produto' => $produto ?? old('id')]) }}" method="POST" novalidate>
+        ['produto' => $produto ?? old('id')]) }}" method="POST" enctype="multipart/form-data" novalidate>
         @method('PUT')
         @csrf
         <x-componentesGerais.atualizacao.opcoes-atualizacao/>
@@ -93,9 +93,10 @@
                     @endforeach
                 </select>
 
-                <div class="invalid-feedback">
+                <span id="aviso-categoria-id" class="d-none campo-invalido">
                     A presença da unidade de medida é obrigatória.
-                </div>
+                </span>
+
                 <span class="mt-1 campo-invalido">
                 @error('unidade_medida')
                 A presença da unidade de medida é obrigatória.
@@ -122,6 +123,10 @@
                     <input type="text" id="filtro-categoria-id" class="form-control"
                            placeholder="Pesquise pelo nome de uma categoria.">
                 </div>
+
+                <span id="aviso-categoria-id" class="d-none campo-invalido">
+                 A presença da categoria é obrigatória.
+                </span>
 
                 <span class="mt-1 campo-invalido">
                 @error('categoria_id')
@@ -150,11 +155,32 @@
                            placeholder="Pesquise pelo nome de uma marca.">
                 </div>
 
+                <span id="aviso-marca-id" class="d-none campo-invalido">
+                    A presença da marca é obrigatória.
+                </span>
+
                 <span class="mt-1 campo-invalido">
                 @error('marca_id')
                  A presença da marca é obrigatória.
                 @enderror
                 </span>
+            </div>
+
+            <div>
+                <label for="imagem_produto" class="form-label">Insira a imagem do produto</label>
+                <div id="container-file" class="input-group">
+                    <input type="file" id="imagem_produto" class="form-control" name="imagem_produto"
+                           accept="image/jpeg, image/jpg" max="2048000">
+                    <div class="invalid-feedback">
+                        Por favor, forneça uma foto válida.
+                    </div>
+
+                    <span class="mt-1 campo-invalido">
+                        @error('imagem_produto')
+                        Por favor, forneça uma foto válida.
+                        @enderror
+                    </span>
+                </div>
             </div>
         </fieldset>
 
@@ -171,7 +197,8 @@
 
                 <div class="input-group d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-porcao" class="form-control w-25" name="quantidade_porcao"
-                           value="{{ $informacoesNutricionais['quantidade_porcao'] ?? old('quantidade_porcao') }}" maxlength="9"
+                           value="{{ $informacoesNutricionais['quantidade_porcao'] ?? old('quantidade_porcao') }}"
+                           maxlength="9"
                            pattern="^\d{0,8}(\.\d{1})?$">
                     <select class="form-select" aria-label="unidade-medida-porcao" name="unidade_medida_porcao"
                     >
@@ -206,7 +233,8 @@
 
                 <div class="input-group  d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-energia" class="form-control w-25" name="quantidade_energia"
-                           value="{{ $informacoesNutricionais['quantidade_energia'] ?? old('quantidade_energia') }}" maxlength="9"
+                           value="{{ $informacoesNutricionais['quantidade_energia'] ?? old('quantidade_energia') }}"
+                           maxlength="9"
                            pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-energia" name="unidade_medida_energia"
                             required>
@@ -233,7 +261,8 @@
 
                 <div class="input-group  d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-proteina" class="form-control w-25" name="quantidade_proteina"
-                           value="{{ $informacoesNutricionais['quantidade_proteina'] ?? old('quantidade_proteina') }}" maxlength="9"
+                           value="{{ $informacoesNutricionais['quantidade_proteina'] ?? old('quantidade_proteina') }}"
+                           maxlength="9"
                            pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-proteina" name="unidade_medida_proteina"
                             required>
@@ -261,7 +290,8 @@
 
                 <div class="input-group  d-flex flex-row align-items-center">
                     <input type="text" id="quantidade-gordura" class="form-control w-25" name="quantidade_gordura"
-                           value="{{ $informacoesNutricionais['quantidade_gordura'] ?? old('quantidade_gordura') }}" maxlength="9"
+                           value="{{ $informacoesNutricionais['quantidade_gordura'] ?? old('quantidade_gordura') }}"
+                           maxlength="9"
                            pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-gordura" name="unidade_medida_gordura"
                             required>
@@ -289,7 +319,8 @@
 
                 <div class="input-group  d-flex flex-row align-items-center w-100">
                     <input type="text" id="quantidade-acucar" class="form-control w-25" name="quantidade_acucar"
-                           value="{{ $informacoesNutricionais['quantidade_acucar'] ?? old('quantidade_acucar') }}" maxlength="9"
+                           value="{{ $informacoesNutricionais['quantidade_acucar'] ?? old('quantidade_acucar') }}"
+                           maxlength="9"
                            pattern="^\d{0,8}(\.\d{1})?$" required>
                     <select class="form-select" aria-label="unidade-medida-acucar" name="unidade_medida_acucar"
                             required>

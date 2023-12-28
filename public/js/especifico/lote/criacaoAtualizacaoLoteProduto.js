@@ -13,7 +13,7 @@ const filtrarOpcoesFornecedorSelect = () => {
 }
 
 const validarSelectFornecedor = () => {
-    validarSelect(selectFornecedorId, filtroFornecedorId, avisoFornecedorId);
+    validarSelect(selectFornecedorId, avisoFornecedorId, filtroFornecedorId);
     selectFornecedorId.addEventListener("change", () => {
         selectFornecedorId.classList.remove("border-danger");
         selectFornecedorId.classList.add("border-success");

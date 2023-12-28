@@ -35,6 +35,7 @@ class AtualizarProdutoRequest extends FormRequest
             'unidade_medida' => ['required', Rule::in(array_merge(UnidadeMedidaMassa::getConstants(), UnidadeMedidaVolume::getConstants(), UnidadeMedidaQuantidade::getConstants()))],
             'categoria_id' => 'required|numeric|min:1',
             'marca_id' => 'required|numeric|min:1',
+            'imagem_produto' => 'file|mimes:jpeg,jpg|max:2048',
 
             //Informaçẽos nutricionais
             'quantidade_porcao' => 'required|numeric|min:0',

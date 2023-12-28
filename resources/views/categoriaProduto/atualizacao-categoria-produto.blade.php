@@ -62,6 +62,11 @@
                     Por favor, forneça uma foto válida.
                 </div>
             </div>
+            <span class="mt-1 campo-invalido">
+                @error('imagem_produto')
+                Por favor, forneça uma foto válida.
+                @enderror
+            </span>
         </div>
     </form>
 

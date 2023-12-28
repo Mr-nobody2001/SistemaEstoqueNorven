@@ -48,7 +48,7 @@ readonly class CategoriaProdutoService
             $imagem = $request->file('imagem_categoria');
 
             // Salvando a imagem no diretório de armazenamento
-            $caminhoImagem = Storage::disk('public')->put('imagens', $imagem);
+            $caminhoImagem = Storage::disk('public')->put('imagens/categoria', $imagem);
 
             $requestValidada = $this->formatarRequestValidadaCategoria($requestValidada, $caminhoImagem);
 
@@ -56,7 +56,7 @@ readonly class CategoriaProdutoService
         } catch (Exception $e) {
             Log::error('Erro ao criar registro: ' . $e->getMessage());
 
-            Storage::disk('public')->delete($caminhoImagem);
+            $this->deletarImagemCategoria($caminhoImagem);
 
             return false;
         }
@@ -74,10 +74,12 @@ readonly class CategoriaProdutoService
             $requestValidada = $request->validated();
 
             if (array_key_exists('imagem_categoria', $requestValidada)) {
-                $this->deletarImagemCategoriaPorId($id);
+                $caminhoImagem = $this->encontrarCategoriaId($id)->caminho_imagem;
+
+                $this->deletarImagemCategoria($caminhoImagem);
 
                 // Salva a nova imagem
-                $caminhoImagem = Storage::disk('public')->put('imagens', $requestValidada['imagem_categoria']);
+                $caminhoImagem = Storage::disk('public')->put('imagens/categoria', $requestValidada['imagem_categoria']);
 
                 $requestValidada = $this->formatarRequestValidadaCategoria($requestValidada, $caminhoImagem);
             }
@@ -90,7 +92,7 @@ readonly class CategoriaProdutoService
             Log::error('Erro ao atualizar registro: ' . $e->getMessage());
 
             if (isset($caminhoImagem)) {
-                Storage::disk('public')->delete($caminhoImagem);
+                $this->deletarImagemCategoria($caminhoImagem);
             }
 
             return false;
@@ -100,9 +102,11 @@ readonly class CategoriaProdutoService
     public function deletarCategoriaProduto(string $id): bool
     {
         try {
+            $caminhoImagem = $this->encontrarCategoriaId($id)->caminho_imagem;
+
             CategoriaProduto::destroy($id);
 
-            $this->deletarImagemCategoriaPorId($id);
+            $this->deletarImagemCategoria($caminhoImagem);
 
             return true;
         } catch (Exception $e) {
@@ -113,13 +117,11 @@ readonly class CategoriaProdutoService
 
     }
 
-    private function deletarImagemCategoriaPorId($id): void
+    private function deletarImagemCategoria(string $caminhoImagem): void
     {
         try {
-            $categoriaProduto = $this->encontrarCategoriaId($id);
-
             // Apaga a imagem antiga
-            Storage::disk('public')->delete($categoriaProduto->caminho_imagem);
+            Storage::disk('public')->delete($caminhoImagem);
         } catch (Exception $e) {
             Log::error('Erro ao excluir imagem da categoria: ' . $e->getMessage());
         }

@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoService
 {
@@ -42,11 +43,18 @@ class ProdutoService
         try {
             $requestValidada = $request->validated();
 
-            $requestValidada = $this->formatarRequestValidada($requestValidada);
+            $imagem = $request->file('imagem_produto');
+
+            // Salvando a imagem no diretório de armazenamento
+            $caminhoImagem = Storage::disk('public')->put('imagens/produto', $imagem);
+
+            $requestValidada = $this->formatarRequestValidada($requestValidada, $caminhoImagem);
 
             Produto::create($requestValidada);
         } catch (Exception $e) {
             Log::error('Erro ao criar registro: ' . $e->getMessage());
+
+            $this->deletarImagemProduto($caminhoImagem);
 
             return false;
         }
@@ -56,12 +64,23 @@ class ProdutoService
 
     public function atualizarProduto(AtualizarProdutoRequest $request): bool
     {
+        $caminhoImagem = null;
+
         try {
             $id = $request->id;
 
             $requestValidada = $request->validated();
 
-            $requestValidada = $this->formatarRequestValidada($requestValidada);
+            if (array_key_exists('imagem_produto', $requestValidada)) {
+                $caminhoImagem = $this->encontrarProdutoId($id)->caminho_imagem;
+
+                $this->deletarImagemProduto($caminhoImagem);
+
+                // Salva a nova imagem
+                $caminhoImagem = Storage::disk('public')->put('imagens/produto', $requestValidada['imagem_produto']);
+            }
+
+            $requestValidada = $this->formatarRequestValidada($requestValidada, $caminhoImagem);
 
             Produto::where('id', $id)
                 ->update($requestValidada);
@@ -70,6 +89,10 @@ class ProdutoService
         } catch (Exception $e) {
             Log::error('Erro ao atualizar registro: ' . $e->getMessage());
 
+            if (isset($caminhoImagem)) {
+                $this->deletarImagemProduto($caminhoImagem);
+            }
+
             return false;
         }
     }
@@ -77,7 +100,11 @@ class ProdutoService
     public function deletarProduto(string $id): bool
     {
         try {
+            $caminhoImagem = $this->encontrarProdutoId($id)->caminho_imagem;
+
             Produto::destroy($id);
+
+            $this->deletarImagemProduto($caminhoImagem);
 
             return true;
         } catch (Exception $e) {
@@ -88,9 +115,19 @@ class ProdutoService
 
     }
 
-    private function formatarRequestValidada(array $requestValidada)
+    private function formatarRequestValidada(array $requestValidada, string $caminhoImagem = null): array
     {
-        $informacoesNutricionais = array_splice($requestValidada, 6);
+        if ($caminhoImagem) {
+            $informacoesNutricionais = array_splice($requestValidada, 7);
+
+            // Retira a imagem
+            unset($requestValidada['imagem_produto']);
+
+            // E substitui pelo endereço da imagem
+            $requestValidada['caminho_imagem'] = $caminhoImagem;
+        } else {
+            $informacoesNutricionais = array_splice($requestValidada, 6);
+        }
 
         $informacoesNutricionais['alergenos'] = array_splice($informacoesNutricionais, 12);
 
@@ -99,5 +136,15 @@ class ProdutoService
         $requestValidada['informacoes_nutricionais'] = $informacoesNutricionais;
 
         return $requestValidada;
+    }
+
+    private function deletarImagemProduto(string $caminhoImagem): void
+    {
+        try {
+            // Apaga a imagem antiga
+            Storage::disk('public')->delete($caminhoImagem);
+        } catch (Exception $e) {
+            Log::error('Erro ao excluir imagem da categoria: ' . $e->getMessage());
+        }
     }
 }

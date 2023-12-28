@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
 @section('titulo', 'Produtos')
 
 @section('estilo')
@@ -24,7 +25,9 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :rota="route('produto.index')" :nome="'nome_produto'" :placeholder="'Pesquise pelo nome do produto.'" :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('produto.index')" :nome="'nome_produto'"
+                                              :placeholder="'Pesquise pelo nome do produto.'"
+                                              :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela alinhar-centro" data-entidade="produto">
@@ -37,6 +40,7 @@
             <th>Categoria</th>
             <th>Marca</th>
             <th>Data de Cadastro</th>
+            <th>Imagem do Produto</th>
         </tr>
         </thead>
         <tbody>
@@ -54,6 +58,11 @@
                 <td>{{ $produto->categoria->nome_categoria }}</td>
                 <td>{{ $produto->marca->nome_marca }}</td>
                 <td>{{ $dataCriacaoProdutoFormatada }}</td>
+                <td>
+                    <a href="{{ Storage::disk('public')->url($produto->caminho_imagem) }}" target="_blank">
+                        {{ substr(Storage::disk('public')->url($produto->caminho_imagem), 0, 25) . '...' }}
+                    </a>
+                </td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>
