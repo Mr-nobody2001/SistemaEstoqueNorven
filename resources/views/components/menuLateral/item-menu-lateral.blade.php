@@ -3,7 +3,7 @@
 @php
     use Illuminate\Support\Facades\Route;
 
-    if ($categoria === 'Início' && Route::currentRouteName() === 'inicio') {
+    if ($categoria === 'Início' && (Route::currentRouteName() === 'index.inicio' || Route::currentRouteName() === 'inicio.pesquisa')) {
         $eAbaAtual = true;
     } else {
         $eAbaAtual = (bool) stripos(url()->current(), $categoria);

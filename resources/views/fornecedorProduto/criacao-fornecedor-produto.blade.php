@@ -6,7 +6,7 @@
 
 @section('script')
     <script type="module" src="{{ asset('js/geral/criacaoGeral.js') }}"></script>
-    <script src="{{ asset('js/especifico/fornecedor/criacaoAtualizacaoFornecedorProduto.js') }}"></script>
+    <script src="{{ asset('js/especifico/fornecedorProduto/criacaoAtualizacaoFornecedorProduto.js') }}"></script>
 @endsection
 
 @php

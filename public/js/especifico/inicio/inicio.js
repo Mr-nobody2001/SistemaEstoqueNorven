@@ -5,6 +5,7 @@ import {verificarMensagensSecao} from "../../avisos/toast.js";
 const barraPesquisa = document.querySelector("#barra-pesquisa");
 const botaoPesquisa = document.querySelector("#botao-pesquisa");
 const botaoAtualizar = document.querySelector(".bi-arrow-clockwise");
+const gridContainer = document.querySelector("#grid-container");
 
 const validarPesquisaProduto = (evento) => {
     const valorPesquisa = barraPesquisa.value;
@@ -13,7 +14,9 @@ const validarPesquisaProduto = (evento) => {
 }
 
 const atualizarPaginaProduto = () => {
-    atualizarPagina();
+    const entidade = gridContainer.dataset.url;
+
+    atualizarPagina(entidade);
 }
 
 window.onload = () => {

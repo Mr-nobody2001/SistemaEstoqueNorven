@@ -33,6 +33,18 @@ class ProdutoService
         return Produto::where('id', $id)->first();
     }
 
+    public function encontrarProdutoCategoria(string $categoriaId): Collection
+    {
+        return Produto::where('categoria_id', $categoriaId)->get();
+    }
+
+    public function encontrarProdutoCategoriaNome(string $categoriaId, string $nomeProduto): Collection
+    {
+        return Produto::where('categoria_id', $categoriaId)
+            ->where('nome_produto', 'ilike', '%' . $nomeProduto . '%')->get();
+    }
+
+
     public function encontrarProdutoNome(string $nomeProduto): LengthAwarePaginator
     {
         return $this->produtoRepository->encontrarProdutoNome($nomeProduto);

@@ -76,7 +76,7 @@
         <div>
             <select class="form-select" aria-label="tipo-transacao" name="tipo_transacao"
                     required>
-                <option disabled selected>Selecione qual é o tipo da transação</option>
+                <option value="" disabled selected>Selecione qual é o tipo da transação</option>
                 @foreach(TipoTransacao::getConstants() as $tipoTransacao)
                     <option value="{{ $tipoTransacao }}" @selected(old('tipo_transacao') == $tipoTransacao)>
                         {{ $tipoTransacao }}</option>

@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [InicioController::class, 'mostrarCategorias'])->name('inicio');
+Route::get('/', [InicioController::class, 'mostrarCategorias'])->name('index.inicio');
+
+Route::get('inicio-pesquisa/{categoriaId}/{nomeProduto?}', [InicioController::class, 'mostrarProdutosCategoria'])->name('inicio.pesquisa');
 
 Route::resources([
     'marca' => MarcaProdutoController::class,

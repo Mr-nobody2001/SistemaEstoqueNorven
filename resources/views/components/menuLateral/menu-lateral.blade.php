@@ -1,7 +1,7 @@
 <nav id="menu-lateral" data-expandido="false">
     <span id="icone-hamburguer" class="material-symbols-outlined">menu</span>
     <ul id="lista-menu-lateral">
-        <x-menuLateral.item-menu-lateral :textoIcone="'home'" :link="route('inicio')"
+        <x-menuLateral.item-menu-lateral :textoIcone="'home'" :link="route('index.inicio')"
                                          :categoria="'Início'"/>
         <x-menuLateral.item-menu-lateral :textoIcone="'inventory'" :link="route('registro.index')"
                                          :categoria="'Registro'"/>
