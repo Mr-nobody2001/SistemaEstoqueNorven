@@ -81,7 +81,7 @@ class ProdutoController extends Controller
 
         $listaTodasMarcas = $this->marcaProdutoService->listarTodosMarcasSemPaginacao();
 
-        return view('produto.atualizar-produto', compact('produto' ,'listaTodasCategorias', 'listaTodasMarcas'));
+        return view('produto.atualizacao-produto', compact('produto' ,'listaTodasCategorias', 'listaTodasMarcas'));
     }
 
     /**

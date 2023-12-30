@@ -41,4 +41,9 @@ class InicioController extends Controller
 
         return view('inicio.inicio-pesquisa-produto', compact('paginaProduto', 'valorPesquisa', 'categoriaId'));
     }
+
+    public function mostrarDetalhesProduto(string $idProduto): View
+    {
+
+    }
 }

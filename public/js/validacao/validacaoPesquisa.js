@@ -2,7 +2,7 @@ import {exibirToast} from "../avisos/toast.js";
 
 const forms = document.querySelectorAll(".needs-validation");
 const spansValidacaoRequest = document.querySelectorAll(".campo-invalido")
-export const validarPesquisa = (evento, valorPesquisa) => {
+export const validarPesquisaTexto = (evento, valorPesquisa) => {
     // alfanumérica, permitindo espaços e exigindo que tenha pelo menos três caracteres
     const regex = /^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&"\-\s]*$/;
 
@@ -10,6 +10,14 @@ export const validarPesquisa = (evento, valorPesquisa) => {
         evento.preventDefault();
 
         exibirToast("A string não é alfanumérica ou não atende aos requisitos.", "erro");
+    }
+}
+
+export const validarPesquisaData = (evento, valorPesquisa) => {
+    if (!valorPesquisa) {
+        evento.preventDefault();
+
+        exibirToast("A data é obrigatória e não pode estar em branco.", "erro");
     }
 }
 

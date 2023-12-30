@@ -1,12 +1,12 @@
 @php use App\Enums\TipoTransacao; @endphp
-@section('titulo', 'Cadastrar Registro')
+@section('titulo', 'Atualizar Registro')
 
 @section('estilo')
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/criacao-atualizacao-delecao-geral.css') }}">
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/geral/criacaoGeral.js') }}"></script>
+    <script type="module" src="{{ asset('js/geral/atualizacaoDelecao.js') }}"></script>
     <script type="module"
             src="{{ asset('js/especifico/registroEstoque/criacaoAtualizacaoRegistroEstoque.js') }}"></script>
 @endsection
@@ -14,12 +14,22 @@
 <x-layouts.estrutura-basica>
     <x-avisos.toast/>
 
-    <x-componentesGerais.informacoes-pagina :textoIcone="'inventory'" :titulo="'Cadastrar Registro'"/>
+    <x-componentesGerais.informacoes-pagina :textoIcone="'inventory'" :titulo="'Atualizar Registro'"/>
 
-    <form id="container-formulario" class="needs-validation" action="{{ route('registro.store') }}" method="POST"
+    <form id="container-formulario" class="needs-validation"
+          action="{{ route('registro.update', ['registro' => $registroEstoque ?? old('id')]) }}" method="POST"
           novalidate>
+        @method('PUT')
         @csrf
-        <x-componentesGerais.criacao.opcao-salvar/>
+        <x-componentesGerais.atualizacao.opcoes-atualizacao/>
+
+        <div class="d-none">
+            <input type="hidden" name="id" value="{{ $registroEstoque->id ?? old('id') }}">
+        </div>
+
+        @php
+            $produtoIdPreenchimento = $registroEstoque->produto_id ?? old('produto_id');
+        @endphp
 
         <div>
             <div class="input-group d-flex flex-row w-100">
@@ -27,7 +37,7 @@
                         name="produto_id" required>
                     <option data-texto="null" value="" disabled selected>Informe o produto desse registro</option>
                     @foreach($listaTodosProdutos as $produto)
-                        <option value="{{ $produto->id }}" data-texto="{{ $produto->nome_produto }}" @selected(old('produto_id') ==
+                        <option value="{{ $produto->id }}" data-texto="{{ $produto->nome_produto }}" @selected($produtoIdPreenchimento ==
                     $produto->id )>{{ $produto->nome_produto }}
                         </option>
                     @endforeach
@@ -48,13 +58,17 @@
             </span>
         </div>
 
+        @php
+            $loteIdPreenchimento = $registroEstoque->lote_id ?? old('lote_id');
+        @endphp
+
         <div>
             <div class="input-group d-flex flex-row w-100">
                 <select id="select-lote-id" class="form-select w-25" aria-label="select-lote-id"
                         name="lote_id" required>
                     <option data-texto="null" value="" disabled selected>Informe o lote desse registro</option>
                     @foreach($listaTodosLotes as $lote)
-                        <option value="{{ $lote->id }}" data-texto="{{ $lote->numero_lote }}" @selected(old('lote_id') ==
+                        <option value="{{ $lote->id }}" data-texto="{{ $lote->numero_lote }}" @selected($loteIdPreenchimento ==
                     $lote->id )>{{ $lote->numero_lote }}
                         </option>
                     @endforeach
@@ -75,6 +89,10 @@
             </span>
         </div>
 
+        @php
+            $tipoTransacaoPreenchimento = $registroEstoque->tipo_transacao ?? old('tipo_transacao');
+        @endphp
+
         <div>
             <div>
                 <select id="select-tipo-transacao" class="form-select" aria-label="select-tipo-transacao"
@@ -82,7 +100,7 @@
                         required>
                     <option value="" disabled selected>Selecione qual é o tipo da transação</option>
                     @foreach(TipoTransacao::getConstants() as $tipoTransacao)
-                        <option value="{{ $tipoTransacao }}" @selected(old('tipo_transacao') == $tipoTransacao)>
+                        <option value="{{ $tipoTransacao }}" @selected($tipoTransacaoPreenchimento == $tipoTransacao)>
                             {{ $tipoTransacao }}</option>
                     @endforeach
                 </select>
@@ -103,7 +121,7 @@
             <label for="quantidade-transacao" class="form-label">Insira a quantidade do produto quer será
                 transacionado</label>
             <input type="number" id="quantidade-transacao" class="form-control" name="quantidade_transacao"
-                   value="{{ old('quantidade_transacao') ?? '' }}" min="1" required>
+                   value="{{ $registroEstoque->quantidade_transacao ?? old('quantidade_transacao') }}" min="1" required>
             <div class="invalid-feedback">
                 A quantidade da transação não pode ser nula e nem negativa.
             </div>
@@ -122,7 +140,8 @@
                 <span class="input-group-text">0.00</span>
                 <input type="text" id="preco-venda" class="form-control rounded-end" name="preco_venda"
                        placeholder="Informe o valor de venda associado a este registro de produto."
-                       value="{{ number_format(old('preco_venda'), 2) ?? '0.00' }}" maxlength="9"
+                       value="{{ number_format($registroEstoque->preco_venda, 2) ?? number_format(old('preco_venda'), 2) }}"
+                       maxlength="9"
                        pattern="^\d{0,8}(\.\d{2})$" required>
                 <div class="invalid-feedback">
                     O valor de venda não pode ser nulo e deve conter apenas caracteres numéricos e ".".
@@ -136,4 +155,8 @@
             </span>
         </div>
     </form>
+
+    {{-- Formulário para a deleção (invisível para o usuário) --}}
+    <x-componentesGerais.atualizacao.formulario-delecao :entidadeRota="'registro'" :entidade="'registro'"
+                                                        :objeto="$registroEstoque"/>
 </x-layouts.estrutura-basica>

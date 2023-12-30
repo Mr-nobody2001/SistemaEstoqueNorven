@@ -1,4 +1,4 @@
-import {validarPesquisa} from "../../validacao/validacaoPesquisa.js";
+import {validarPesquisaTexto} from "../../validacao/validacaoPesquisa.js";
 import {atualizarPagina} from "../../service/indexCRUD.js";
 import {verificarMensagensSecao} from "../../avisos/toast.js";
 
@@ -10,7 +10,7 @@ const gridContainer = document.querySelector("#grid-container");
 const validarPesquisaProduto = (evento) => {
     const valorPesquisa = barraPesquisa.value;
 
-    validarPesquisa(evento, valorPesquisa);
+    validarPesquisaTexto(evento, valorPesquisa);
 }
 
 const atualizarPaginaProduto = () => {

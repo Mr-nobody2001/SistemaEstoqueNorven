@@ -24,7 +24,16 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :rota="route('registro.index')" :nome="'nome_registro'" :placeholder="'Pesquise pelo número do loteProduto do registro.'" :pesquisa="$valorPesquisa"/>
+    <div id="container-pesquisa">
+        <form class="d-flex flex-column" action="{{ route('registro.index') }}" method="GET">
+            <label for="barra-pesquisa" class="form-label">Pesquise pela data de cadastro do registro.</label>
+            <div id="container-barra-pesquisa">
+                <input type="date" id="barra-pesquisa" class="form-control" name="data_registro"
+                       VALUE="{{ $valorPesquisa ?? '' }}" required>
+                <button type="submit" id="botao-pesquisa" class="btn">Pesquisar</button>
+            </div>
+        </form>
+    </div>
 
     {{-- Tabela de registros --}}
     <table class="tabela alinhar-centro" data-entidade="registro">

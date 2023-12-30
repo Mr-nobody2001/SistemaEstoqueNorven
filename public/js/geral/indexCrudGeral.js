@@ -1,4 +1,4 @@
-import {validarPesquisa} from "../validacao/validacaoPesquisa.js";
+import {validarPesquisaData, validarPesquisaTexto} from "../validacao/validacaoPesquisa.js";
 import {atualizarPagina, indicarSelecaoElementoTabela} from "../service/indexCRUD.js";
 import {ocultarAvisoEscolhaAtualizacaoDelecao} from "../service/indexCRUD.js";
 import {prepararOpcaoAlteracao} from "../service/indexCRUD.js";
@@ -18,7 +18,8 @@ const botaoFecharAviso = document.querySelector("#botao-fechar-aviso");
 const validarPesquisaProduto = (evento) => {
     const valorPesquisa = barraPesquisa.value;
 
-    validarPesquisa(evento, valorPesquisa);
+    barraPesquisa.type === "date" ? validarPesquisaData(evento, valorPesquisa) :
+        validarPesquisaTexto(evento, valorPesquisa);
 }
 
 const atualizarPaginaProduto = () => {

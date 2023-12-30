@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\registroEstoque\AtualizarRegistroEstoqueRequest;
 use App\Http\Requests\registroEstoque\CriarRegistroEstoqueRequest;
 use App\services\LoteProdutoService;
 use App\services\ProdutoService;
@@ -29,7 +30,7 @@ class RegistroEstoqueController extends Controller
 
         if ($request->data_registro) {
             $valorPesquisa = $request->data_registro;
-            $paginaRegistro = $this->registroEstoqueService->encontrarRegistroNome($valorPesquisa);
+            $paginaRegistro = $this->registroEstoqueService->encontrarRegistroEstoqueDataRegistro($valorPesquisa);
         } else {
             $paginaRegistro = $this->registroEstoqueService->listarTodosRegistros();
         }
@@ -54,7 +55,7 @@ class RegistroEstoqueController extends Controller
      */
     public function store(CriarRegistroEstoqueRequest $request): Application|RedirectResponse|Redirector
     {
-        if (!$this->registroEstoqueService->criarRegistro($request)) {
+        if (!$this->registroEstoqueService->criarRegistroEstoque($request)) {
             return redirect(route('registro.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);
         }
 
@@ -71,22 +72,27 @@ class RegistroEstoqueController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        dd();
-        /*if (!$this->produtoService->criarProduto($request)) {
-            return redirect(route('produto.index'))->with(['msg' => 'Não foi possível criar o registro.', 'tipo' => 'erro']);
-        }
+        $registroEstoque = $this->registroEstoqueService->encontrarRegistroEstoqueId($id);
 
-        return redirect(route('produto.index'))->with(['msg' => 'Produto criado com sucesso', 'tipo' => 'sucesso',]);*/
+        $listaTodosLotes = $this->loteProdutoService->listarTodosLotesSemPaginacao();
+
+        $listaTodosProdutos = $this->produtoService->listarTodosProdutosSemPaginacao();
+
+        return view('registroEstoque.atualizacao-registro-estoque', compact('registroEstoque', 'listaTodosLotes', 'listaTodosProdutos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AtualizarRegistroEstoqueRequest $request): Application|RedirectResponse|Redirector
     {
-        //
+        if (!$this->registroEstoqueService->atualizarRegistroEstoque($request)) {
+            return redirect(route('registro.index'))->with(['msg' => 'Não foi possível atualizar o registro.', 'tipo' => 'erro']);
+        }
+
+        return redirect(route('registro.index'))->with(['msg' => 'Registro atualizado com sucesso', 'tipo' => 'sucesso']);
     }
 
     /**
@@ -94,6 +100,10 @@ class RegistroEstoqueController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (!$this->registroEstoqueService->deletarRegistroEstoque($id)) {
+            return redirect(route('registro.index'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
+        }
+
+        return redirect(route('registro.index'))->with(['msg' => 'Registro removido com sucesso', 'tipo' => 'sucesso']);
     }
 }
