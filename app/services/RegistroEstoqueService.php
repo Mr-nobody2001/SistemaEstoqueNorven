@@ -5,6 +5,7 @@ namespace App\services;
 use App\Http\Requests\registroEstoque\AtualizarRegistroEstoqueRequest;
 use App\Http\Requests\registroEstoque\CriarRegistroEstoqueRequest;
 use App\Models\RegistroEstoque;
+use App\repositorys\RegistroEstoqueRepository;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Log;
 
 class RegistroEstoqueService
 {
+    public function __construct(private readonly RegistroEstoqueRepository $registroEstoqueRepository)
+    {
+    }
+
     public function listarTodosRegistros(): LengthAwarePaginator
     {
         return RegistroEstoque::orderBy('id')->paginate(20);
@@ -30,12 +35,12 @@ class RegistroEstoqueService
 
     public function encontrarRegistroEstoqueIdProdutoCompra(string $produtoId): LengthAwarePaginator
     {
-        return RegistroEstoque::where('produto_id', $produtoId)->where('tipo_transacao', 'compra')->orderBy('id', 'desc')->paginate(20);
+        return $this->registroEstoqueRepository->encontrarRegistroEstoqueIdProdutoCompra($produtoId);
     }
 
     public function encontrarRegistroEstoqueIdProdutoVenda(string $produtoId): LengthAwarePaginator
     {
-        return RegistroEstoque::where('produto_id', $produtoId)->where('tipo_transacao', 'venda')->orderBy('id', 'desc')->paginate(20);
+        return $this->registroEstoqueRepository->encontrarRegistroEstoqueIdProdutoVenda($produtoId);
     }
 
     public function calcularTicketMedio(string $produtoId): float
@@ -44,13 +49,9 @@ class RegistroEstoqueService
 
         $mesPassado = $dataAtual->subDays(30);
 
-        $receitaTotal = RegistroEstoque::where('produto_id', $produtoId)->where('tipo_transacao', 'venda')
-            ->where('data_registro', '>=', $mesPassado)
-            ->selectRaw('SUM(quantidade_transacao * preco_venda) as receita_total')
-            ->value('receita_total');
+        $receitaTotal = $this->registroEstoqueRepository->calcularTotalReceita($produtoId, $mesPassado);
 
-        $totalTransacao = RegistroEstoque::where('produto_id', $produtoId)->where('tipo_transacao', 'venda')
-            ->sum('quantidade_transacao');
+        $totalTransacao = $this->registroEstoqueRepository->calcularTotalTransacao($produtoId);
 
         if ($totalTransacao === 0) {
             $totalTransacao = 1;
@@ -61,12 +62,9 @@ class RegistroEstoqueService
 
     public function calcularQuantidadeEstoqueProduto(string $produtoId): float
     {
-        $totalArmazenado = RegistroEstoque::where('produto_id', $produtoId)->where('tipo_transacao', 'compra')
-            ->sum('quantidade_transacao');
+        $totalArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenado($produtoId);
 
-        $totalRetirado = RegistroEstoque::where('produto_id', $produtoId)->where('tipo_transacao', 'venda')
-            ->orWhere('tipo_transacao', 'baixa')
-            ->selectRaw('SUM(quantidade_transacao) as total_retirado')->value('total_retirado');
+        $totalRetirado = $this->registroEstoqueRepository->calcularTotalRetirado($produtoId);
 
         return ($totalArmazenado - $totalRetirado);
     }
@@ -75,15 +73,9 @@ class RegistroEstoqueService
     {
         $dataAtual = Carbon::now();
 
-        $totalVendasMesAtual = RegistroEstoque::where('produto_id', $produtoId)
-            ->where('tipo_transacao', 'venda')
-            ->where('data_registro', '>=', $dataAtual->subDays(30))
-            ->sum('quantidade_transacao');
+        $totalVendasMesAtual = $this->registroEstoqueRepository->calcularTotalVendasMesAtual($produtoId, $dataAtual);
 
-        $totalVendasMesPassado = RegistroEstoque::where('produto_id', $produtoId)
-            ->where('tipo_transacao', 'venda')
-            ->whereBetween('data_registro', [$dataAtual->subDays(60), $dataAtual->subDays(30)])
-            ->sum('quantidade_transacao');
+        $totalVendasMesPassado = $this->registroEstoqueRepository->calcularTotalVendasMesPassado($produtoId, $dataAtual);
 
         return $totalVendasMesAtual - $totalVendasMesPassado;
     }
