@@ -1,0 +1,19 @@
+.container-detalhes-produto {
+    gap: 80px;
+}
+
+body tr:hover {
+    background-color: transparent !important;
+    cursor: default !important;
+    transition: 0s;
+}
+
+img {
+    border-radius: 10px;
+}
+
+.container-historico-lote {
+    width: auto;
+    max-height: 400px;
+    overflow-y: auto;
+}

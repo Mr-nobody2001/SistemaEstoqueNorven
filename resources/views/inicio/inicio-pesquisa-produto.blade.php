@@ -3,7 +3,7 @@
 @section('titulo', 'Página Inicial - Pesquisa por Produto')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/inicio/inicio.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/index-geral.css') }}">
 @endsection
 
@@ -41,7 +41,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $produto->nome_produto }}</h5>
                     <p class="card-text">{{ $produto->descricao_produto }}</p>
-                    <a href="{{ route('inicio.pesquisa', ['categoriaId' => $produto->id]) }}"
+                    <a href="{{ route('inicio.detalhamento', ['produtoId' => $produto->id]) }}"
                        class="btn btn-dark">Detalhes do Produto</a>
                 </div>
             </div>

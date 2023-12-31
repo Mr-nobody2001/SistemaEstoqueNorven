@@ -24,6 +24,8 @@ Route::get('/', [InicioController::class, 'mostrarCategorias'])->name('index.ini
 
 Route::get('inicio-pesquisa/{categoriaId}/{nomeProduto?}', [InicioController::class, 'mostrarProdutosCategoria'])->name('inicio.pesquisa');
 
+Route::get('inicio-detalhe/{produtoId}', [InicioController::class, 'mostrarDetalhesProduto'])->name('inicio.detalhamento');
+
 Route::resources([
     'marca' => MarcaProdutoController::class,
     'categoria' => CategoriaProdutoController::class,

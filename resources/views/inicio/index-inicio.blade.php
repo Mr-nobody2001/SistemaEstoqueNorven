@@ -3,7 +3,7 @@
 @section('titulo', 'Página Inicial - Pesquisa por Categoria')
 
 @section('estilo')
-    <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/inicio/inicio.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/estilosGerais/index-geral.css') }}">
 @endsection
 
