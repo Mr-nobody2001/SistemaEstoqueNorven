@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Facades\Storage; @endphp
+@php use Carbon\Carbon;use Illuminate\Support\Facades\Storage; @endphp
 
 @section('titulo', 'Página Inicial - Detalhes do Produto')
 
@@ -142,10 +142,10 @@
                 @forelse ($listaRegistroEstoqueCompra as $registro)
                     @php
                         $dataRegistro = new DateTime($registro->data_registro);
-                        $dataRegistro = $dataRegistro->format('d/m/Y H:i:s')
+                        $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
                     @endphp
 
-                    <tr data-id="{{ $registro->id }}">
+                    <tr @class(['totalmente-vendido' => $registro->lote->totalmente_vendido]) data-id="{{ $registro->id }}">
                         <td>{{ $registro->id }}</td>
                         <td>{{ $registro->lote->numero_lote }}</td>
                         <td>{{ $registro->produto->nome_produto }}</td>
@@ -182,7 +182,7 @@
                 @forelse ($listaRegistroEstoqueVenda as $registro)
                     @php
                         $dataRegistro = new DateTime($registro->data_registro);
-                        $dataRegistro = $dataRegistro->format('d/m/Y H:i:s')
+                        $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
                     @endphp
 
                     <tr data-id="{{ $registro->id }}">

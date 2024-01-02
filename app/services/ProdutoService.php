@@ -35,7 +35,7 @@ class ProdutoService
 
     public function encontrarProdutoCategoria(string $categoriaId): Collection
     {
-        return Produto::where('categoria_id', $categoriaId)->get();
+        return Produto::where('categoria_id', $categoriaId)->orderBy('nome_produto')->get();
     }
 
     public function encontrarProdutoCategoriaNome(string $categoriaId, string $nomeProduto): Collection

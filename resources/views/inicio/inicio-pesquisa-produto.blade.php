@@ -30,13 +30,13 @@
                 $dataCriacaoProdutoFormatada = $dataCriacaoProdutoFormatada->format('d/m/Y')
             @endphp
 
-            <div class="card animate__animated animate__fadeIn" style="width: 18rem;">
+            <div @class(['card', 'animate__animated', 'animate__fadeIn', 'quantidade-baixa' => $produto->quantidade_baixa]) style="width: 18rem;">
                 <img src={{ Storage::url($produto->caminho_imagem) }} class="card-img-top" width="200px"
                      height="200px" alt={{ $produto->nome_produto }}>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Código: {{ $produto->codigo_produto }}</li>
-                    <li class="list-group-item">Marca: {{ $produto->marca->nome_marca }}</li>
-                    <li class="list-group-item">Data de Cadastro: {{ $dataCriacaoProdutoFormatada }}</li>
+                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa])>Código: {{ $produto->codigo_produto }}</li>
+                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa])>Marca: {{ $produto->marca->nome_marca }}</li>
+                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa])>Data de Cadastro: {{ $dataCriacaoProdutoFormatada }}</li>
                 </ul>
                 <div class="card-body">
                     <h5 class="card-title">{{ $produto->nome_produto }}</h5>

@@ -1,7 +1,10 @@
 :root {
-    --cor-positiva: #008000FF;
+    --background-positiva: #008000FF;
 
-    --cor-negativa: #FF0000FF;
+    --cor-background-produto-vencido:#FBE286;
+    --cor-texto-vencido: #FFFFFF;
+
+    --background-negativa: #FE4847;
     --cor-texto-negativo: #FFFFFF;
 }
 
@@ -18,16 +21,26 @@ body {
 }
 
 .quantidade-baixa {
-    background-color: var(--cor-negativa);
+    background-color: var(--background-negativa);
     color: var(--cor-texto-negativo);
 }
 
+.totalmente-vendido {
+    background-color: #C6BFB5;
+    text-decoration: line-through;
+}
+
+.produto-vencido {
+    background-color: var(--cor-background-produto-vencido);
+    color: var(--cor-texto-vencido);
+}
+
 .positivo {
-    color: var(--cor-positiva);
+    color: var(--background-positiva);
     font-size: 1.3rem;
 }
 
 .negativo {
-    color: var(--cor-negativa);
+    color: var(--background-negativa);
     font-size: 1.3rem;
 }

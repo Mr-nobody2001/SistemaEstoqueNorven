@@ -4,6 +4,7 @@ namespace App\services;
 
 use App\Http\Requests\registroEstoque\AtualizarRegistroEstoqueRequest;
 use App\Http\Requests\registroEstoque\CriarRegistroEstoqueRequest;
+use App\Models\LoteProduto;
 use App\Models\RegistroEstoque;
 use App\repositorys\RegistroEstoqueRepository;
 use Carbon\Carbon;
@@ -41,6 +42,21 @@ class RegistroEstoqueService
     public function encontrarRegistroEstoqueIdProdutoVenda(string $produtoId): LengthAwarePaginator
     {
         return $this->registroEstoqueRepository->encontrarRegistroEstoqueIdProdutoVenda($produtoId);
+    }
+
+    public function verificarEstoqueVendidoTotalmente(string $loteId): bool
+    {
+        $lote = LoteProduto::find($loteId);
+
+        if ($lote->totalmente_vendido) {
+            return false;
+        }
+
+        $quantidadeLoteArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenadoLote($loteId);
+
+        $quantidadeLoteRetirado = $this->registroEstoqueRepository->calcularTotalRetiradoLote($loteId);
+
+        return $quantidadeLoteArmazenado - $quantidadeLoteRetirado === 0;
     }
 
     public function calcularTicketMedio(string $produtoId): float

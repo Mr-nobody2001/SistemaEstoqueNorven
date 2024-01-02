@@ -4,6 +4,7 @@ namespace App\repositorys;
 
 use App\Models\LoteProduto;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class LoteProdutoRepository

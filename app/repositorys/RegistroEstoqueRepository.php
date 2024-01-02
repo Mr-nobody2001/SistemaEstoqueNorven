@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class RegistroEstoqueRepository
 {
-    public function calcularTotalReceita(string $produtoId, Carbon $mesPassado): float
+    public function calcularTotalReceita(string $produtoId, Carbon $mesPassado): float|null
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
@@ -17,7 +17,7 @@ class RegistroEstoqueRepository
             ->value('receita_total');
     }
 
-    public function calcularTotalTransacao(string $produtoId): int
+    public function calcularTotalTransacao(string $produtoId): int|null
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
@@ -40,22 +40,39 @@ class RegistroEstoqueRepository
             ->paginate(20);
     }
 
-    public function calcularTotalArmazenado(string $produtoId): int
+    public function calcularTotalArmazenado(string $produtoId): int|null
     {
-        return  RegistroEstoque::where('produto_id', $produtoId)
+        return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'compra')
             ->sum('quantidade_transacao');
     }
 
-    public function calcularTotalRetirado(string $produtoId): int
+    public function calcularTotalArmazenadoLote(string $loteId): int|null
+    {
+        return RegistroEstoque::where('lote_id', $loteId)
+            ->where('tipo_transacao', 'compra')
+            ->sum('quantidade_transacao');
+    }
+
+    public function calcularTotalRetirado(string $produtoId): int|null
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
             ->orWhere('tipo_transacao', 'baixa')
-            ->selectRaw('SUM(quantidade_transacao) as total_retirado')->value('total_retirado');
+            ->selectRaw('SUM(quantidade_transacao) as total_retirado')
+            ->value('total_retirado');
     }
 
-    public function calcularTotalVendasMesAtual(string $produtoId, Carbon $dataAtual): int
+    public function calcularTotalRetiradoLote(string $loteId): int|null
+    {
+        return RegistroEstoque::where('lote_id', $loteId)
+            ->where('tipo_transacao', 'venda')
+            ->orWhere('tipo_transacao', 'baixa')
+            ->selectRaw('SUM(quantidade_transacao) as total_retirado')
+            ->value('total_retirado');
+    }
+
+    public function calcularTotalVendasMesAtual(string $produtoId, Carbon $dataAtual): int|null
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
@@ -63,11 +80,16 @@ class RegistroEstoqueRepository
             ->sum('quantidade_transacao');
     }
 
-    public function calcularTotalVendasMesPassado(string $produtoId, Carbon $dataAtual): int
+    public function calcularTotalVendasMesPassado(string $produtoId, Carbon $dataAtual): int|null
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
             ->whereBetween('data_registro', [$dataAtual->subDays(60), $dataAtual->subDays(30)])
             ->sum('quantidade_transacao');
+    }
+
+    public function verificarEstoqueVendidoTotalmente()
+    {
+
     }
 }
