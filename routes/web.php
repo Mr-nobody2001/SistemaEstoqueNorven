@@ -3,10 +3,12 @@
 use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\FornecedorProdutoController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LoteProdutoController;
 use App\Http\Controllers\MarcaProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\RegistroEstoqueController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +22,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [InicioController::class, 'mostrarCategorias'])->name('index.inicio');
+Route::get('/', [LoginController::class, 'mostrarFormularioLogin']);
 
-Route::get('inicio-pesquisa/{categoriaId}/{nomeProduto?}', [InicioController::class, 'mostrarProdutosCategoria'])->name('inicio.pesquisa');
+Route::post('/validar', [LoginController::class, 'autenticarUsuario'])
+    ->name('autenticar');
 
-Route::get('inicio-detalhe/{produtoId}', [InicioController::class, 'mostrarDetalhesProduto'])->name('inicio.detalhamento');
+Route::prefix('inicio')->group(function () {
+    Route::get('', [InicioController::class, 'mostrarCategorias'])->name('inicio');
+
+    Route::get('pesquisa/{categoriaId}/{nomeProduto?}', [InicioController::class, 'mostrarProdutosCategoria'])
+        ->name('inicio.pesquisa');
+
+    Route::get('detalhe/{produtoId}', [InicioController::class, 'mostrarDetalhesProduto'])
+        ->name('inicio.detalhamento');
+});
 
 Route::resources([
     'marca' => MarcaProdutoController::class,
@@ -33,4 +44,7 @@ Route::resources([
     'lote' => LoteProdutoController::class,
     'produto' => ProdutoController::class,
     'registro' => RegistroEstoqueController::class,
-]);
+], ['except', 'show']);
+
+Route::resource('usuario', UsuarioController::class)
+    ->except('index', 'create', 'show');

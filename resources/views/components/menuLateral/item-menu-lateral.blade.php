@@ -3,9 +3,11 @@
 @php
     use Illuminate\Support\Facades\Route;
 
-    if ($categoria === 'Início' && (Route::currentRouteName() === 'index.inicio'
+    if ($categoria === 'Início' && (Route::currentRouteName() === 'inicio'
     || Route::currentRouteName() === 'inicio.pesquisa'
     || Route::currentRouteName() === 'inicio.detalhamento')) {
+        $eAbaAtual = true;
+    } elseif ($categoria === 'Usuário' && Route::currentRouteName() === 'usuario.edit') {
         $eAbaAtual = true;
     } else {
         $eAbaAtual = (bool) stripos(url()->current(), $categoria);

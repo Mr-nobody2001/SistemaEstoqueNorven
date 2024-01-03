@@ -12,6 +12,8 @@
 @endsection
 
 <x-layouts.estrutura-basica>
+    <x-avisos.toast/>
+
     <div id="topo-secao-principal">
         <x-componentesGerais.informacoes-pagina :textoIcone="'home'"
                                                 :titulo="'Página Inicial - Pesquisa por Categoria'"/>
@@ -20,7 +22,7 @@
         </div>
     </div>
 
-    <x-componentesGerais.index.pesquisa-index :rota="route('index.inicio')" :nome="'nome_categoria'"
+    <x-componentesGerais.index.pesquisa-index :rota="route('inicio')" :nome="'nome_categoria'"
                                               :placeholder="'Pesquise pelo nome da categoria.'" :pesquisa="''"/>
 
     <div id="grid-container">

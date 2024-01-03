@@ -44,7 +44,9 @@ class VerificarProdutos extends Command
 
         $this->indicarProdutoVencido($listaRegistroEstoque);
 
-        $this->info('O comando app:verificar-produtos foi executado com sucesso.');
+        $horarioAtual = Carbon::now();
+
+        $this->info("O comando app:verificar-produtos foi executado com sucesso ($horarioAtual).");
     }
 
     private function indicarProdutoEstoqueBaixo(Collection $listaProdutos): void
@@ -78,7 +80,7 @@ class VerificarProdutos extends Command
 
     private function indicarLoteFinalizado(RegistroEstoque $registroEstoque): void
     {
-        if ($this->registroEstoqueService->verificarLoteFInalizado($registroEstoque->lote->id)) {
+        if ($this->registroEstoqueService->verificarLoteFinalizado($registroEstoque->lote->id)) {
             $registroEstoque->lote->lote_finalizado = true;
 
             $registroEstoque->lote->save();
