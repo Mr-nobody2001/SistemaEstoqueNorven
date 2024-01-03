@@ -44,7 +44,7 @@
             <th>Nome Produto</th>
             <th>Tipo da Transação</th>
             <th>Quantidade Transacionada</th>
-            <th>Preço de Venda do Produto</th>
+            <th>Preço de Compra/Venda</th>
             <th>Data de Registro</th>
         </tr>
         </thead>
