@@ -4,7 +4,9 @@ namespace App\services;
 
 use App\Http\Requests\produto\AtualizarProdutoRequest;
 use App\Http\Requests\produto\CriarProdutoRequest;
+use App\Models\LoteProduto;
 use App\Models\Produto;
+use App\Models\RegistroEstoque;
 use App\repositorys\ProdutoRepository;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -31,6 +33,20 @@ class ProdutoService
     public function encontrarProdutoId(string $id): Produto
     {
         return Produto::where('id', $id)->first();
+    }
+
+    public static function verificarProdutoVencido(string $produtoId): bool
+    {
+        $listRregistroEstoque = RegistroEstoque::where('produto_id', $produtoId)->get();
+
+        foreach ($listRregistroEstoque as $registroEstoque) {
+            if (LoteProduto::where('id', $registroEstoque->lote->id)
+                ->where('lote_vencido', true)->count()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function encontrarProdutoCategoria(string $categoriaId): Collection

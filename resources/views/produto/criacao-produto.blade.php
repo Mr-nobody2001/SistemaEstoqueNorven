@@ -344,60 +344,60 @@
                 @enderror
                 </span>
             </div>
+        </fieldset>
 
-            <fieldset>
-                <legend class="titulo-destaque">Alérgenos</legend>
+        <fieldset>
+            <legend class="titulo-destaque">Alérgenos</legend>
+            <div>
                 <div>
-                    <div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="leite" name="leite"
-                                   value="leite" @checked(old('leite'))>
-                            <label class="form-check-label" for="leite">Leite</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="ovos" name="ovos"
-                                   value="ovos" @checked(old('ovos'))>
-                            <label class="form-check-label" for="ovos">Ovos</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="amendoim" name="amendoim"
-                                   value="amendoim" @checked(old('amendoim'))>
-                            <label class="form-check-label" for="amendoim">Amendoim</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="nozes" name="nozes"
-                                   value="nozes" @checked(old('nozes'))>
-                            <label class="form-check-label" for="nozes">Nozes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="trigo" name="trigo"
-                                   value="trigo" @checked(old('trigo'))>
-                            <label class="form-check-label" for="trigo">Trigo</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="soja" name="soja"
-                                   value="soja" @checked(old('soja'))>
-                            <label class="form-check-label" for="soja">Soja</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="mostarda" name="mostarda"
-                                   value="mostarda" @checked(old('mostarda'))>
-                            <label class="form-check-label" for="mostarda">Mostarda</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="sulfitos" name="sulfitos"
-                                   value="sulfitos" @checked(old('sulfitos'))>
-                            <label class="form-check-label" for="sulfitos">Sulfitos</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="sementes_gergelim"
-                                   name="sementes_gergelim"
-                                   value="sementes_gergelim" @checked(old('sementes_gergelim'))>
-                            <label class="form-check-label" for="sementes_gergelim">Sementes de Gergelim</label>
-                        </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="leite" name="leite"
+                               value="leite" @checked(old('leite'))>
+                        <label class="form-check-label" for="leite">Leite</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="ovos" name="ovos"
+                               value="ovos" @checked(old('ovos'))>
+                        <label class="form-check-label" for="ovos">Ovos</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="amendoim" name="amendoim"
+                               value="amendoim" @checked(old('amendoim'))>
+                        <label class="form-check-label" for="amendoim">Amendoim</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="nozes" name="nozes"
+                               value="nozes" @checked(old('nozes'))>
+                        <label class="form-check-label" for="nozes">Nozes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="trigo" name="trigo"
+                               value="trigo" @checked(old('trigo'))>
+                        <label class="form-check-label" for="trigo">Trigo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="soja" name="soja"
+                               value="soja" @checked(old('soja'))>
+                        <label class="form-check-label" for="soja">Soja</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="mostarda" name="mostarda"
+                               value="mostarda" @checked(old('mostarda'))>
+                        <label class="form-check-label" for="mostarda">Mostarda</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="sulfitos" name="sulfitos"
+                               value="sulfitos" @checked(old('sulfitos'))>
+                        <label class="form-check-label" for="sulfitos">Sulfitos</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="sementes_gergelim"
+                               name="sementes_gergelim"
+                               value="sementes_gergelim" @checked(old('sementes_gergelim'))>
+                        <label class="form-check-label" for="sementes_gergelim">Sementes de Gergelim</label>
                     </div>
                 </div>
-            </fieldset>
+            </div>
         </fieldset>
     </form>
 </x-layouts.estrutura-basica>

@@ -2,7 +2,7 @@
     --background-positiva: #008000FF;
 
     --cor-background-produto-vencido:#FBE286;
-    --cor-texto-vencido: #FFFFFF;
+    --cor-texto-vencido: #000000FF;
 
     --background-negativa: #FE4847;
     --cor-texto-negativo: #FFFFFF;
@@ -25,12 +25,13 @@ body {
     color: var(--cor-texto-negativo);
 }
 
-.totalmente-vendido {
+.lote-finalizado {
     text-decoration: line-through;
 }
 
 .produto-vencido {
     background-color: var(--cor-background-produto-vencido);
+    color: var(--cor-texto-vencido);
 }
 
 .positivo {

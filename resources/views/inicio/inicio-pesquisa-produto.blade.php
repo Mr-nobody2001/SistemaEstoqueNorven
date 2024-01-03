@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Facades\Storage; @endphp
+@php use App\services\ProdutoService;use Illuminate\Support\Facades\Storage; @endphp
 
 @section('titulo', 'Página Inicial - Pesquisa por Produto')
 
@@ -20,23 +20,31 @@
         </div>
     </div>
 
-    <x-componentesGerais.index.pesquisa-index :rota="route('inicio.pesquisa', ['categoriaId' => $categoriaId])" :nome="'nome_produto'"
-                                              :placeholder="'Pesquise pelo nome do produto.'" :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('inicio.pesquisa', ['categoriaId' => $categoriaId])"
+                                              :nome="'nome_produto'"
+                                              :placeholder="'Pesquise pelo nome do produto.'"
+                                              :pesquisa="$valorPesquisa"/>
 
     <div id="grid-container" data-url="inicio-pesquisa/{{ $categoriaId }}">
         @forelse($paginaProduto as $produto)
             @php
                 $dataCriacaoProdutoFormatada = new DateTime($produto->data_cadastro);
-                $dataCriacaoProdutoFormatada = $dataCriacaoProdutoFormatada->format('d/m/Y')
+                $dataCriacaoProdutoFormatada = $dataCriacaoProdutoFormatada->format('d/m/Y');
+                $produtoVencido = ProdutoService::verificarProdutoVencido($produto->id);
             @endphp
 
-            <div @class(['card', 'animate__animated', 'animate__fadeIn', 'quantidade-baixa' => $produto->quantidade_baixa]) style="width: 18rem;">
+            <div
+                    @class(['card', 'animate__animated', 'animate__fadeIn', 'quantidade-baixa' => $produto->quantidade_baixa, 'produto-vencido' => $produtoVencido]) style="width: 18rem;">
                 <img src={{ Storage::url($produto->caminho_imagem) }} class="card-img-top" width="200px"
                      height="200px" alt={{ $produto->nome_produto }}>
                 <ul class="list-group list-group-flush">
-                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa])>Código: {{ $produto->codigo_produto }}</li>
-                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa])>Marca: {{ $produto->marca->nome_marca }}</li>
-                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa])>Data de Cadastro: {{ $dataCriacaoProdutoFormatada }}</li>
+                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa, 'produto-vencido' => $produtoVencido])>
+                        Código: {{ $produto->codigo_produto }}</li>
+                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa, 'produto-vencido' => $produtoVencido])>
+                        Marca: {{ $produto->marca->nome_marca }}</li>
+                    <li @class(['list-group-item', 'quantidade-baixa' => $produto->quantidade_baixa, 'produto-vencido' => $produtoVencido])>
+                        Data de
+                        Cadastro: {{ $dataCriacaoProdutoFormatada }}</li>
                 </ul>
                 <div class="card-body">
                     <h5 class="card-title">{{ $produto->nome_produto }}</h5>

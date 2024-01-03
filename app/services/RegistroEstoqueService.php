@@ -44,7 +44,7 @@ class RegistroEstoqueService
         return $this->registroEstoqueRepository->encontrarRegistroEstoqueIdProdutoVenda($produtoId);
     }
 
-    public function verificarEstoqueTotalmenteVendido(string $loteId): bool
+    public function verificarLoteFinalizado(string $loteId): bool
     {
         $lote = LoteProduto::find($loteId);
 

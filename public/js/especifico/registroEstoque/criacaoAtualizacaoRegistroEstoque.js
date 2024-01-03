@@ -10,6 +10,7 @@ const avisoProdutoId = document.querySelector("#aviso-produto-id");
 const avisoLoteId = document.querySelector("#aviso-lote-id");
 const avisoTipoTransacao = document.querySelector("#aviso-tipo-transacao");
 const containerFormulario = document.querySelector("#container-formulario");
+const precoVenda = document.querySelector("#preco-venda");
 
 const filtrarOpcoesProdutoSelect = () => {
     const valorPesquisa = filtroProdutoId.value.toLowerCase();
@@ -50,6 +51,20 @@ const validarSelectsRegistroEstoque = () => {
     });
 }
 
+const prepararPrecoVenda = () => {
+    for (let opcao of selectTipoTransacao.children) {
+        if (opcao.selected && opcao.value !== "baixa") {
+            precoVenda.disabled = false;
+            return;
+        }
+    }
+
+    precoVenda.value = "0.0";
+
+    precoVenda.disabled = true;
+}
+
 filtroProdutoId.addEventListener("input", filtrarOpcoesProdutoSelect);
 filtroLoteId.addEventListener("input", filtrarOpcoesLoteSelect);
 containerFormulario.addEventListener("submit", validarSelectsRegistroEstoque);
+selectTipoTransacao.addEventListener("change", prepararPrecoVenda);

@@ -42,7 +42,7 @@
         <div>
             <label for="data_validade" class="form-label">Data de validade do lote</label>
             <input type="date" id="data-validade" class="form-control" name="data_validade"
-                   value="{{ $loteProduto->data_validade ?? old('data_validade') }}" required>
+                   value="{{ $loteProduto->data_validade ?? old('data_validade') }}">
             <div class="invalid-feedback">
                 A data de validade não pode ser nula.
             </div>

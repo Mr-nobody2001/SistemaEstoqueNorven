@@ -24,7 +24,7 @@ class LoteProdutoService
 
     public function listarTodosLotesSemPaginacao(): Collection
     {
-        return LoteProduto::orderBy('id')->get();
+        return LoteProduto::where('lote_finalizado', false)->orderBy('id')->get();
     }
 
     public function encontrarLoteId(string $id): LoteProduto

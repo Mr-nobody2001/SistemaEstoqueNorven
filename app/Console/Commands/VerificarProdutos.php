@@ -42,24 +42,7 @@ class VerificarProdutos extends Command
 
         $listaRegistroEstoque = RegistroEstoque::all();
 
-        foreach ($listaRegistroEstoque as $registroEstoque) {
-            if ($this->registroEstoqueService->verificarEstoqueTotalmenteVendido($registroEstoque->lote->id)) {
-                $registroEstoque->lote->totalmente_vendido = true;
-
-                $registroEstoque->lote->save();
-            }
-
-            if (!$registroEstoque->lote->totalmente_vendido) {
-                $dataAtual = Carbon::now();
-                $dataValidade = Carbon::createFromFormat('Y-m-d', $registroEstoque->lote->data_validade);
-
-                if ($dataAtual->greaterThan($dataValidade)) {
-                    $registroEstoque->lote->lote_vencido = true;
-
-                    $registroEstoque->lote->save();
-                }
-            }
-        }
+        $this->indicarProdutoVencido($listaRegistroEstoque);
 
         $this->info('O comando app:verificar-produtos foi executado com sucesso.');
     }
@@ -72,6 +55,33 @@ class VerificarProdutos extends Command
             $produto->quantidade_baixa = $quantiedadeProduto < 100;
 
             $produto->save();
+        }
+    }
+
+    private function indicarProdutoVencido(Collection $listaRegistroEstoque): void
+    {
+        foreach ($listaRegistroEstoque as $registroEstoque) {
+            $this->indicarLoteFinalizado($registroEstoque);
+
+            if (!$registroEstoque->lote->lote_finalizado) {
+                $dataAtual = Carbon::now();
+                $dataValidade = Carbon::createFromFormat('Y-m-d', $registroEstoque->lote->data_validade);
+
+                if ($dataAtual->greaterThan($dataValidade)) {
+                    $registroEstoque->lote->lote_vencido = true;
+
+                    $registroEstoque->lote->save();
+                }
+            }
+        }
+    }
+
+    private function indicarLoteFinalizado(RegistroEstoque $registroEstoque): void
+    {
+        if ($this->registroEstoqueService->verificarLoteFInalizado($registroEstoque->lote->id)) {
+            $registroEstoque->lote->lote_finalizado = true;
+
+            $registroEstoque->lote->save();
         }
     }
 }
