@@ -34,7 +34,7 @@
             @endphp
 
             <div
-                    @class(['card', 'animate__animated', 'animate__fadeIn', 'quantidade-baixa' => $produto->quantidade_baixa, 'produto-vencido' => $produtoVencido]) style="width: 18rem;">
+                    @class(['card','animate__animated', 'animate__fadeIn', 'quantidade-baixa' => $produto->quantidade_baixa, 'produto-vencido' => $produtoVencido])>
                 <img src={{ Storage::url($produto->caminho_imagem) }} class="card-img-top" width="200px"
                      height="200px" alt={{ $produto->nome_produto }}>
                 <ul class="list-group list-group-flush">
@@ -46,7 +46,7 @@
                         Data de
                         Cadastro: {{ $dataCriacaoProdutoFormatada }}</li>
                 </ul>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="card-title">{{ $produto->nome_produto }}</h5>
                     <p class="card-text">{{ $produto->descricao_produto }}</p>
                     <a href="{{ route('inicio.detalhamento', ['produtoId' => $produto->id]) }}"

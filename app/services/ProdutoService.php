@@ -41,7 +41,9 @@ class ProdutoService
 
         foreach ($listRregistroEstoque as $registroEstoque) {
             if (LoteProduto::where('id', $registroEstoque->lote->id)
-                ->where('lote_vencido', true)->count()) {
+                ->where('lote_finalizado', false)
+                ->where('lote_vencido', true)
+                ->count()) {
                 return true;
             }
         }

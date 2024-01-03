@@ -59,9 +59,9 @@ const prepararPrecoVenda = () => {
         }
     }
 
-    precoVenda.value = "0.0";
+    precoVenda.value = "0.00";
 
-    precoVenda.disabled = true;
+    precoVenda.readOnly = true;
 }
 
 filtroProdutoId.addEventListener("input", filtrarOpcoesProdutoSelect);

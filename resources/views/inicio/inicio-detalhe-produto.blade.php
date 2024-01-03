@@ -143,7 +143,7 @@
                     @php
                         $dataRegistro = new DateTime($registro->data_registro);
                         $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
-                        $loteFInalizado = $registro->lote->lote_finalizado;
+                        $loteFinalizado = $registro->lote->lote_finalizado;
                         $loteVencido = $registro->lote->lote_vencido;
 
                         if ($registro->lote->lote_finalizado && $registro->lote->lote_vencido) {
@@ -151,7 +151,7 @@
                         }
                     @endphp
 
-                    <tr @class(['totalmente-vendido' => $loteFInalizado, 'produto-vencido' =>
+                    <tr @class(['lote-finalizado' => $loteFinalizado, 'produto-vencido' =>
                         $loteVencido]) data-id="{{ $registro->id }}">
                         <td>{{ $registro->id }}</td>
                         <td>{{ $registro->lote->numero_lote }}</td>
