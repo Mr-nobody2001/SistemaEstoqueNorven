@@ -6,6 +6,7 @@ use App\Models\LoteProduto;
 use App\Models\Produto;
 use App\Models\RegistroEstoque;
 use App\services\RegistroEstoqueService;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -42,10 +43,21 @@ class VerificarProdutos extends Command
         $listaRegistroEstoque = RegistroEstoque::all();
 
         foreach ($listaRegistroEstoque as $registroEstoque) {
-            if ($this->registroEstoqueService->verificarEstoqueVendidoTotalmente($registroEstoque->id)) {
+            if ($this->registroEstoqueService->verificarEstoqueTotalmenteVendido($registroEstoque->lote->id)) {
                 $registroEstoque->lote->totalmente_vendido = true;
 
                 $registroEstoque->lote->save();
+            }
+
+            if (!$registroEstoque->lote->totalmente_vendido) {
+                $dataAtual = Carbon::now();
+                $dataValidade = Carbon::createFromFormat('Y-m-d', $registroEstoque->lote->data_validade);
+
+                if ($dataAtual->greaterThan($dataValidade)) {
+                    $registroEstoque->lote->lote_vencido = true;
+
+                    $registroEstoque->lote->save();
+                }
             }
         }
 

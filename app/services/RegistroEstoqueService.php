@@ -44,7 +44,7 @@ class RegistroEstoqueService
         return $this->registroEstoqueRepository->encontrarRegistroEstoqueIdProdutoVenda($produtoId);
     }
 
-    public function verificarEstoqueVendidoTotalmente(string $loteId): bool
+    public function verificarEstoqueTotalmenteVendido(string $loteId): bool
     {
         $lote = LoteProduto::find($loteId);
 
@@ -55,6 +55,10 @@ class RegistroEstoqueService
         $quantidadeLoteArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenadoLote($loteId);
 
         $quantidadeLoteRetirado = $this->registroEstoqueRepository->calcularTotalRetiradoLote($loteId);
+
+        if (is_null($quantidadeLoteArmazenado) || is_null($quantidadeLoteRetirado)) {
+            return false;
+        }
 
         return $quantidadeLoteArmazenado - $quantidadeLoteRetirado === 0;
     }
@@ -76,16 +80,16 @@ class RegistroEstoqueService
         return ($receitaTotal / $totalTransacao);
     }
 
-    public function calcularQuantidadeEstoqueProduto(string $produtoId): float
+    public function calcularQuantidadeEstoqueProduto(string $produtoId): int
     {
-        $totalArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenado($produtoId);
+        $quantidadeProdutoArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenado($produtoId);
 
-        $totalRetirado = $this->registroEstoqueRepository->calcularTotalRetirado($produtoId);
+        $quantidadeProdutoRetirado = $this->registroEstoqueRepository->calcularTotalRetirado($produtoId);
 
-        return ($totalArmazenado - $totalRetirado);
+        return ($quantidadeProdutoArmazenado - $quantidadeProdutoRetirado);
     }
 
-    public function calcularVolumeVendas(string $produtoId): float
+    public function calcularVolumeVendas(string $produtoId): int
     {
         $dataAtual = Carbon::now();
 

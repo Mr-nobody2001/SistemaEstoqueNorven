@@ -12,7 +12,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-readonly class CategoriaProdutoService
+class CategoriaProdutoService
 {
     public function __construct(private CategoriaProdutoRepository $categoriaProdutoRepository)
     {

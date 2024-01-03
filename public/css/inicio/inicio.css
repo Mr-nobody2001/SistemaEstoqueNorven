@@ -26,13 +26,11 @@ body {
 }
 
 .totalmente-vendido {
-    background-color: #C6BFB5;
     text-decoration: line-through;
 }
 
 .produto-vencido {
     background-color: var(--cor-background-produto-vencido);
-    color: var(--cor-texto-vencido);
 }
 
 .positivo {

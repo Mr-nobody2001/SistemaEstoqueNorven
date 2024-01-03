@@ -143,9 +143,16 @@
                     @php
                         $dataRegistro = new DateTime($registro->data_registro);
                         $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
+                        $loteTotalmenteVendido = $registro->lote->totalmente_vendido;
+                        $loteVencido = $registro->lote->lote_vencido;
+
+                        if ($registro->lote->totalmente_vendido && $registro->lote->lote_vencido) {
+                            $loteVencido = false;
+                        }
                     @endphp
 
-                    <tr @class(['totalmente-vendido' => $registro->lote->totalmente_vendido]) data-id="{{ $registro->id }}">
+                    <tr @class(['totalmente-vendido' => $loteTotalmenteVendido, 'produto-vencido' =>
+                        $loteVencido]) data-id="{{ $registro->id }}">
                         <td>{{ $registro->id }}</td>
                         <td>{{ $registro->lote->numero_lote }}</td>
                         <td>{{ $registro->produto->nome_produto }}</td>
@@ -207,8 +214,8 @@
             <thead>
             <tr class="titulo-tabela-destaque">
                 <th>Quantidade em Estoque</th>
-                <th>Ticket Médio (últimos trinta dias)</th>
-                <th>Volume vendas (últimos trinta dias)</th>
+                <th>Ticket Médio (mês atual)</th>
+                <th>Volume vendas (mês atual comparado ao mês anterior)</th>
             </tr>
             </thead>
             <tbody>

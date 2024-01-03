@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
-readonly class LoteProdutoService
+class LoteProdutoService
 {
     public function __construct(private LoteProdutoRepository $loteProdutoRepository)
     {

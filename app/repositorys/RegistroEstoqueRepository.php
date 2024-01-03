@@ -56,20 +56,24 @@ class RegistroEstoqueRepository
 
     public function calcularTotalRetirado(string $produtoId): int|null
     {
-        return RegistroEstoque::where('produto_id', $produtoId)
-            ->where('tipo_transacao', 'venda')
-            ->orWhere('tipo_transacao', 'baixa')
-            ->selectRaw('SUM(quantidade_transacao) as total_retirado')
-            ->value('total_retirado');
+        return RegistroEstoque::where(function ($query) use ($produtoId) {
+            $query->where('produto_id', $produtoId)
+                ->where('tipo_transacao', 'venda');
+        })->orWhere(function ($query) use ($produtoId) {
+            $query->where('produto_id', $produtoId)
+                ->where('tipo_transacao', 'baixa');
+        })->sum('quantidade_transacao');
     }
 
     public function calcularTotalRetiradoLote(string $loteId): int|null
     {
-        return RegistroEstoque::where('lote_id', $loteId)
-            ->where('tipo_transacao', 'venda')
-            ->orWhere('tipo_transacao', 'baixa')
-            ->selectRaw('SUM(quantidade_transacao) as total_retirado')
-            ->value('total_retirado');
+        return RegistroEstoque::where(function ($query) use ($loteId) {
+            $query->where('lote_id', $loteId)
+                ->where('tipo_transacao', 'venda');
+        })->orWhere(function ($query) use ($loteId) {
+            $query->where('lote_id', $loteId)
+                ->where('tipo_transacao', 'baixa');
+        })->sum('quantidade_transacao');
     }
 
     public function calcularTotalVendasMesAtual(string $produtoId, Carbon $dataAtual): int|null
@@ -86,10 +90,5 @@ class RegistroEstoqueRepository
             ->where('tipo_transacao', 'venda')
             ->whereBetween('data_registro', [$dataAtual->subDays(60), $dataAtual->subDays(30)])
             ->sum('quantidade_transacao');
-    }
-
-    public function verificarEstoqueVendidoTotalmente()
-    {
-
     }
 }

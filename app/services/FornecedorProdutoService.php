@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Collection;
 use RuntimeException;
 
-readonly class FornecedorProdutoService
+class FornecedorProdutoService
 {
     public function __construct(private FornecedorProdutoRepository $fornecedorProdutoRepository)
     {
