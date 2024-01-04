@@ -13,7 +13,6 @@ class LoteProduto extends Model
 
     protected $fillable = [
         'numero_lote',
-        'preco_custo',
         'data_validade',
         'fornecedor_id'
     ];

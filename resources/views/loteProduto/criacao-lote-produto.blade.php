@@ -54,26 +54,6 @@
         </div>
 
         <div>
-            <div class="d-flex flex-row input-group">
-                <span class="input-group-text">$</span>
-                <span class="input-group-text">0.00</span>
-                <input type="text" id="preco-custo" class="form-control rounded-end" name="preco_custo"
-                       placeholder="Informe o valor de custo associado a este lote do produto."
-                       value="{{ old('preco_custo') }}" maxlength="9"
-                       pattern="^(?!0+(\.0{2})$)\d{0,8}(\.\d{2})$" required>
-                <div class="invalid-feedback">
-                    O custo não pode ser nulo e deve conter apenas caracteres numéricos e ".".
-                </div>
-            </div>
-
-            <span class="mt-1 campo-invalido">
-                @error('preco_custo')
-                 O custo fornecido não está no formato adequado.
-                @enderror
-            </span>
-        </div>
-
-        <div>
             <div class="input-group d-flex flex-row w-100">
                 <select id="select-fornecedor-id" class="form-select w-25" aria-label="select-fornecedor-id"
                         name="fornecedor_id" required>

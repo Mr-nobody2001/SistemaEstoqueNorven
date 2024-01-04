@@ -19,7 +19,6 @@ class LoteProdutoSeeder extends Seeder
                 DB::table('lote_produtos')->insert([
                     'numero_lote' => 'CM91384811' . $i,
                     'data_validade' => now()->addMonths(random_int(1, 12))->addDays(random_int(1, 31))->format('Y-m-d'),
-                    'preco_custo' => number_format(random_int(10, 29) + (random_int(0, 99) / 100), 2, '.', ''),
                     'fornecedor_id' => random_int(1, 5)
                 ]);
             } catch (RandomException $e) {

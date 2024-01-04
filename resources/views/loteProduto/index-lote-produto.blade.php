@@ -33,7 +33,6 @@
             <th>Id</th>
             <th>Número do Lote</th>
             <th>Data de Validade</th>
-            <th>Preço de Custo</th>
             <th>Nome do Fornecedor</th>
         </tr>
         </thead>
@@ -48,7 +47,6 @@
                 <td>{{ $loteProduto->id }}</td>
                 <td>{{ $loteProduto->numero_lote }}</td>
                 <td>{{ $dataValidadeFormatada }}</td>
-                <td>{{ 'R$ ' . number_format($loteProduto->preco_custo, 2, ',', '.') }}</td>
                 <td>{{ $loteProduto->fornecedor->nome_fornecedor }}</td>
             </tr>
         @empty
