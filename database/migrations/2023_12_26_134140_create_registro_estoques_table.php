@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->enum('tipo_transacao' ,TipoTransacao::getConstants())->nullable(false);
             $table->integer('quantidade_transacao')->nullable(false);
-            $table->double('preco_venda', 8, 2)->nullable(false);
+            $table->double('valor_transacao', 8, 2)->nullable(true);
             $table->foreignId('lote_id')->constrained('lote_produtos');
             $table->foreignId('produto_id')->constrained('produtos');
             $table->timestamps();

@@ -137,23 +137,23 @@
         @endphp
 
         <div>
-            <label for="preco-venda" class="form-label">Insira o preço de venda do produto quer será
+            <label for="valor-transacao" class="form-label">Insira o preço de venda do produto quer será
                 transacionado</label>
             <div class="d-flex flex-row input-group">
                 <span class="input-group-text">$</span>
                 <span class="input-group-text">0.00</span>
-                <input type="text" id="preco-venda" class="form-control rounded-end" name="preco_venda"
+                <input type="text" id="valor-transacao" class="form-control rounded-end" name="valor_transacao"
                        placeholder="Informe o valor de venda associado a este registro de produto."
-                       value="{{ number_format($registroEstoque->preco_venda, 2) ?? number_format(old('preco_venda'), 2) }}"
-                       maxlength="9"
-                       pattern="^\d{0,8}(\.\d{2})$" @readonly($contemBaixa) required>
+                       value="{{ number_format($registroEstoque->valor_transacao, 2) ??
+                        number_format(old('valor_transacao'), 2) ?? "0.00" }}" maxlength="9"
+                       pattern="^\d{0,8}(\.\d{2})$" @disabled($contemBaixa)>
                 <div class="invalid-feedback">
                     O valor de venda não pode ser nulo e deve conter apenas caracteres numéricos e ".".
                 </div>
             </div>
 
             <span class="mt-1 campo-invalido">
-            @error('preco_venda')
+            @error('valor_transacao')
             O valor de venda fornecido não está no formato adequado.
             @enderror
             </span>

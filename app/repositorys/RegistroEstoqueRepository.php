@@ -13,7 +13,7 @@ class RegistroEstoqueRepository
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
             ->where('data_registro', '>=', $mesPassado)
-            ->selectRaw('SUM(quantidade_transacao * preco_venda) as receita_total')
+            ->selectRaw('SUM(quantidade_transacao * valor_transacao) as receita_total')
             ->value('receita_total');
     }
 

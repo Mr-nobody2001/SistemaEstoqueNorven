@@ -16,7 +16,7 @@ class RegistroEstoque extends Model
         'tipo_transacao',
         'quantidade_transacao',
         'descricao_produto',
-        'preco_venda',
+        'valor_transacao',
         'lote_id',
         'produto_id',
     ];

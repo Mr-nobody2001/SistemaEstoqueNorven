@@ -28,7 +28,7 @@ class AtualizarRegistroEstoqueRequest extends FormRequest
             'lote_id' => 'required|numeric|min:1',
             'tipo_transacao' => ['required', Rule::in(TipoTransacao::getConstants())],
             'quantidade_transacao' => 'required|numeric|min:1',
-            'preco_venda' => 'required|decimal:2|min:0',
+            'valor_transacao' => 'nullable|decimal:2|min:0',
         ];
     }
 }

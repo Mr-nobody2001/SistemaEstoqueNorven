@@ -61,7 +61,7 @@
                 <td>{{ $registro->produto->nome_produto }}</td>
                 <td>{{ $registro->tipo_transacao }}</td>
                 <td>{{ $registro->quantidade_transacao }}</td>
-                <td>{{ 'R$ ' . number_format($registro->preco_venda , 2, ',', '.') }}</td>
+                <td>{{ 'R$ ' . number_format($registro->valor_transacao , 2, ',', '.') }}</td>
                 <td>{{ $dataRegistro }}</td>
             </tr>
         @empty
