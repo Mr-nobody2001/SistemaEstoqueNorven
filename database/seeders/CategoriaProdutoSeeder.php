@@ -25,8 +25,8 @@ class CategoriaProdutoSeeder extends Seeder
         Storage::disk('public')->put('imagens/categoria/confeitaria.jpg',
             file_get_contents('/home/gabriel/Imagens/confeitaria.jpg'));
 
-        Storage::disk('public')->put('imagens/categoria/higiene_limpeza.jpg',
-            file_get_contents('/home/gabriel/Imagens/higiene_limpeza.jpg'));
+        Storage::disk('public')->put('imagens/categoria/limpeza.jpg',
+            file_get_contents('/home/gabriel/Imagens/limpeza.jpg'));
 
         Storage::disk('public')->put('imagens/categoria/alimentos_processados.jpg',
             file_get_contents('/home/gabriel/Imagens/alimentos_processados.jpg'));
@@ -56,9 +56,9 @@ class CategoriaProdutoSeeder extends Seeder
         ]);
 
         DB::table('categoria_produtos')->insert([
-            'nome_categoria' => 'Higiene e Limpeza',
-            'descricao_categoria' => 'Categoria destinada a produtos para manter a higiene pessoal e limpeza doméstica.',
-            'caminho_imagem' => 'imagens/categoria/higiene_limpeza.jpg',
+            'nome_categoria' => 'Limpeza',
+            'descricao_categoria' => 'Categoria destinada a produtos para limpeza doméstica.',
+            'caminho_imagem' => 'imagens/categoria/limpeza.jpg',
         ]);
 
         DB::table('categoria_produtos')->insert([

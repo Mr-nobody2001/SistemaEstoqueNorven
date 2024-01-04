@@ -15,6 +15,8 @@ class UsuarioService
         try {
             $requestValidada = $request->validated();
 
+            $requestValidada['password'] = bcrypt($requestValidada['password']);
+
             User::create($requestValidada);
         } catch (Exception $e) {
             Log::error('Erro ao criar registro: ' . $e->getMessage());
@@ -31,6 +33,8 @@ class UsuarioService
             $id = $request->id;
 
             $requestValidada = $request->validated();
+
+            $requestValidada['password'] = bcrypt($requestValidada['password']);
 
             User::where('id', $id)
                 ->update($requestValidada);

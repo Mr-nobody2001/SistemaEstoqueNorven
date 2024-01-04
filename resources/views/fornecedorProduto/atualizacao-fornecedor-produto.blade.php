@@ -10,7 +10,7 @@
 @endsection
 
 @php
-    $contemCpf = (bool) (old('cpf') $fornecedorProduto->cpf);
+    $contemCpf = (bool) (old('cpf') ?? $fornecedorProduto->cpf);
 @endphp
 
 <x-layouts.estrutura-basica>

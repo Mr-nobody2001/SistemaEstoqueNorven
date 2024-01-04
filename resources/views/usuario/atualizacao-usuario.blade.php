@@ -22,7 +22,13 @@
         ['usuario' => $usuario->id ?? old('id')]) }}" method="POST" novalidate>
         @method('PUT')
         @csrf
-        <x-componentesGerais.atualizacao.opcoes-atualizacao/>
+        <div id="container-botao-atualizar-deletar" class="w-100 justify-content-between">
+            <a id="botao-sair" class="btn d-flex justify-content-center align-items-center" href="{{ route('deslogar') }}">Sair</a>
+            <div>
+                <button type="submit" id="botao-atualizar" class="btn">Atualizar</button>
+                <button id="botao-deletar" class="btn">Deletar</button>
+            </div>
+        </div>
 
         <div class="d-none">
             <input type="hidden" name="id" value="{{ $usuario->id ?? old('id') }}">

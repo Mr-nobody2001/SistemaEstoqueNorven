@@ -6,7 +6,6 @@ use App\Http\Requests\usuario\AtualizarUsuarioRequest;
 use App\Http\Requests\usuario\CriarUsuarioRequest;
 use App\services\UsuarioService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UsuarioController extends Controller
@@ -75,6 +74,6 @@ class UsuarioController extends Controller
             return redirect(route('inicio'))->with(['msg' => 'Não foi possível remover o registro.', 'tipo' => 'erro']);
         }
 
-        return redirect('/')->with(['msg' => 'Usuário removido com sucesso', 'tipo' => 'sucesso']);
+        return redirect(route('login'))->with(['msg' => 'Usuário removido com sucesso', 'tipo' => 'sucesso']);
     }
 }

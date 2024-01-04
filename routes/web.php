@@ -22,29 +22,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'mostrarFormularioLogin']);
+Route::redirect('/', 'login');
 
-Route::post('/validar', [LoginController::class, 'autenticarUsuario'])
-    ->name('autenticar');
-
-Route::prefix('inicio')->group(function () {
-    Route::get('', [InicioController::class, 'mostrarCategorias'])->name('inicio');
-
-    Route::get('pesquisa/{categoriaId}/{nomeProduto?}', [InicioController::class, 'mostrarProdutosCategoria'])
-        ->name('inicio.pesquisa');
-
-    Route::get('detalhe/{produtoId}', [InicioController::class, 'mostrarDetalhesProduto'])
-        ->name('inicio.detalhamento');
+Route::prefix('login')->group(function () {
+    Route::get('', [LoginController::class, 'mostrarFormularioLogin'])
+        ->name('login');
+    Route::post('autenticar', [LoginController::class, 'autenticarUsuario'])
+        ->name('autenticar');
+    Route::get('deslogar', [LoginController::class, 'deslogarUsuario'])
+        ->name('deslogar');
 });
-
-Route::resources([
-    'marca' => MarcaProdutoController::class,
-    'categoria' => CategoriaProdutoController::class,
-    'fornecedor' => FornecedorProdutoController::class,
-    'lote' => LoteProdutoController::class,
-    'produto' => ProdutoController::class,
-    'registro' => RegistroEstoqueController::class,
-], ['except', 'show']);
 
 Route::resource('usuario', UsuarioController::class)
     ->except('index', 'create', 'show');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('inicio')->group(function () {
+        Route::get('', [InicioController::class, 'mostrarCategorias'])->name('inicio');
+        Route::get('pesquisa/{categoriaId}/{nomeProduto?}', [InicioController::class, 'mostrarProdutosCategoria'])
+            ->name('inicio.pesquisa');
+        Route::get('detalhe/{produtoId}', [InicioController::class, 'mostrarDetalhesProduto'])
+            ->name('inicio.detalhamento');
+    });
+
+    Route::resources([
+        'marca' => MarcaProdutoController::class,
+        'categoria' => CategoriaProdutoController::class,
+        'fornecedor' => FornecedorProdutoController::class,
+        'lote' => LoteProdutoController::class,
+        'produto' => ProdutoController::class,
+        'registro' => RegistroEstoqueController::class,
+    ], ['except', 'show']);
+});
