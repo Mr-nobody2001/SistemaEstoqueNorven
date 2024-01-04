@@ -132,6 +132,10 @@
             </span>
         </div>
 
+        @php
+            $contemBaixa = $registroEstoque->tipo_transacao === 'baixa' ||  old('tipo_transacao') === 'baixa';
+        @endphp
+
         <div>
             <label for="preco-venda" class="form-label">Insira o preço de venda do produto quer será
                 transacionado</label>
@@ -142,7 +146,7 @@
                        placeholder="Informe o valor de venda associado a este registro de produto."
                        value="{{ number_format($registroEstoque->preco_venda, 2) ?? number_format(old('preco_venda'), 2) }}"
                        maxlength="9"
-                       pattern="^\d{0,8}(\.\d{2})$" required>
+                       pattern="^\d{0,8}(\.\d{2})$" @readonly($contemBaixa) required>
                 <div class="invalid-feedback">
                     O valor de venda não pode ser nulo e deve conter apenas caracteres numéricos e ".".
                 </div>
