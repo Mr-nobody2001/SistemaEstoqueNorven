@@ -80,7 +80,7 @@ class RegistroEstoqueRepository
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
-            ->where('data_registro', '>=', $dataAtual->subDays(30))
+            ->where('data_registro', '>=', $dataAtual->copy()->subDays(30))
             ->sum('quantidade_transacao');
     }
 
@@ -88,7 +88,7 @@ class RegistroEstoqueRepository
     {
         return RegistroEstoque::where('produto_id', $produtoId)
             ->where('tipo_transacao', 'venda')
-            ->whereBetween('data_registro', [$dataAtual->subDays(60), $dataAtual->subDays(30)])
+            ->whereBetween('data_registro', [$dataAtual->copy()->subDays(60), $dataAtual->copy()->subDays(30)])
             ->sum('quantidade_transacao');
     }
 }
