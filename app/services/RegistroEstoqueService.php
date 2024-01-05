@@ -91,7 +91,15 @@ class RegistroEstoqueService
 
     public function verificarQuantidadeLoteEstoque(string $loteId)
     {
-        return $this->registroEstoqueRepository->calcularTotalArmazenadoLote($loteId);
+        $quantidadeLoteArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenadoLote($loteId);
+
+        $quantidadeLoteRetirado = $this->registroEstoqueRepository->calcularTotalRetiradoLote($loteId);
+
+        if (is_null($quantidadeLoteArmazenado) || is_null($quantidadeLoteRetirado)) {
+            return false;
+        }
+
+        return $quantidadeLoteArmazenado - $quantidadeLoteRetirado;
     }
 
     public function calcularVolumeVendas(string $produtoId): int
@@ -110,6 +118,11 @@ class RegistroEstoqueService
         try {
             $requestValidada = $request->validated();
 
+            if ($request->tipo_transacao !== 'compra' && $request->quantidade_transacao >
+                $this->verificarQuantidadeLoteEstoque($request->lote_id)) {
+                throw new Exception('A quantidade da transação fornecida excede o estoque disponível do produto.');
+            }
+
             RegistroEstoque::create($requestValidada);
         } catch (Exception $e) {
             Log::error('Erro ao criar registro: ' . $e->getMessage());
@@ -126,6 +139,16 @@ class RegistroEstoqueService
             $id = $request->id;
 
             $requestValidada = $request->validated();
+
+            if ($request->tipo_transacao !== 'compra') {
+                $diferencaQuantidadeTransacao = $request->quantidade_transacao -
+                    RegistroEstoque::find($id)->quantidade_transacao;
+
+                if ($diferencaQuantidadeTransacao >
+                    $this->verificarQuantidadeLoteEstoque($request->lote_id)) {
+                    throw new Exception('A quantidade da transação fornecida excede o estoque disponível do produto.');
+                }
+            }
 
             RegistroEstoque::where('id', $id)
                 ->update($requestValidada);

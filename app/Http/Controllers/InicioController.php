@@ -55,7 +55,7 @@ class InicioController extends Controller
 
         $ticketMedio = $this->registroEstoqueService->calcularTicketMedio($produtoId);
 
-        $quantidadeEstoque = $this->registroEstoqueService->calcularQuantidadeEstoqueProduto($produtoId);
+        $quantidadeEstoque = $this->registroEstoqueService->calcularQuantidadeEstoqueProdutoId($produtoId);
 
         $volumeVendas = $this->registroEstoqueService->calcularVolumeVendas($produtoId);
 
