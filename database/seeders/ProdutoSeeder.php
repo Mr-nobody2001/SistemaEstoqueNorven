@@ -125,7 +125,7 @@ class ProdutoSeeder extends Seeder
                 'caminho_imagem' => $imagensProduto[$i],
                 'informacoes_nutricionais' => json_encode([
                     'quantidade_porcao' => random_int(1, 99) / 10,
-                    'unidade_medida_porcao' => 'mL',
+                    'unidade_medida_porcao' => 'g',
                     'quantidade_energia' => random_int(1, 99) / 10,
                     'unidade_medida_energia' => 'kcal',
                     'quantidade_proteina' => random_int(1, 99) / 10,

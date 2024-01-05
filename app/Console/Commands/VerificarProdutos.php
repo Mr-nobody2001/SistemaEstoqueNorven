@@ -66,8 +66,13 @@ class VerificarProdutos extends Command
             $this->indicarLoteFinalizado($registroEstoque);
 
             if (!$registroEstoque->lote->lote_finalizado) {
-                $dataAtual = Carbon::now();
-                $dataValidade = Carbon::createFromFormat('Y-m-d', $registroEstoque->lote->data_validade);
+                $dataAtual = Carbon::now('America/Sao_Paulo');
+
+                $dataValidade = $registroEstoque->lote->data_validade;
+
+                if (!is_null($dataValidade)) {
+                    $dataValidade = Carbon::createFromFormat('Y-m-d', $registroEstoque->lote->data_validade);
+                }
 
                 if ($dataAtual->greaterThan($dataValidade)) {
                     $registroEstoque->lote->lote_vencido = true;

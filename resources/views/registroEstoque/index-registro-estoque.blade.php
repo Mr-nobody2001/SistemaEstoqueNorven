@@ -41,6 +41,7 @@
         <tr class="titulo-tabela-destaque">
             <th>Id</th>
             <th>Lote Produto</th>
+            <th>Fornecedor do Lote</th>
             <th>Nome Produto</th>
             <th>Tipo da Transação</th>
             <th>Quantidade Transacionada</th>
@@ -58,6 +59,7 @@
             <tr data-id="{{ $registro->id }}">
                 <td>{{ $registro->id }}</td>
                 <td>{{ $registro->lote->numero_lote }}</td>
+                <td>{{ $registro->lote->fornecedor->nome_fornecedor }}</td>
                 <td>{{ $registro->produto->nome_produto }}</td>
                 <td>{{ $registro->tipo_transacao }}</td>
                 <td>{{ $registro->quantidade_transacao }}</td>

@@ -139,6 +139,7 @@
                     <th>Id</th>
                     <th>Lote Produto</th>
                     <th>Nome Produto</th>
+                    <th>Fornecedor do Lote</th>
                     <th>Tipo da Transação</th>
                     <th>Quantidade Transacionada</th>
                     <th>Preço de Compra/Venda</th>
@@ -149,6 +150,7 @@
                 <tbody>
                 @forelse ($listaRegistroEstoqueCompra as $registro)
                     @php
+                        // Formata a data de validade do lote
                         $dataValidadeFormatada = $registro->lote->data_validade;
 
                        if (!is_null($dataValidadeFormatada)) {
@@ -176,6 +178,7 @@
                         <td>{{ $registro->id }}</td>
                         <td>{{ $registro->lote->numero_lote }}</td>
                         <td>{{ $registro->produto->nome_produto }}</td>
+                        <td>{{ $registro->lote->fornecedor->nome_fornecedor }}</td>
                         <td>{{ $registro->tipo_transacao }}</td>
                         <td>{{ $registro->quantidade_transacao }}</td>
                         <td>{{ 'R$ ' . number_format($registro->valor_transacao , 2, ',', '.') }}</td>
@@ -184,7 +187,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7">Nenhum registro foi encontrado</td>
+                        <td colspan="9" class="text-center">Nenhum registro foi encontrado</td>
                     </tr>
                 @endforelse
                 </tbody>
@@ -200,15 +203,26 @@
                     <th>Id</th>
                     <th>Lote Produto</th>
                     <th>Nome Produto</th>
+                    <th>Fornecedor do Lote</th>
                     <th>Tipo da Transação</th>
                     <th>Quantidade Transacionada</th>
                     <th>Preço de Compra/Venda</th>
                     <th>Data de Registro</th>
+                    <th>Data de Validade do Lote</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($listaRegistroEstoqueVenda as $registro)
                     @php
+                        // Formata a data de validade do lote
+                        $dataValidadeFormatada = $registro->lote->data_validade;
+
+                        if (!is_null($dataValidadeFormatada)) {
+                            $dataValidadeFormatada = new DateTime($registro->lote->data_validade);
+                            $dataValidadeFormatada = $dataValidadeFormatada->format('d/m/Y');
+                        }
+
+                        // Formata a data de registro
                         $dataRegistro = new DateTime($registro->data_registro);
                         $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
                     @endphp
@@ -217,14 +231,16 @@
                         <td>{{ $registro->id }}</td>
                         <td>{{ $registro->lote->numero_lote }}</td>
                         <td>{{ $registro->produto->nome_produto }}</td>
+                        <td>{{ $registro->lote->fornecedor->nome_fornecedor }}</td>
                         <td>{{ $registro->tipo_transacao }}</td>
                         <td>{{ $registro->quantidade_transacao }}</td>
-                        <td>{{ 'R$ ' . number_format($registro->preco_venda , 2, ',', '.') }}</td>
+                        <td>{{ 'R$ ' . number_format($registro->valor_transacao , 2, ',', '.') }}</td>
                         <td>{{ $dataRegistro }}</td>
+                        <td>{{ $dataValidadeFormatada ?? 'Não perecível' }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7">Nenhum registro foi encontrado</td>
+                        <td colspan="9" class="text-center">Nenhum registro foi encontrado</td>
                     </tr>
                 @endforelse
                 </tbody>

@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        // * * * * * cd /home/gabriel/PhpstormProjects/sistema-estoque-norven && php artisan schedule:run >> /dev/null 2>&1
         $schedule->command('app:verificar-produtos')->everyMinute()
             ->appendOutputTo(storage_path('logs/command.log'));
     }
