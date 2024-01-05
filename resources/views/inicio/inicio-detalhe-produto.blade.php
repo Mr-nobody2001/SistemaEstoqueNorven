@@ -121,6 +121,13 @@
                 </tr>
                 </tbody>
             </table>
+
+            @php
+                $contemAlergenos = (bool) $informacoesNutricionais['alergenos'];
+            @endphp
+
+            <p @class(["mt-3", 'd-none' => !$contemAlergenos])>Este produto pode incluir os seguintes alérgenos: {{ implode(', ',
+            $informacoesNutricionais['alergenos']) }}</p>
         </div>
 
         <h2 class="titulo-destaque align-self-center">Histórico de Compras do Produto</h2>
@@ -136,19 +143,32 @@
                     <th>Quantidade Transacionada</th>
                     <th>Preço de Compra/Venda</th>
                     <th>Data de Registro</th>
+                    <th>Data de Validade do Lote</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($listaRegistroEstoqueCompra as $registro)
                     @php
-                        $dataRegistro = new DateTime($registro->data_registro);
-                        $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
-                        $loteFinalizado = $registro->lote->lote_finalizado;
-                        $loteVencido = $registro->lote->lote_vencido;
+                        $dataValidadeFormatada = $registro->lote->data_validade;
 
-                        if ($registro->lote->lote_finalizado && $registro->lote->lote_vencido) {
-                            $loteVencido = false;
-                        }
+                       if (!is_null($dataValidadeFormatada)) {
+                           $dataValidadeFormatada = new DateTime($registro->lote->data_validade);
+                           $dataValidadeFormatada = $dataValidadeFormatada->format('d/m/Y');
+                       }
+
+                       // Formata a data de registro
+                       $dataRegistro = new DateTime($registro->data_registro);
+                       $dataRegistro = $dataRegistro->format('d/m/Y H:i:s');
+
+                       // Define se o lote está finalizado
+                       $loteFinalizado = $registro->lote->lote_finalizado;
+
+                       // Define se o lote está vencido
+                       $loteVencido = $registro->lote->lote_vencido;
+
+                       if ($registro->lote->lote_finalizado && $registro->lote->lote_vencido) {
+                           $loteVencido = false;
+                       }
                     @endphp
 
                     <tr @class(['lote-finalizado' => $loteFinalizado, 'produto-vencido' =>
@@ -158,8 +178,9 @@
                         <td>{{ $registro->produto->nome_produto }}</td>
                         <td>{{ $registro->tipo_transacao }}</td>
                         <td>{{ $registro->quantidade_transacao }}</td>
-                        <td>{{ 'R$ ' . number_format($registro->preco_venda , 2, ',', '.') }}</td>
+                        <td>{{ 'R$ ' . number_format($registro->valor_transacao , 2, ',', '.') }}</td>
                         <td>{{ $dataRegistro }}</td>
+                        <td>{{ $dataValidadeFormatada ?? 'Não perecível' }}</td>
                     </tr>
                 @empty
                     <tr>
