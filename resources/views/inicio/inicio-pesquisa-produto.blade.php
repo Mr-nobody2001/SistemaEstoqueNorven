@@ -25,7 +25,7 @@
                                               :placeholder="'Pesquise pelo nome do produto.'"
                                               :pesquisa="$valorPesquisa"/>
 
-    <div id="grid-container" data-url="inicio-pesquisa/{{ $categoriaId }}">
+    <div id="grid-container" data-url="inicio/pesquisa/{{ $categoriaId }}">
         @forelse($paginaProduto as $produto)
             @php
                 $dataCriacaoProdutoFormatada = new DateTime($produto->data_cadastro);

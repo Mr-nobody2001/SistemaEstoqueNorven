@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @section('titulo', 'Cadastrar Lote')
 
 @section('estilo')
@@ -35,8 +36,7 @@
         </div>
 
         @php
-            $dataAtual = new DateTime();
-            $dataAtual->modify('+1 day');
+            $dataAtual = Carbon::now()->addDay(1);
         @endphp
 
         <div>

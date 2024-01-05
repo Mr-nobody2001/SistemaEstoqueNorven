@@ -64,8 +64,8 @@
                         required>
                     <option data-texto="null" disabled selected>Informe o fornecedor desse lote</option>
                     @foreach($listaTodosFornecedores as $fornecedor)
-                        <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}" @selected($fornecedorIdPreenchimento ==
-                    $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
+                        <option value="{{ $fornecedor->id }}" data-texto="{{ $fornecedor->nome_fornecedor }}"
+                            @selected($fornecedorIdPreenchimento == $fornecedor->id )>{{ $fornecedor->nome_fornecedor }}
                         </option>
                     @endforeach
                 </select>

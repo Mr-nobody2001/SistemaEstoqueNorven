@@ -46,8 +46,8 @@
                 <td>{{ $fornecedorProduto->nome_fornecedor }}</td>
                 <td>{{ $fornecedorProduto->telefone }}</td>
                 <td>{{ $fornecedorProduto->email }}</td>
-                <td>{{ $fornecedorProduto->cnpj }}</td>
-                <td>{{ $fornecedorProduto->cpf }}</td>
+                <td>{{ $fornecedorProduto->cnpj ?? "..." }}</td>
+                <td>{{ $fornecedorProduto->cpf ?? "..." }}</td>
             </tr>
         @empty
             <p class="aviso-secao d-none" data-mensagem="Nenhum registro foi encontrado" data-tipo="alerta"></p>

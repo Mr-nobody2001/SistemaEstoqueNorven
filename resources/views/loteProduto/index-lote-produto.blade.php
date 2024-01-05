@@ -24,7 +24,9 @@
 
 
     {{-- Inclui tudo relacionado a pesquisa como a barra de pesquisa e o botão de pesquisa --}}
-    <x-componentesGerais.index.pesquisa-index :rota="route('lote.index')"  :nome="'numero_lote'" :placeholder="'Pesquise pelo número do lote.'"  :pesquisa="$valorPesquisa"/>
+    <x-componentesGerais.index.pesquisa-index :rota="route('lote.index')" :nome="'numero_lote'"
+                                              :placeholder="'Pesquise pelo número do lote.'"
+                                              :pesquisa="$valorPesquisa"/>
 
     {{-- Tabela de registros --}}
     <table class="tabela alinhar-centro" data-entidade="lote">
@@ -39,14 +41,18 @@
         <tbody>
         @forelse ($paginaLoteProduto as $loteProduto)
             @php
-                $dataValidadeFormatada = new DateTime($loteProduto->data_validade);
-                $dataValidadeFormatada = $dataValidadeFormatada->format('d/m/Y');
+                $dataValidadeFormatada = $loteProduto->data_validade;
+
+                if (!is_null($dataValidadeFormatada)) {
+                    $dataValidadeFormatada = new DateTime($loteProduto->data_validade);
+                    $dataValidadeFormatada = $dataValidadeFormatada->format('d/m/Y');
+                }
             @endphp
 
             <tr data-id="{{ $loteProduto->id }}">
                 <td>{{ $loteProduto->id }}</td>
                 <td>{{ $loteProduto->numero_lote }}</td>
-                <td>{{ $dataValidadeFormatada }}</td>
+                <td>{{ $dataValidadeFormatada ?? 'Não perecível' }}</td>
                 <td>{{ $loteProduto->fornecedor->nome_fornecedor }}</td>
             </tr>
         @empty
