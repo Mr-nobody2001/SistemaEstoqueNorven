@@ -52,7 +52,7 @@ class VerificarProdutos extends Command
     private function indicarProdutoEstoqueBaixo(Collection $listaProdutos): void
     {
         foreach ($listaProdutos as $produto) {
-            $quantiedadeProduto = $this->registroEstoqueService->calcularQuantidadeEstoqueProduto($produto->id);
+            $quantiedadeProduto = $this->registroEstoqueService->calcularQuantidadeEstoqueProdutoId($produto->id);
 
             $produto->quantidade_baixa = $quantiedadeProduto < 100;
 

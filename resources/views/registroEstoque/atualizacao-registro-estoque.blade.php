@@ -123,11 +123,11 @@
             <input type="number" id="quantidade-transacao" class="form-control" name="quantidade_transacao"
                    value="{{ $registroEstoque->quantidade_transacao ?? old('quantidade_transacao') }}" min="1" required>
             <div class="invalid-feedback">
-                A quantidade da transação não pode ser nula e nem negativa.
+                A quantidade da transação não pode ser negativa e nem maior a quantidade do produto do lote em estoque.
             </div>
             <span class="mt-1 campo-invalido">
                 @error('quantidade_transacao')
-                A quantidade da transação não pode ser nula e nem negativa.
+                A quantidade da transação não pode ser negativa e nem maior a quantidade do produto do lote em estoque.
                 @enderror
             </span>
         </div>

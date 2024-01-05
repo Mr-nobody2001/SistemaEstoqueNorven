@@ -80,13 +80,18 @@ class RegistroEstoqueService
         return ($receitaTotal / $totalTransacao);
     }
 
-    public function calcularQuantidadeEstoqueProduto(string $produtoId): int
+    public function calcularQuantidadeEstoqueProdutoId(string $produtoId): int
     {
         $quantidadeProdutoArmazenado = $this->registroEstoqueRepository->calcularTotalArmazenado($produtoId);
 
         $quantidadeProdutoRetirado = $this->registroEstoqueRepository->calcularTotalRetirado($produtoId);
 
         return ($quantidadeProdutoArmazenado - $quantidadeProdutoRetirado);
+    }
+
+    public function verificarQuantidadeLoteEstoque(string $loteId)
+    {
+        return $this->registroEstoqueRepository->calcularTotalArmazenadoLote($loteId);
     }
 
     public function calcularVolumeVendas(string $produtoId): int
