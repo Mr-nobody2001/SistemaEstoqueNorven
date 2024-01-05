@@ -24,7 +24,7 @@ class CriarCategoriaProdutoRequest extends FormRequest
         return [
             'nome_categoria' => 'required|regex:/^[a-zA-Z0-9áéíóúâêîôûãõàèìòùäëïöüçñÁÉÍÓÚÂÊÎÔÛÃÕÀÈÌÒÙÄËÏÖÜÇÑ&\'\-\s]*$/|
             unique:categoria_produtos,nome_categoria|string|max:50',
-            'descricao_categoria' => 'nullable|string',
+            'descricao_categoria' => 'required|string',
             'imagem_categoria' => 'required|file|mimes:jpeg,jpg|max:2048',
         ];
 

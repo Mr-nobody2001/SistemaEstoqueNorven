@@ -36,7 +36,7 @@
         <div>
             <label for="descricao_categoria" class="form-label">Descrição da categoria</label>
             <textarea id="descricao_categoria" class="form-control" name="descricao_categoria"
-                      rows="3">{{ old('descricao_categoria') ?? '' }}</textarea>
+                      rows="3" required>{{ old('descricao_categoria') ?? '' }}</textarea>
             <div class="invalid-feedback">
                 Por favor, forneça uma descrição válida.
             </div>
