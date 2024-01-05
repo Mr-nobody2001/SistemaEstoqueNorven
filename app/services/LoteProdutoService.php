@@ -22,6 +22,11 @@ class LoteProdutoService
         return LoteProduto::orderBy('id')->paginate(20);
     }
 
+    public function listarTodosLotesNaoFinalizadosSemPaginacao(): Collection
+    {
+        return LoteProduto::where('lote_finalizado', false)->orderBy('id')->get();
+    }
+
     public function listarTodosLotesSemPaginacao(): Collection
     {
         return LoteProduto::where('lote_finalizado', false)->orderBy('id')->get();

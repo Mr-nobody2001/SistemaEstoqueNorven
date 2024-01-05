@@ -43,7 +43,7 @@ class RegistroEstoqueController extends Controller
      */
     public function create(): View
     {
-        $listaTodosLotes = $this->loteProdutoService->listarTodosLotesSemPaginacao();
+        $listaTodosLotes = $this->loteProdutoService->listarTodosLotesNaoFinalizadosSemPaginacao();
 
         $listaTodosProdutos = $this->produtoService->listarTodosProdutosSemPaginacao();
 

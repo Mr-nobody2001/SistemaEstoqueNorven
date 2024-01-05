@@ -69,7 +69,7 @@
                     <option data-texto="null" value="" disabled selected>Informe o lote desse registro</option>
                     @foreach($listaTodosLotes as $lote)
                         <option value="{{ $lote->id }}" data-texto="{{ $lote->numero_lote }}" @selected($loteIdPreenchimento ==
-                    $lote->id )>{{ $lote->numero_lote }}
+                        $lote->id )>{{ $lote->numero_lote }}
                         </option>
                     @endforeach
                 </select>
